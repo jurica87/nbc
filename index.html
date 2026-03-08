@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBC Baskets Nordhorn e.V. | Home of the Baskets</title>
+    <meta name="description" content="Offizielle Website des NBC Baskets Nordhorn. Basketball für alle Altersklassen, Cheerleading und Breitensport. Gegründet 2026.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nbc: {
+                            orange: '#F26522',
+                            purple: '#5D4E8C',
+                            dark: '#1a1a1a',
+                            darker: '#121212',
+                            light: '#f4f4f4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #121212; color: #f4f4f4; overflow-x: hidden; }
+        
+        .glass-nav {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .accordion-content {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+        
+        @keyframes pulse-orange {
+            0% { box-shadow: 0 0 0 0 rgba(242, 101, 34, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(242, 101, 34, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(242, 101, 34, 0); }
+        }
+        .floating-cta { animation: pulse-orange 2s infinite; }
+
+        @keyframes bounce-ball {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+        .basketball-float {
+            animation: bounce-ball 2s ease-in-out infinite;
+        }
+        .basketball-float:hover {
+            animation-play-state: paused;
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        section { scroll-margin-top: 100px; }
+    </style>
+</head>
+<body class="relative font-sans antialiased text-gray-200 bg-nbc-darker">
+
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-nbc-orange text-white p-3 z-50 rounded font-bold shadow-lg">
+        Zum Hauptinhalt springen
+    </a>
+
+    <nav class="fixed w-full z-50 glass-nav transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <a href="./index.html" class="flex-shrink-0 flex items-center gap-3 group">
+                    <img src="./NBC_Logo.png" 
+                         onerror="this.src='https://placehold.co/100x100/F26522/FFFFFF?text=NBC'" 
+                         alt="NBC Logo" 
+                         class="h-12 w-auto object-contain transition-transform group-hover:scale-110"> 
+                    <div class="hidden md:block leading-tight">
+                        <span class="block font-heading font-bold text-xl tracking-wide uppercase text-white">NBC Baskets</span>
+                        <span class="block text-xs text-nbc-orange uppercase tracking-widest font-bold">Nordhorn</span>
+                    </div>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-nbc-orange transition-colors">Verein</a>
+                    <a href="#teams" class="text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-nbc-orange transition-colors">Teams</a>
+                    <a href="#halle" class="text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-nbc-orange transition-colors">Halle</a>
+                    <a href="#kontakt" class="text-sm font-bold uppercase tracking-wider text-gray-300 hover:text-nbc-orange transition-colors">Kontakt</a>
+                    <a href="./Mitgliedschaft.html" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-6 py-2 rounded-full font-heading font-bold uppercase tracking-wide hover:shadow-[0_0_15px_rgba(242,101,34,0.5)] transition-all transform hover:-translate-y-0.5">
+                        Mitglied werden
+                    </a>
+                </div>
+
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none" aria-label="Menü öffnen">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden md:hidden bg-nbc-darker border-t border-gray-800 absolute w-full shadow-2xl" id="mobile-menu">
+            <div class="px-4 pt-4 pb-6 space-y-2">
+                <a href="#about" class="block px-3 py-3 rounded-md text-lg font-heading font-bold text-white hover:bg-gray-800 border-b border-gray-800" onclick="closeMenu()">VEREIN</a>
+                <a href="#teams" class="block px-3 py-3 rounded-md text-lg font-heading font-bold text-white hover:bg-gray-800 border-b border-gray-800" onclick="closeMenu()">TEAMS</a>
+                <a href="#halle" class="block px-3 py-3 rounded-md text-lg font-heading font-bold text-white hover:bg-gray-800 border-b border-gray-800" onclick="closeMenu()">HALLE</a>
+                <a href="#kontakt" class="block px-3 py-3 rounded-md text-lg font-heading font-bold text-white hover:bg-gray-800" onclick="closeMenu()">KONTAKT</a>
+                <a href="./Mitgliedschaft.html" class="block w-full text-center bg-nbc-orange text-white px-3 py-3 rounded-md text-lg font-heading font-bold mt-4 shadow-lg">MITGLIED WERDEN</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+
+        <header class="relative h-screen flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Basketball Court" class="w-full h-full object-cover opacity-30">
+                <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
+            </div>
+
+            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto mt-12">
+                <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 border border-nbc-orange/30 rounded-full bg-nbc-orange/10 backdrop-blur-sm">
+                    <span class="w-2 h-2 rounded-full bg-nbc-orange animate-pulse"></span>
+                    <span class="text-nbc-orange font-bold tracking-widest text-xs uppercase">Est. 2026 • Nordhorn</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-heading font-bold text-white mb-6 leading-none tracking-tight">
+                    GAME <span class="text-transparent bg-clip-text bg-gradient-to-r from-nbc-orange to-nbc-purple">ON.</span>
+                </h1>
+                
+                <p class="text-xl md:text-2xl text-gray-300 mb-10 font-light max-w-2xl mx-auto leading-relaxed">
+                    Der neue Basketball-Club für Nordhorn. <br class="hidden md:inline">Leidenschaft, Teamgeist und Community.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="#teams" class="w-full sm:w-auto bg-nbc-orange hover:bg-orange-600 text-white font-heading font-bold text-lg py-4 px-10 rounded-full transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(242,101,34,0.4)]">
+                        TEAMS ANSEHEN
+                    </a>
+                    <a href="./Probetraining.html" class="w-full sm:w-auto border border-gray-600 hover:border-white text-gray-300 hover:text-white font-heading text-lg py-4 px-10 rounded-full transition-all hover:bg-white/5">
+                        PROBETRAINING
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <section id="about" class="py-24 bg-nbc-darker border-t border-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="text-4xl md:text-5xl font-heading font-bold mb-8 text-white leading-tight">
+                            MEHR ALS NUR <br><span class="text-nbc-orange">EIN VEREIN.</span>
+                        </h2>
+                        <div class="space-y-6 text-gray-400 text-lg leading-relaxed">
+                            <p>
+                                Der <strong class="text-white">Nordhorner Basketball- und Breitensportclub e.V.</strong> (NBC) wurde 2026 gegründet, um frischen Wind in die Grafschafter Sportlandschaft zu bringen.
+                            </p>
+                            <p>
+                                Unser Fokus liegt auf einer modernen, inklusiven Jugendarbeit. Wir glauben daran, dass Basketball Charakter formt – durch Fairness, Respekt und Teamgeist auf und neben dem Feld.
+                            </p>
+                        </div>
+                        
+                        <div class="mt-10 grid grid-cols-2 gap-6">
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                                <div class="text-4xl font-heading font-bold text-nbc-purple mb-1">2026</div>
+                                <div class="text-xs text-gray-500 uppercase tracking-wider font-bold">Gegründet</div>
+                            </div>
+                            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center">
+                                <div class="text-4xl font-heading font-bold text-nbc-purple mb-1">9</div>
+                                <div class="text-xs text-gray-500 uppercase tracking-wider font-bold">Teams</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="relative group">
+                        <div class="absolute -inset-2 bg-gradient-to-r from-nbc-orange to-nbc-purple opacity-20 blur-xl rounded-2xl group-hover:opacity-40 transition duration-1000"></div>
+                        <img src="https://images.unsplash.com/photo-1519861531473-920026393112?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team Huddle" class="relative rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover aspect-[4/3] border border-gray-800">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="teams" class="py-24 bg-nbc-dark">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <span class="text-nbc-orange font-bold tracking-widest uppercase text-sm">Join the Squad</span>
+                    <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mt-2 mb-6">UNSERE TEAMS</h2>
+                    <p class="text-gray-400 max-w-2xl mx-auto">Vom Nachwuchs bis zur ersten Mannschaft. Klicke auf ein Team für Details.</p>
+                </div>
+
+                <div class="space-y-4" id="team-accordion">
+                    
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u8')" aria-expanded="false" aria-controls="u8">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U8 MINIS <span class="text-gray-500 text-base font-sans font-normal ml-2">(Mix)</span></span>
+                            <span id="icon-u8" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u8" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden relative">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U8" alt="Team U8" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Der spielerische Einstieg für unsere Jüngsten.</p>
+                                    <a href="./U8.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">
+                                        Zur Team-Seite <svg class="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u10')" aria-expanded="false" aria-controls="u10">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U10 KIDS <span class="text-gray-500 text-base font-sans font-normal ml-2">(Mix)</span></span>
+                            <span id="icon-u10" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u10" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U10" alt="Team U10" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Grundlagen, Dribbling und erste Spiele.</p>
+                                    <a href="./U10.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u12m')" aria-expanded="false" aria-controls="u12m">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U12 JUGEND <span class="text-gray-500 text-base font-sans font-normal ml-2">(männlich)</span></span>
+                            <span id="icon-u12m" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u12m" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U12m" alt="Team U12 männlich" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Festigung der Basics und Ligabetrieb.</p>
+                                    <a href="./U12-M.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u12w')" aria-expanded="false" aria-controls="u12w">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U12 JUGEND <span class="text-gray-500 text-base font-sans font-normal ml-2">(weiblich)</span></span>
+                            <span id="icon-u12w" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u12w" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U12w" alt="Team U12 weiblich" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Mädchen-Basketball aufstrebend.</p>
+                                    <a href="./U12-W.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u14')" aria-expanded="false" aria-controls="u14">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U14 JUGEND</span>
+                            <span id="icon-u14" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u14" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U14" alt="Team U14" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Taktik, Athletik und Teamplay.</p>
+                                    <a href="./U14.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u16')" aria-expanded="false" aria-controls="u16">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U16 JUGEND</span>
+                            <span id="icon-u16" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u16" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U16" alt="Team U16" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Leistungsorientiertes Training.</p>
+                                    <a href="./U16.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('u18')" aria-expanded="false" aria-controls="u18">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">U18 JUGEND</span>
+                            <span id="icon-u18" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="u18" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+U18" alt="Team U18" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Die Vorbereitung auf den Herrenbereich.</p>
+                                    <a href="./U18.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 border-l-4 border-l-nbc-orange rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('herren')" aria-expanded="false" aria-controls="herren">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-orange transition-colors">1. HERREN</span>
+                            <span id="icon-herren" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="herren" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+Herren" alt="Team Herren" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Unsere erste Mannschaft.</p>
+                                    <a href="./Herren1.html" class="inline-flex items-center text-nbc-orange hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 border-l-4 border-l-nbc-purple rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('damen')" aria-expanded="false" aria-controls="damen">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-nbc-purple transition-colors">1. DAMEN</span>
+                            <span id="icon-damen" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="damen" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+Damen" alt="Team Damen" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Frauenpower in der Liga.</p>
+                                    <a href="./Damen1.html" class="inline-flex items-center text-nbc-purple hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group border border-gray-800 border-l-4 border-l-pink-500 rounded-xl overflow-hidden bg-nbc-darker hover:border-gray-600 transition-all">
+                        <button class="w-full px-6 py-5 flex justify-between items-center focus:outline-none" onclick="toggleAccordion('cheer')" aria-expanded="false" aria-controls="cheer">
+                            <span class="font-heading text-xl font-bold text-white group-hover:text-pink-500 transition-colors">NBC CHEERLEADER</span>
+                            <span id="icon-cheer" class="text-nbc-purple text-2xl font-light transform transition-transform duration-300">+</span>
+                        </button>
+                        <div id="cheer" class="accordion-content bg-gray-900/50">
+                            <div class="p-6 grid md:grid-cols-3 gap-6 border-t border-gray-800">
+                                <div class="md:col-span-1 h-32 bg-gray-800 rounded-lg overflow-hidden">
+                                    <img src="https://placehold.co/400x300/1a1a1a/666?text=Foto+Cheer" alt="Cheerleaders" class="w-full h-full object-cover">
+                                </div>
+                                <div class="md:col-span-2 flex flex-col justify-center">
+                                    <p class="text-gray-400 text-sm mb-4">Support & Show für unsere Heimspiele.</p>
+                                    <a href="./Cheerleader.html" class="inline-flex items-center text-pink-500 hover:text-white font-bold text-sm transition-colors">Zur Team-Seite →</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="halle" class="py-24 bg-nbc-darker border-t border-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="h-96 bg-gray-800 rounded-xl overflow-hidden relative shadow-2xl border border-gray-700 group">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center text-gray-500 pointer-events-none">
+                            <span class="text-4xl mb-2">📍</span>
+                            <span class="font-bold">Ludwig-Povel-Halle</span>
+                            <span class="text-xs mt-2">Klicken für Google Maps</span>
+                        </div>
+                        <a href="https://www.google.com/maps/search/?api=1&query=Ludwig-Povel-Halle+Nordhorn" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-10 bg-white/0 hover:bg-white/5 transition-colors" aria-label="Google Maps öffnen"></a>
+                    </div>
+                    
+                    <div class="flex flex-col justify-center">
+                        <h2 class="text-4xl font-heading font-bold mb-6 text-white">HEIMAT DER <br><span class="text-nbc-orange">NBC BASKETS</span></h2>
+                        
+                        <div class="mb-8">
+                            <h3 class="text-xl text-white font-bold mb-1">Ludwig-Povel-Halle</h3>
+                            <p class="text-nbc-purple font-medium mb-4">Die moderne Spielstätte in Nordhorn</p>
+                            <p class="text-gray-400 leading-relaxed">
+                                Hier finden unsere Heimspiele und Trainings statt. Zentrale Lage, ausreichend Parkplätze und Platz für unsere Fans.
+                            </p>
+                        </div>
+
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-nbc-orange mr-4 border border-gray-700">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-white font-bold">Adresse</span>
+                                    <span class="text-gray-400">De-Vries-Straße 5<br>48531 Nordhorn</span>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center text-nbc-orange mr-4 border border-gray-700">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                </div>
+                                <div>
+                                    <span class="block text-white font-bold">Kontakt</span>
+                                    <a href="tel:+491739042341" class="text-gray-400 hover:text-white transition-colors">+49 (0)173 904 2341</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main> 
+    
+    <footer id="kontakt" class="bg-black text-white pt-20 pb-10 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <img src="./NBC_Logo.png" onerror="this.src='https://placehold.co/50x50/F26522/FFFFFF?text=NBC'" alt="NBC Logo Small" class="h-10 w-auto">
+                        <span class="font-heading font-bold text-xl uppercase tracking-wider">NBC Baskets</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        Nordhorner Basketball- und Breitensportclub e.V.<br>
+                        Gemeinsam stark seit 2026.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold mb-4 text-white uppercase tracking-wider text-sm border-b border-gray-800 pb-2 inline-block">Menu</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="#about" class="hover:text-nbc-orange transition-colors">Über uns</a></li>
+                        <li><a href="#teams" class="hover:text-nbc-orange transition-colors">Teams</a></li>
+                        <li><a href="#halle" class="hover:text-nbc-orange transition-colors">Anfahrt</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold mb-4 text-white uppercase tracking-wider text-sm border-b border-gray-800 pb-2 inline-block">Rechtliches</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="./Impressum.html" class="hover:text-nbc-orange transition-colors">Impressum</a></li>
+                        <li><a href="./Datenschutz.html" class="hover:text-nbc-orange transition-colors">Datenschutz</a></li>
+                        <li><a href="./Satzung.html" class="hover:text-nbc-orange transition-colors">Satzung</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-heading font-bold mb-4 text-white uppercase tracking-wider text-sm border-b border-gray-800 pb-2 inline-block">Kontakt</h4>
+                    <p class="text-gray-500 text-sm mb-2">
+                        <a href="mailto:info@nbc-nordhorn.de" class="hover:text-white transition-colors flex items-center"><span class="text-nbc-orange mr-2">✉</span> info@nbc-nordhorn.de</a>
+                    </p>
+                    <p class="text-gray-500 text-sm">
+                        <a href="tel:+491739042341" class="hover:text-white transition-colors flex items-center"><span class="text-nbc-orange mr-2">📞</span> +49 (0)173 904 2341</a>
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-900 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600">
+                <p>© 2026 NBC Baskets Nordhorn. Alle Rechte vorbehalten.</p>
+                <p class="mt-2 md:mt-0">Design: NBC Baskets</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Minigame Basketball -->
+    <a href="./minigame.html" class="fixed bottom-6 right-6 z-50 group" title="🏀 Spielen?">
+        <div class="basketball-float w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-700 rounded-full shadow-2xl flex items-center justify-center border-4 border-white/20 hover:border-nbc-orange transition-all cursor-pointer relative">
+            <span class="text-3xl">🏀</span>
+            <div class="absolute -top-10 right-0 bg-black/80 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                🏀 Spielen?
+            </div>
+        </div>
+    </a>
+
+    <script>
+        function toggleAccordion(id) {
+            const content = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            const button = document.querySelector(`button[aria-controls="${id}"]`);
+            
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                if(item.id !== id) {
+                    item.style.maxHeight = null;
+                    item.classList.remove('active');
+                }
+            });
+            
+            document.querySelectorAll('[id^="icon-"]').forEach(item => {
+                if(item.id !== 'icon-' + id) {
+                    item.innerText = '+';
+                    item.style.transform = 'rotate(0deg)';
+                }
+            });
+            
+            document.querySelectorAll('button[aria-controls]').forEach(btn => {
+                if(btn.getAttribute('aria-controls') !== id) {
+                    btn.setAttribute('aria-expanded', 'false');
+                }
+            });
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                icon.innerText = '+';
+                icon.style.transform = 'rotate(0deg)';
+                button.setAttribute('aria-expanded', 'false');
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('active');
+                icon.innerText = '+';
+                icon.style.transform = 'rotate(45deg)';
+                button.setAttribute('aria-expanded', 'true');
+            }
+        }
+
+        function closeMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

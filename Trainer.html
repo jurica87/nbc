@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsere Trainer | NBC Baskets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212', light: '#f4f4f4' }
+                    },
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>body { background-color: #121212; color: #f4f4f4; }</style>
+</head>
+<body class="bg-nbc-darker flex flex-col min-h-screen">
+
+    <nav class="bg-nbc-darker/95 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2 group">
+                <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+                <span class="text-xl group-hover:-translate-x-1 transition-transform text-nbc-orange">←</span>
+                <span class="font-heading font-bold uppercase tracking-wider text-white">Zurück</span>
+            </a>
+            <span class="text-gray-500 font-bold text-sm hidden md:block">COACHING STAFF</span>
+        </div>
+    </nav>
+
+    <header class="py-16 px-4 text-center">
+        <h1 class="text-5xl font-heading font-bold text-white mb-4">UNSERE TRAINER</h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+            Qualifizierte Coaches für alle Altersklassen. Wir setzen auf Ausbildung und Erfahrung.
+        </p>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 w-full pb-20">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-orange transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Patrick Olliges</h3>
+                    <p class="text-nbc-orange font-bold text-sm mb-4">Head Coach 1. Herren & U12m</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Erfahrener Coach mit Leidenschaft für taktisches Basketball. Betreut sowohl die 1. Herren als auch die U12-Jungen.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800 flex gap-2">
+                        <a href="./Herren1.html" class="text-xs bg-gray-800 hover:bg-nbc-orange text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            1. Herren
+                        </a>
+                        <a href="./U12-M.html" class="text-xs bg-gray-800 hover:bg-nbc-orange text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            U12 männl.
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        D-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Niklas Kraffzig</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">U10, U14 & Vorstand</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Vielseitig engagiert im Verein. Trainiert die jüngsten und die U14-Jugend. Auch im Vorstand aktiv.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800 flex gap-2">
+                        <a href="./U10.html" class="text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            U10
+                        </a>
+                        <a href="./U14.html" class="text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            U14
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Femke Duarte</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">Co-Trainerin U12m</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Unterstützt Patrick Olliges bei der U12 mit Fokus auf individuelle Spielerentwicklung.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./U12-M.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center">
+                            U12 männlich
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-orange transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        D-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Justus Drechsler</h3>
+                    <p class="text-nbc-orange font-bold text-sm mb-4">Co-Trainer U12m</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Verstärkt das U12-Trainerteam mit frischen Ideen und athletischem Training.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./U12-M.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-orange text-white px-3 py-2 rounded transition-colors text-center">
+                            U12 männlich
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Dania Khayata</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">Head Coach U12w</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Leitet das U12-Mädchen-Team mit Empathie und technischem Know-how.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./U12-W.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center">
+                            U12 weiblich
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-orange transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Noah Soumah</h3>
+                    <p class="text-nbc-orange font-bold text-sm mb-4">Head Coach U16</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Leistungsorientiertes Training für die U16 mit Fokus auf Spielverständnis.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800 flex gap-2">
+                        <a href="./U16.html" class="text-xs bg-gray-800 hover:bg-nbc-orange text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            U16
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        D-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Daniel Kuratnik</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">Co-Trainer U16</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Unterstützt Noah Soumah bei der U16 mit Schwerpunkt Athletik.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./U16.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center">
+                            U16
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-orange transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Simon Sperling</h3>
+                    <p class="text-nbc-orange font-bold text-sm mb-4">Head Coach U18</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Bereitet die U18 optimal auf den Übergang in den Herrenbereich vor.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./U18.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-orange text-white px-3 py-2 rounded transition-colors text-center">
+                            U18
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        C-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Nele Bramlage</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">Head Coach 1. Damen</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Spielerisch und taktisch stark - führt unser Damen-Team an. Auch als Schiedsrichterin aktiv.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800 flex gap-2">
+                        <a href="./Damen1.html" class="text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center flex-1">
+                            1. Damen
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-nbc-purple transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">🏀</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        D-LIZENZ
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Kira Buchholz</h3>
+                    <p class="text-nbc-purple font-bold text-sm mb-4">Co-Trainerin 1. Damen</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Unterstützt Nele Bramlage bei der Betreuung der 1. Damen.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./Damen1.html" class="block w-full text-xs bg-gray-800 hover:bg-nbc-purple text-white px-3 py-2 rounded transition-colors text-center">
+                            1. Damen
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-pink-500 transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative bg-gradient-to-br from-pink-900/30 to-gray-900 flex items-center justify-center">
+                    <span class="text-6xl">📣</span>
+                    <div class="absolute top-4 right-4 bg-black/70 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded border border-gray-600">
+                        CHEER
+                    </div>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Stefanie Berisa</h3>
+                    <p class="text-pink-500 font-bold text-sm mb-4">Cheerleading Coach</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Leitet unsere Cheerleader mit Energie und Choreografie-Know-how.
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="./Cheerleader.html" class="block w-full text-xs bg-gray-800 hover:bg-pink-500 text-white px-3 py-2 rounded transition-colors text-center">
+                            Cheerleader
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all group flex flex-col">
+                <div class="h-64 overflow-hidden relative flex items-center justify-center bg-gray-800">
+                    <span class="text-4xl">🏀</span>
+                </div>
+                <div class="p-6 flex-grow flex flex-col">
+                    <h3 class="text-2xl font-heading font-bold text-white uppercase">Wir suchen dich!</h3>
+                    <p class="text-gray-500 font-bold text-sm mb-4">Jugendtrainer (m/w/d)</p>
+                    <p class="text-gray-400 text-sm mb-6 flex-grow">
+                        Du hast Erfahrung im Coaching oder willst es lernen? Wir unterstützen dich beim Lizenzerwerb!
+                    </p>
+                    <div class="mt-auto pt-4 border-t border-gray-800">
+                        <a href="mailto:info@nbc-nordhorn.de" class="block w-full text-xs bg-nbc-orange text-white px-3 py-2 rounded font-bold text-center hover:bg-orange-600 transition-colors">
+                            JETZT BEWERBEN
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-gray-900 mt-auto">
+        <p>© 2026 NBC Baskets Nordhorn e.V.</p>
+    </footer>
+</body>
+</html>

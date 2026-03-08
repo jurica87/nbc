@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Probetraining | NBC Baskets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212' }
+                    },
+                    fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>body { background-color: #121212; color: #f4f4f4; }</style>
+</head>
+<body class="bg-nbc-darker flex flex-col min-h-screen">
+
+    <nav class="bg-nbc-darker/95 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2 group">
+                <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+                <span class="text-xl group-hover:-translate-x-1 transition-transform text-nbc-orange">←</span>
+                <span class="font-heading font-bold uppercase tracking-wider text-white">Zurück</span>
+            </a>
+            <span class="text-gray-500 font-bold text-sm hidden md:block">PROBETRAINING</span>
+        </div>
+    </nav>
+
+    <header class="py-16 px-4 text-center">
+        <h1 class="text-5xl font-heading font-bold text-white mb-4">PROBETRAINING</h1>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+            Schnupper einfach rein! Komm vorbei und lerne uns kennen.
+        </p>
+    </header>
+
+    <main class="flex-grow max-w-5xl mx-auto px-4 w-full pb-20">
+        
+        <div class="bg-gradient-to-br from-nbc-orange/20 to-nbc-purple/20 border border-nbc-orange rounded-2xl p-8 mb-12 text-center">
+            <h2 class="text-3xl font-heading font-bold text-white mb-4">WIE LÄUFT'S?</h2>
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-white shrink-0">1</div>
+                    <div>
+                        <h3 class="font-bold text-white">Termin wählen</h3>
+                        <p class="text-gray-400 text-sm">Schau dir unsere Trainingszeiten an und komm vorbei.</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-white shrink-0">2</div>
+                    <div>
+                        <h3 class="font-bold text-white">Schnuppern</h3>
+                        <p class="text-gray-400 text-sm">Mach mit beim Training - ohne Verpflichtung!</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-white shrink-0">3</div>
+                    <div>
+                        <h3 class="font-bold text-white">Entscheiden</h3>
+                        <p class="text-gray-400 text-sm">Gefällt's dir? Dann werde Mitglied!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <h3 class="text-2xl font-heading font-bold text-white mb-4 flex items-center gap-2">📍 ADRESSE</h3>
+                <p class="text-gray-300 mb-2"><strong>Ludwig-Povel-Halle</strong></p>
+                <p class="text-gray-400">De-Vries-Straße 5<br>48531 Nordhorn</p>
+                <a href="https://www.google.com/maps/search/?api=1&query=Ludwig-Povel-Halle+Nordhorn" target="_blank" class="inline-block mt-4 text-nbc-orange hover:underline">Google Maps →</a>
+            </div>
+            <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
+                <h3 class="text-2xl font-heading font-bold text-white mb-4 flex items-center gap-2">🎒 WAS MITBRINGEN?</h3>
+                <ul class="space-y-2 text-gray-300">
+                    <li>✓ Bequeme Sportkleidung</li>
+                    <li>✓ Hallenschuhe (sauber!)</li>
+                    <li>✓ Trinkflasche</li>
+                    <li>✓ Gute Laune 😊</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800 mb-12">
+            <h2 class="text-2xl font-heading font-bold text-white mb-6">ANMELDUNG ZUM PROBETRAINING</h2>
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir bestätigen dein Probetraining.');">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <input type="text" placeholder="Vorname" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-nbc-orange focus:outline-none">
+                    <input type="text" placeholder="Nachname" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-nbc-orange focus:outline-none">
+                </div>
+                <input type="email" placeholder="E-Mail" required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-nbc-orange focus:outline-none">
+                <input type="tel" placeholder="Telefon" class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-nbc-orange focus:outline-none">
+                <select required class="w-full bg-black/50 border border-gray-700 rounded-lg px-4 py-3 text-white focus:border-nbc-orange focus:outline-none">
+                    <option value="">Interessiert für...</option>
+                    <option value="u8">U8 Minis</option>
+                    <option value="u10">U10 Kids</option>
+                    <option value="u12m">U12 männlich</option>
+                    <option value="u12w">U12 weiblich</option>
+                    <option value="u14">U14</option>
+                    <option value="u16">U16</option>
+                    <option value="u18">U18</option>
+                    <option value="herren">1. Herren</option>
+                    <option value="damen">1. Damen</option>
+                    <option value="cheer">Cheerleading</option>
+                </select>
+                <button type="submit" class="w-full bg-nbc-orange hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-colors">
+                    ANMELDEN
+                </button>
+            </form>
+            <p class="text-center mt-4 text-gray-500 text-sm">
+                Oder spontan vorbeikommen? Kein Problem!
+            </p>
+        </div>
+
+        <div class="text-center">
+            <h3 class="text-xl font-bold text-white mb-4">FRAGEN?</h3>
+            <p class="text-gray-400 mb-4">Schreib uns oder ruf an:</p>
+            <a href="mailto:info@nbc-nordhorn.de" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors mr-2">E-Mail</a>
+            <a href="tel:+491739042341" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors">Anrufen</a>
+        </div>
+
+    </main>
+
+    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-gray-900 mt-auto">
+        <p>© 2026 NBC Baskets Nordhorn e.V.</p>
+    </footer>
+</body>
+</html>

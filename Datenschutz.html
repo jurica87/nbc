@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutz | NBC Baskets Nordhorn</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212' } }, fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] } } } }
+    </script>
+    <style>body { background-color: #121212; color: #e5e5e5; } h2 { color: #fff; margin-top: 2rem; margin-bottom: 0.5rem; font-family: 'Oswald'; font-size: 1.5rem; }</style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <nav class="bg-nbc-darker/90 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2 text-white hover:text-nbc-orange transition-colors">
+                <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+                <span class="font-bold">← ZURÜCK</span>
+            </a>
+            <span class="font-heading font-bold uppercase tracking-wider">DATENSCHUTZ</span>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-3xl mx-auto w-full px-6 py-16">
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-8 border-l-4 border-nbc-purple pl-4">DATENSCHUTZERKLÄRUNG</h1>
+        
+        <div class="space-y-6 text-gray-300 leading-relaxed">
+            <p>Wir freuen uns über Ihr Interesse an unserem Verein. Datenschutz hat einen besonders hohen Stellenwert für den Vorstand des NBC Baskets Nordhorn e.V.</p>
+
+            <h2>1. Datenschutz auf einen Blick</h2>
+            <p><strong>Allgemeine Hinweise:</strong> Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen.</p>
+            <p><strong>Datenerfassung:</strong> Die Datenverarbeitung auf dieser Website erfolgt durch den Websitebetreiber. Dessen Kontaktdaten können Sie dem Impressum dieser Website entnehmen.</p>
+
+            <h2>2. Hosting</h2>
+            <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter:<br>
+            [Name des Hosters wird eingetragen]<br>
+            Der Provider erhebt und speichert automatisch Informationen in so genannten Server-Log-Dateien, die Ihr Browser automatisch an uns übermittelt (Browsertyp, Uhrzeit, IP-Adresse). Dies dient der technischen Sicherheit der Seite.</p>
+
+            <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
+            <p><strong>Verantwortliche Stelle:</strong><br>
+            NBC Baskets Nordhorn e.V.<br>
+            De-Vries-Straße 5, 48531 Nordhorn<br>
+            E-Mail: info@nbc-nordhorn.de</p>
+
+            <h2>4. Datenerfassung auf dieser Website</h2>
+            <p><strong>Kontakt per E-Mail oder Telefon:</strong> Wenn Sie uns per E-Mail oder Telefon kontaktieren, wird Ihre Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre Einwilligung weiter.</p>
+            
+            <h2>5. Plugins und Tools</h2>
+            <p><strong>Google Web Fonts:</strong> Diese Seite nutzt zur einheitlichen Darstellung von Schriftarten Web Fonts. Beim Aufruf einer Seite lädt Ihr Browser die benötigten Web Fonts in ihren Browsercache.</p>
+        </div>
+    </main>
+
+    <footer class="bg-black py-6 text-center text-xs text-gray-600 border-t border-gray-900">
+        &copy; 2026 NBC Baskets Nordhorn
+    </footer>
+</body>
+</html>

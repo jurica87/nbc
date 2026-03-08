@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satzung | NBC Baskets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212' } }, fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] } } } }
+    </script>
+    <style>
+        body { background-color: #121212; color: #e5e5e5; }
+        .prose h3 { color: #fff; font-family: 'Oswald'; margin-top: 2rem; font-size: 1.5rem; }
+        .prose p { margin-bottom: 1rem; line-height: 1.6; color: #ccc; }
+    </style>
+</head>
+<body class="bg-nbc-darker flex flex-col min-h-screen">
+
+    <nav class="bg-nbc-darker/95 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2 group">
+                <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
+                <span class="text-xl group-hover:-translate-x-1 transition-transform text-nbc-orange">←</span>
+                <span class="font-heading font-bold uppercase tracking-wider text-white">Zurück</span>
+            </a>
+            <span class="text-gray-500 font-bold text-sm hidden md:block">SATZUNG</span>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-3xl mx-auto w-full px-6 py-16">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-2">VEREINSSATZUNG</h1>
+            <p class="text-nbc-purple font-medium">Nordhorner Basketball- und Breitensportclub e.V.</p>
+            <p class="text-xs text-gray-500 mt-2">Stand: 01.01.2026</p>
+        </div>
+        
+        <div class="prose max-w-none border-l-2 border-gray-800 pl-6">
+            <h3>§ 1 Name, Sitz, Geschäftsjahr</h3>
+            <p>1. Der Verein führt den Namen "Nordhorner Basketball- und Breitensportclub e.V." (Kurzform: NBC Baskets Nordhorn).</p>
+            <p>2. Er hat seinen Sitz in Nordhorn und soll in das Vereinsregister eingetragen werden.</p>
+            <p>3. Das Geschäftsjahr ist das Kalenderjahr.</p>
+
+            <h3>§ 2 Zweck des Vereins</h3>
+            <p>1. Zweck des Vereins ist die Förderung des Sports, insbesondere des Basketballsports und des Cheerleadings.</p>
+            <p>2. Der Satzungszweck wird verwirklicht insbesondere durch:</p>
+            <ul class="list-disc ml-5 text-gray-400 mb-4">
+                <li>Abhaltung von geordneten Sport- und Spielübungen.</li>
+                <li>Durchführung von sportlichen Veranstaltungen.</li>
+                <li>Aus- und Fortbildung von Übungsleitern, Trainern und Schiedsrichtern.</li>
+                <li>Förderung der Jugend.</li>
+            </ul>
+
+            <h3>§ 3 Gemeinnützigkeit</h3>
+            <p>Der Verein verfolgt ausschließlich und unmittelbar gemeinnützige Zwecke im Sinne des Abschnitts "Steuerbegünstigte Zwecke" der Abgabenordnung.</p>
+            
+            <p class="italic text-gray-500 mt-8">[Vollständige Satzung auf Anfrage beim Vorstand erhältlich]</p>
+        </div>
+    </main>
+
+    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-gray-900 mt-auto">
+        <p>© 2026 NBC Baskets Nordhorn e.V.</p>
+    </footer>
+</body>
+</html>
