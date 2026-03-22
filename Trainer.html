@@ -18,7 +18,47 @@
             }
         }
     </script>
-    <style>body { background-color: #121212; color: #f4f4f4; }</style>
+    <style>body { background-color: #121212; color: #f4f4f4; }
+        /* Mitglied Werden Button Animation */
+        @keyframes glow-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                transform: scale(1.02);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .member-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(242, 101, 34, 0.4);
+            animation: glow-pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .member-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+        }
+    </style>
 </head>
 <body class="bg-nbc-darker flex flex-col min-h-screen">
 
@@ -304,5 +344,8 @@
     <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-gray-900 mt-auto">
         <p>© 2026 NBC Baskets Nordhorn e.V.</p>
     </footer>
+    <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
+        Mitglied Werden
+    </a>
 </body>
 </html>

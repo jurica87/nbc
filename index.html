@@ -72,6 +72,46 @@
         }
 
         section { scroll-margin-top: 100px; }
+    
+        /* Mitglied Werden Button Animation */
+        @keyframes glow-pulse {
+            0%, 100% { 
+                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                transform: scale(1.02);
+            }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .member-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(242, 101, 34, 0.4);
+            animation: glow-pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        .member-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+        }
     </style>
 </head>
 <body class="relative font-sans antialiased text-gray-200 bg-nbc-darker">
@@ -128,7 +168,7 @@
 
         <header class="relative h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 z-0">
-                <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Basketball Court" class="w-full h-full object-cover opacity-30">
+                <img src="https://placehold.co/1920x1080/1a1a1a/333?text=NBC+Baskets" alt="Basketball Court" class="w-full h-full object-cover opacity-30">
                 <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
             </div>
 
@@ -187,7 +227,7 @@
                     
                     <div class="relative group">
                         <div class="absolute -inset-2 bg-gradient-to-r from-nbc-orange to-nbc-purple opacity-20 blur-xl rounded-2xl group-hover:opacity-40 transition duration-1000"></div>
-                        <img src="https://images.unsplash.com/photo-1519861531473-920026393112?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Team Huddle" class="relative rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover aspect-[4/3] border border-gray-800">
+                        <img src="https://placehold.co/800x600/1a1a1a/444?text=Team" alt="Team Huddle" class="relative rounded-2xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-500 w-full object-cover aspect-[4/3] border border-gray-800">
                     </div>
                 </div>
             </div>
@@ -406,7 +446,7 @@
                         
                         <div class="mb-8">
                             <h3 class="text-xl text-white font-bold mb-1">Ludwig-Povel-Halle</h3>
-                            <p class="text-nbc-purple font-medium mb-4">Die moderne Spielstätte in Nordhorn</p>
+                            <p class="text-nbc-purple font-medium mb-4">Unsere Spielstätte in Nordhorn</p>
                             <p class="text-gray-400 leading-relaxed">
                                 Hier finden unsere Heimspiele und Trainings statt. Zentrale Lage, ausreichend Parkplätze und Platz für unsere Fans.
                             </p>
@@ -545,5 +585,8 @@
             document.getElementById('mobile-menu').classList.add('hidden');
         }
     </script>
+    <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
+        Mitglied Werden
+    </a>
 </body>
 </html>
