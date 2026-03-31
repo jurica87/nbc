@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212', light: '#f4f4f4' }
+                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7', light: '#f4f4f4' }
                     },
                     fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
                 }
@@ -19,17 +19,17 @@
         }
     </script>
     <style>
-        body { background-color: #121212; color: #f4f4f4; }
-        .glass-nav { background: rgba(18, 18, 18, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        body { background-color: #f8f9fa; color: #f4f4f4; }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
     
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
-                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
                 transform: scale(1);
             }
             50% { 
-                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                box-shadow: 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #F2722C, 0 0 60px #7457A3;
                 transform: scale(1.02);
             }
         }
@@ -42,7 +42,7 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            background: linear-gradient(135deg, #F2722C 0%, #7457A3 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -59,11 +59,11 @@
         }
         .member-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+            box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
         }
     </style>
 </head>
-<body class="font-sans antialiased bg-nbc-darker text-gray-200 flex flex-col min-h-screen">
+<body class="font-sans antialiased bg-[#f8f9fa] text-[#1a1a2e] flex flex-col min-h-screen">
 
     <nav class="fixed w-full z-50 glass-nav h-20 flex items-center">
         <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
@@ -71,11 +71,11 @@
                 <img src="./NBC_Logo.png" alt="NBC Logo" class="h-10 w-auto" onerror="this.style.display='none'">
                 <span class="text-2xl mr-2 group-hover:-translate-x-1 transition-transform">←</span>
                 <div>
-                    <span class="block font-heading font-bold text-xl uppercase text-white">NBC Baskets</span>
+                    <span class="block font-heading font-bold text-xl uppercase text-[#1a1a2e]">NBC Baskets</span>
                     <span class="block text-xs text-nbc-orange uppercase tracking-widest font-bold">Zurück zur Startseite</span>
                 </div>
             </a>
-            <a href="./Probetraining.html" class="hidden md:block bg-nbc-purple hover:bg-opacity-80 text-white px-5 py-2 rounded-full font-heading font-bold text-sm uppercase transition-all">
+            <a href="./Probetraining.html" class="hidden md:block bg-nbc-purple hover:bg-opacity-80 text-[#1a1a2e] px-5 py-2 rounded-full font-heading font-bold text-sm uppercase transition-all">
                 Probetraining
             </a>
         </div>
@@ -83,18 +83,18 @@
 
     <header class="relative h-[60vh] flex items-end pb-12 overflow-hidden mt-20">
         <div class="absolute inset-0 z-0">
-            <img src="https://placehold.co/1920x1080/1a1a1a/444?text=U10+KIDS" alt="U10 Team" class="w-full h-full object-cover opacity-50">
+            <img src="./team_u10.jpg" alt="U10 Team" class="w-full h-full object-contain">
             <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 w-full">
-            <span class="inline-block py-1 px-3 rounded bg-nbc-orange text-white text-xs font-bold uppercase tracking-widest mb-4">
+            <span class="inline-block py-1 px-3 rounded bg-nbc-orange text-[#1a1a2e] text-xs font-bold uppercase tracking-widest mb-4">
                 Aufstiegsklasse
             </span>
-            <h1 class="text-5xl md:text-7xl font-heading font-bold text-white uppercase leading-none">
+            <h1 class="text-5xl md:text-7xl font-heading font-bold text-[#1a1a2e] uppercase leading-none">
                 U10 <span class="text-nbc-purple">KIDS</span>
             </h1>
-            <p class="text-xl text-gray-300 mt-4">Gemischt • Jahrgang 2016/2017</p>
+            <p class="text-xl text-[#4a4a5a] mt-4">Gemischt • Jahrgang 2016/2017</p>
         </div>
     </header>
 
@@ -104,8 +104,8 @@
             <div class="lg:col-span-2 space-y-12">
                 
                 <section>
-                    <h2 class="text-3xl font-heading font-bold text-white mb-4 border-l-4 border-nbc-orange pl-4">DAS TEAM</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed">
+                    <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4 border-l-4 border-nbc-orange pl-4">DAS TEAM</h2>
+                    <p class="text-[#4a4a5a] text-lg leading-relaxed">
                         In der U10 werden die Grundlagen des Basketballs verfestigt. Die Kinder lernen 
                         korrektes Dribbeln, Passen und den Wurf auf den Korb. Erste kleine Spielformen 
                         machen den Trainingsalltag abwechslungsreich. Der Spaß bleibt dabei immer im Mittelpunkt!
@@ -113,34 +113,34 @@
                 </section>
 
                 <section>
-                    <h3 class="text-2xl font-heading font-bold text-white mb-6">TRAININGSSCHWERPUNKTE</h3>
+                    <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">TRAININGSSCHWERPUNKTE</h3>
                     <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-gray-900 p-4 rounded-lg border border-gray-800">
+                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
                             <span class="text-nbc-orange text-2xl mb-2 block">🏀</span>
-                            <h4 class="font-bold text-white mb-1">Dribbling</h4>
-                            <p class="text-gray-400 text-sm">Ballkontrolle und Koordination</p>
+                            <h4 class="font-bold text-[#1a1a2e] mb-1">Dribbling</h4>
+                            <p class="text-[#4a4a5a] text-sm">Ballkontrolle und Koordination</p>
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-lg border border-gray-800">
+                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
                             <span class="text-nbc-orange text-2xl mb-2 block">🤲</span>
-                            <h4 class="font-bold text-white mb-1">Passen & Fangen</h4>
-                            <p class="text-gray-400 text-sm">Zusammenspiel im Team</p>
+                            <h4 class="font-bold text-[#1a1a2e] mb-1">Passen & Fangen</h4>
+                            <p class="text-[#4a4a5a] text-sm">Zusammenspiel im Team</p>
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-lg border border-gray-800">
+                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
                             <span class="text-nbc-orange text-2xl mb-2 block">🎯</span>
-                            <h4 class="font-bold text-white mb-1">Wurf</h4>
-                            <p class="text-gray-400 text-sm">Korbleger-Technik</p>
+                            <h4 class="font-bold text-[#1a1a2e] mb-1">Wurf</h4>
+                            <p class="text-[#4a4a5a] text-sm">Korbleger-Technik</p>
                         </div>
-                        <div class="bg-gray-900 p-4 rounded-lg border border-gray-800">
+                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
                             <span class="text-nbc-orange text-2xl mb-2 block">🏃</span>
-                            <h4 class="font-bold text-white mb-1">Athletik</h4>
-                            <p class="text-gray-400 text-sm">Schnelligkeit und Sprungkraft</p>
+                            <h4 class="font-bold text-[#1a1a2e] mb-1">Athletik</h4>
+                            <p class="text-[#4a4a5a] text-sm">Schnelligkeit und Sprungkraft</p>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    <h3 class="text-2xl font-heading font-bold text-white mb-6">SPIEL & WETTKAMPF</h3>
-                    <p class="text-gray-400 leading-relaxed">
+                    <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">SPIEL & WETTKAMPF</h3>
+                    <p class="text-[#4a4a5a] leading-relaxed">
                         Die U10 nimmt an ersten Mini-Turnieren teil. Hier geht es noch nicht um Siege, 
                         sondern um Spielpraxis und den Umgang mit anderen Teams. Jeder bekommt gleich 
                         viel Spielzeit - Entwicklung steht im Vordergrund!
@@ -150,40 +150,35 @@
 
             <aside class="space-y-8">
                 
-                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                    <h3 class="font-heading font-bold text-xl text-white mb-4 flex items-center">
+                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
                         <span class="text-nbc-orange mr-2">🕒</span> TRAININGSZEITEN
                     </h3>
                     <ul class="space-y-4">
-                        <li class="border-b border-gray-800 pb-2">
-                            <span class="block text-nbc-purple font-bold">Montag</span>
-                            <span class="text-white">16:30 - 17:30 Uhr</span>
-                            <span class="block text-xs text-gray-500 mt-1">Ludwig-Povel-Halle</span>
-                        </li>
-                        <li class="border-b border-gray-800 pb-2 last:border-0">
-                            <span class="block text-nbc-purple font-bold">Freitag</span>
-                            <span class="text-white">15:00 - 16:30 Uhr</span>
-                            <span class="block text-xs text-gray-500 mt-1">Kreissporthalle</span>
+                        <li class="border-b border-[#e0e0e5] pb-2">
+                            <span class="block text-nbc-purple font-bold">Mittwoch</span>
+                            <span class="text-[#1a1a2e]">16:15 - 17:15 Uhr</span>
+                            <span class="block text-xs text-[#6a6a7a] mt-1">Ludwig-Povel-Halle</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                    <h3 class="font-heading font-bold text-xl text-white mb-4 flex items-center">
+                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
                         <span class="text-nbc-orange mr-2">📋</span> TRAINER
                     </h3>
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl">👤</div>
                         <div>
-                            <div class="text-white font-bold">Niklas Kraffzig</div>
-                            <div class="text-xs text-gray-400">Head Coach (D-Lizenz)</div>
+                            <div class="text-[#1a1a2e] font-bold">Niklas Kraffzig</div>
+                            <div class="text-xs text-[#4a4a5a]">Head Coach (D-Lizenz)</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-gradient-to-br from-nbc-orange to-nbc-purple p-6 rounded-xl text-center shadow-lg">
-                    <h3 class="font-heading font-bold text-xl text-white mb-2">LUST AUF BASKETBALL?</h3>
-                    <p class="text-white/90 text-sm mb-6">Komm zum Schnuppertraining vorbei!</p>
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-2">LUST AUF BASKETBALL?</h3>
+                    <p class="text-[#1a1a2e]/90 text-sm mb-6">Komm zum Schnuppertraining vorbei!</p>
                     <a href="./Probetraining.html" class="inline-block bg-white text-nbc-dark font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors w-full">
                         ANMELDEN
                     </a>
@@ -193,11 +188,11 @@
         </div>
     </main>
 
-    <footer class="bg-black py-8 border-t border-gray-800 text-center text-sm text-gray-600">
+    <footer class="bg-[#f8f9fa] py-8 border-t border-[#e0e0e5] text-center text-sm text-[#8a8a9a]">
         <p>© 2026 NBC Baskets Nordhorn</p>
         <p class="mt-2">
-            <a href="./Impressum.html" class="hover:text-white mx-2">Impressum</a>
-            <a href="./Datenschutz.html" class="hover:text-white mx-2">Datenschutz</a>
+            <a href="./Impressum.html" class="hover:text-[#1a1a2e] mx-2">Impressum</a>
+            <a href="./Datenschutz.html" class="hover:text-[#1a1a2e] mx-2">Datenschutz</a>
         </p>
     </footer>
 

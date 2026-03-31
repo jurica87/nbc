@@ -7,17 +7,17 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = { theme: { extend: { colors: { nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212' } }, fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] } } } }
+        tailwind.config = { theme: { extend: { colors: { nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7' } }, fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] } } } }
     </script>
-    <style>body { background-color: #121212; color: #e5e5e5; } h2 { color: #fff; margin-top: 2rem; margin-bottom: 0.5rem; font-family: 'Oswald'; font-size: 1.5rem; }
+    <style>body { background-color: #f8f9fa; color: #e5e5e5; } h2 { color: #fff; margin-top: 2rem; margin-bottom: 0.5rem; font-family: 'Oswald'; font-size: 1.5rem; }
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
-                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
                 transform: scale(1);
             }
             50% { 
-                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                box-shadow: 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #F2722C, 0 0 60px #7457A3;
                 transform: scale(1.02);
             }
         }
@@ -30,7 +30,7 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            background: linear-gradient(135deg, #F2722C 0%, #7457A3 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -47,15 +47,15 @@
         }
         .member-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+            box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <nav class="bg-nbc-darker/90 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+    <nav class="bg-[#f8f9fa]/90 backdrop-blur border-b border-[#e0e0e5] p-4 sticky top-0 z-50">
         <div class="max-w-4xl mx-auto flex justify-between items-center">
-            <a href="./index.html" class="flex items-center gap-2 text-white hover:text-nbc-orange transition-colors">
+            <a href="./index.html" class="flex items-center gap-2 text-[#1a1a2e] hover:text-[#F2722C] transition-colors">
                 <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
                 <span class="font-bold">← ZURÜCK</span>
             </a>
@@ -64,9 +64,9 @@
     </nav>
 
     <main class="flex-grow max-w-3xl mx-auto w-full px-6 py-16">
-        <h1 class="text-4xl md:text-5xl font-heading font-bold text-white mb-8 border-l-4 border-nbc-purple pl-4">DATENSCHUTZERKLÄRUNG</h1>
+        <h1 class="text-4xl md:text-5xl font-heading font-bold text-[#1a1a2e] mb-8 border-l-4 border-nbc-purple pl-4">DATENSCHUTZERKLÄRUNG</h1>
         
-        <div class="space-y-6 text-gray-300 leading-relaxed">
+        <div class="space-y-6 text-[#4a4a5a] leading-relaxed">
             <p>Wir freuen uns über Ihr Interesse an unserem Verein. Datenschutz hat einen besonders hohen Stellenwert für den Vorstand des NBC Baskets Nordhorn e.V.</p>
 
             <h2>1. Datenschutz auf einen Blick</h2>
@@ -92,7 +92,7 @@
         </div>
     </main>
 
-    <footer class="bg-black py-6 text-center text-xs text-gray-600 border-t border-gray-900">
+    <footer class="bg-[#f8f9fa] py-6 text-center text-xs text-[#8a8a9a] border-t border-[#e0e0e5]">
         &copy; 2026 NBC Baskets Nordhorn
     </footer>
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">

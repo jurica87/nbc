@@ -11,7 +11,7 @@
             theme: {
                 extend: {
                     colors: {
-                        nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212', light: '#f4f4f4' }
+                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7', light: '#f4f4f4' }
                     },
                     fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
                 }
@@ -19,17 +19,17 @@
         }
     </script>
     <style>
-        body { background-color: #121212; color: #f4f4f4; }
-        .glass-nav { background: rgba(18, 18, 18, 0.95); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        body { background-color: #f8f9fa; color: #f4f4f4; }
+        .glass-nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
     
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
-                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
                 transform: scale(1);
             }
             50% { 
-                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                box-shadow: 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #F2722C, 0 0 60px #7457A3;
                 transform: scale(1.02);
             }
         }
@@ -42,7 +42,7 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            background: linear-gradient(135deg, #F2722C 0%, #7457A3 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -59,11 +59,11 @@
         }
         .member-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+            box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
         }
     </style>
 </head>
-<body class="font-sans antialiased bg-nbc-darker text-gray-200 flex flex-col min-h-screen">
+<body class="font-sans antialiased bg-[#f8f9fa] text-[#1a1a2e] flex flex-col min-h-screen">
 
     <nav class="fixed w-full z-50 glass-nav h-20 flex items-center">
         <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
@@ -71,11 +71,11 @@
                 <img src="./NBC_Logo.png" alt="NBC Logo" class="h-10 w-auto" onerror="this.style.display='none'">
                 <span class="text-2xl mr-2 group-hover:-translate-x-1 transition-transform">←</span>
                 <div>
-                    <span class="block font-heading font-bold text-xl uppercase text-white">NBC Baskets</span>
+                    <span class="block font-heading font-bold text-xl uppercase text-[#1a1a2e]">NBC Baskets</span>
                     <span class="block text-xs text-nbc-orange uppercase tracking-widest font-bold">Zurück zur Startseite</span>
                 </div>
             </a>
-            <a href="./Probetraining.html" class="hidden md:block bg-nbc-purple hover:bg-opacity-80 text-white px-5 py-2 rounded-full font-heading font-bold text-sm uppercase transition-all">
+            <a href="./Probetraining.html" class="hidden md:block bg-nbc-purple hover:bg-opacity-80 text-[#1a1a2e] px-5 py-2 rounded-full font-heading font-bold text-sm uppercase transition-all">
                 Probetraining
             </a>
         </div>
@@ -83,18 +83,18 @@
 
     <header class="relative h-[60vh] flex items-end pb-12 overflow-hidden mt-20">
         <div class="absolute inset-0 z-0">
-            <img src="https://placehold.co/1920x1080/1a1a1a/444?text=1.+HERREN" alt="1. Herren" class="w-full h-full object-cover opacity-50">
+            <img src="./team_herren.jpg" alt="1. Herren" class="w-full h-full object-contain">
             <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 w-full">
-            <span class="inline-block py-1 px-3 rounded bg-nbc-orange text-white text-xs font-bold uppercase tracking-widest mb-4">
-                Bezirksliga
+            <span class="inline-block py-1 px-3 rounded bg-nbc-orange text-[#1a1a2e] text-xs font-bold uppercase tracking-widest mb-4">
+                Regionsliga
             </span>
-            <h1 class="text-5xl md:text-7xl font-heading font-bold text-white uppercase leading-none">
+            <h1 class="text-5xl md:text-7xl font-heading font-bold text-[#1a1a2e] uppercase leading-none">
                 1. <span class="text-nbc-orange">HERREN</span>
             </h1>
-            <p class="text-xl text-gray-300 mt-4">Unsere erste Mannschaft</p>
+            <p class="text-xl text-[#4a4a5a] mt-4">Unsere erste Mannschaft</p>
         </div>
     </header>
 
@@ -104,8 +104,8 @@
             <div class="lg:col-span-2 space-y-12">
                 
                 <section>
-                    <h2 class="text-3xl font-heading font-bold text-white mb-4 border-l-4 border-nbc-orange pl-4">DAS TEAM</h2>
-                    <p class="text-gray-400 text-lg leading-relaxed">
+                    <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4 border-l-4 border-nbc-orange pl-4">DAS TEAM</h2>
+                    <p class="text-[#4a4a5a] text-lg leading-relaxed">
                         Unsere erste Herrenmannschaft ist das Aushängeschild des Vereins. In der Bezirksliga 
                         Weser-Ems spielen erfahrene Cracks und junge Talente zusammen. Unter der Leitung von 
                         Patrick Olliges vereinen wir Erfahrung mit Dynamik und spielen attraktiven, 
@@ -114,43 +114,35 @@
                 </section>
 
                 <section>
-                    <h3 class="text-2xl font-heading font-bold text-white mb-6">SAISON 2025/26</h3>
-                    <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-800">
-                            <span class="text-gray-400">Liga</span>
-                            <span class="text-white font-bold">Bezirksliga Weser-Ems</span>
-                        </div>
-                        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-800">
-                            <span class="text-gray-400">Heimspiele</span>
-                            <span class="text-white font-bold">Samstag, 18:00 Uhr</span>
-                        </div>
+                    <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">SAISON 2025/26</h3>
+                    <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-400">Saisonziel</span>
-                            <span class="text-white font-bold">Playoff-Platzierung</span>
+                            <span class="text-[#4a4a5a]">Liga</span>
+                            <span class="text-[#1a1a2e] font-bold">Regionsliga</span>
                         </div>
                     </div>
                 </section>
 
                 <section>
-                    <h3 class="text-2xl font-heading font-bold text-white mb-6">DER KADER</h3>
+                    <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">DER KADER</h3>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                        <div class="bg-[#ffffff] rounded-lg p-4 text-center border border-[#e0e0e5]">
                             <div class="w-16 h-16 bg-gray-800 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl">🏀</div>
-                            <div class="font-bold text-white">Spieler</div>
+                            <div class="font-bold text-[#1a1a2e]">Spieler</div>
                             <div class="text-xs text-nbc-orange">Position</div>
                         </div>
-                        <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                        <div class="bg-[#ffffff] rounded-lg p-4 text-center border border-[#e0e0e5]">
                             <div class="w-16 h-16 bg-gray-800 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl">🏀</div>
-                            <div class="font-bold text-white">Spieler</div>
+                            <div class="font-bold text-[#1a1a2e]">Spieler</div>
                             <div class="text-xs text-nbc-orange">Position</div>
                         </div>
-                        <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800">
+                        <div class="bg-[#ffffff] rounded-lg p-4 text-center border border-[#e0e0e5]">
                             <div class="w-16 h-16 bg-gray-800 rounded-full mx-auto mb-3 flex items-center justify-center text-2xl">🏀</div>
-                            <div class="font-bold text-white">Spieler</div>
+                            <div class="font-bold text-[#1a1a2e]">Spieler</div>
                             <div class="text-xs text-nbc-orange">Position</div>
                         </div>
-                        <div class="bg-gray-900 rounded-lg p-4 text-center border border-gray-800 flex items-center justify-center">
-                            <span class="text-gray-500 text-sm">... und mehr!</span>
+                        <div class="bg-[#ffffff] rounded-lg p-4 text-center border border-[#e0e0e5] flex items-center justify-center">
+                            <span class="text-[#6a6a7a] text-sm">... und mehr!</span>
                         </div>
                     </div>
                 </section>
@@ -158,40 +150,40 @@
 
             <aside class="space-y-8">
                 
-                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                    <h3 class="font-heading font-bold text-xl text-white mb-4 flex items-center">
+                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
                         <span class="text-nbc-orange mr-2">🕒</span> TRAININGSZEITEN
                     </h3>
                     <ul class="space-y-4">
-                        <li class="border-b border-gray-800 pb-2">
+                        <li class="border-b border-[#e0e0e5] pb-2">
                             <span class="block text-nbc-purple font-bold">Dienstag</span>
-                            <span class="text-white">20:00 - 21:30 Uhr</span>
-                            <span class="block text-xs text-gray-500 mt-1">Ludwig-Povel-Halle</span>
+                            <span class="text-[#1a1a2e]">20:00 - 21:30 Uhr</span>
+                            <span class="block text-xs text-[#6a6a7a] mt-1">Ludwig-Povel-Halle</span>
                         </li>
-                        <li class="border-b border-gray-800 pb-2 last:border-0">
+                        <li class="border-b border-[#e0e0e5] pb-2 last:border-0">
                             <span class="block text-nbc-purple font-bold">Donnerstag</span>
-                            <span class="text-white">20:00 - 21:30 Uhr</span>
-                            <span class="block text-xs text-gray-500 mt-1">Kreissporthalle</span>
+                            <span class="text-[#1a1a2e]">20:00 - 21:30 Uhr</span>
+                            <span class="block text-xs text-[#6a6a7a] mt-1">Kreissporthalle</span>
                         </li>
                     </ul>
                 </div>
 
-                <div class="bg-gray-900 p-6 rounded-xl border border-gray-800">
-                    <h3 class="font-heading font-bold text-xl text-white mb-4 flex items-center">
+                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
                         <span class="text-nbc-orange mr-2">📋</span> TRAINER
                     </h3>
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl">👤</div>
                         <div>
-                            <div class="text-white font-bold">Patrick Olliges</div>
-                            <div class="text-xs text-gray-400">Head Coach (C-Lizenz)</div>
+                            <div class="text-[#1a1a2e] font-bold">Patrick Olliges</div>
+                            <div class="text-xs text-[#4a4a5a]">Head Coach (C-Lizenz)</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="bg-gradient-to-br from-nbc-orange to-nbc-purple p-6 rounded-xl text-center shadow-lg">
-                    <h3 class="font-heading font-bold text-xl text-white mb-2">VERSTÄRKUNG GESUCHT!</h3>
-                    <p class="text-white/90 text-sm mb-6">Du spielst Basketball auf hohem Niveau?</p>
+                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-2">VERSTÄRKUNG GESUCHT!</h3>
+                    <p class="text-[#1a1a2e]/90 text-sm mb-6">Du spielst Basketball auf hohem Niveau?</p>
                     <a href="./Probetraining.html" class="inline-block bg-white text-nbc-dark font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors w-full">
                         ANMELDEN
                     </a>
@@ -201,11 +193,11 @@
         </div>
     </main>
 
-    <footer class="bg-black py-8 border-t border-gray-800 text-center text-sm text-gray-600">
+    <footer class="bg-[#f8f9fa] py-8 border-t border-[#e0e0e5] text-center text-sm text-[#8a8a9a]">
         <p>© 2026 NBC Baskets Nordhorn</p>
         <p class="mt-2">
-            <a href="./Impressum.html" class="hover:text-white mx-2">Impressum</a>
-            <a href="./Datenschutz.html" class="hover:text-white mx-2">Datenschutz</a>
+            <a href="./Impressum.html" class="hover:text-[#1a1a2e] mx-2">Impressum</a>
+            <a href="./Datenschutz.html" class="hover:text-[#1a1a2e] mx-2">Datenschutz</a>
         </p>
     </footer>
 

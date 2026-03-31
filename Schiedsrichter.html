@@ -11,22 +11,22 @@
             theme: {
                 extend: {
                     colors: {
-                        nbc: { orange: '#F26522', purple: '#5D4E8C', dark: '#1a1a1a', darker: '#121212', light: '#f4f4f4' }
+                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7', light: '#f4f4f4' }
                     },
                     fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
                 }
             }
         }
     </script>
-    <style>body { background-color: #121212; color: #f4f4f4; }
+    <style>body { background-color: #f8f9fa; color: #f4f4f4; }
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
-                box-shadow: 0 0 5px #F26522, 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #5D4E8C;
+                box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
                 transform: scale(1);
             }
             50% { 
-                box-shadow: 0 0 10px #F26522, 0 0 20px #F26522, 0 0 40px #F26522, 0 0 60px #5D4E8C;
+                box-shadow: 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #F2722C, 0 0 60px #7457A3;
                 transform: scale(1.02);
             }
         }
@@ -39,7 +39,7 @@
             bottom: 20px;
             left: 20px;
             z-index: 1000;
-            background: linear-gradient(135deg, #F26522 0%, #5D4E8C 100%);
+            background: linear-gradient(135deg, #F2722C 0%, #7457A3 100%);
             color: white;
             padding: 12px 24px;
             border-radius: 50px;
@@ -56,20 +56,20 @@
         }
         .member-btn:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px #F26522, 0 0 60px #5D4E8C;
+            box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
         }
     </style>
 </head>
-<body class="bg-nbc-darker flex flex-col min-h-screen">
+<body class="bg-[#f8f9fa] flex flex-col min-h-screen">
 
-    <nav class="bg-nbc-darker/95 backdrop-blur border-b border-gray-800 p-4 sticky top-0 z-50">
+    <nav class="bg-[#f8f9fa]/95 backdrop-blur border-b border-[#e0e0e5] p-4 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="./index.html" class="flex items-center gap-2 group">
                 <img src="./NBC_Logo.png" alt="NBC Logo" class="h-8 w-auto" onerror="this.style.display='none'">
                 <span class="text-xl group-hover:-translate-x-1 transition-transform text-nbc-orange">←</span>
-                <span class="font-heading font-bold uppercase tracking-wider text-white">Zurück</span>
+                <span class="font-heading font-bold uppercase tracking-wider text-[#1a1a2e]">Zurück</span>
             </a>
-            <span class="text-gray-500 font-bold text-sm hidden md:block">OFFICIALS</span>
+            <span class="text-[#6a6a7a] font-bold text-sm hidden md:block">OFFICIALS</span>
         </div>
     </nav>
 
@@ -77,10 +77,10 @@
         <div class="inline-block bg-gray-800 rounded-full p-4 mb-6">
             <svg class="w-10 h-10 md:w-12 md:h-12 text-nbc-orange" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg> 
         </div>
-        <h1 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4 break-words hyphens-auto">
+        <h1 class="text-3xl md:text-5xl font-heading font-bold text-[#1a1a2e] mb-4 break-words hyphens-auto">
             UNSERE SCHIEDSRICHTER
         </h1>
-        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+        <p class="text-lg md:text-xl text-[#4a4a5a] max-w-2xl mx-auto">
             Ohne sie kein Spiel. Respekt für unsere Refs!
         </p>
     </header>
@@ -91,11 +91,11 @@
             <div class="flex flex-col md:flex-row items-center gap-4">
                 <div class="w-16 h-16 bg-nbc-purple rounded-full flex items-center justify-center text-3xl">👑</div>
                 <div class="text-center md:text-left">
-                    <h2 class="text-2xl font-heading font-bold text-white">SCHIEDSRICHTERWART</h2>
+                    <h2 class="text-2xl font-heading font-bold text-[#1a1a2e]">SCHIEDSRICHTERWART</h2>
                     <p class="text-nbc-orange font-bold text-lg">Anika Luther</p>
-                    <p class="text-gray-400 text-sm">Zuständig für Einsatzplanung und Ausbildung</p>
+                    <p class="text-[#4a4a5a] text-sm">Zuständig für Einsatzplanung und Ausbildung</p>
                 </div>
-                <a href="mailto:anika.luther@nbc-nordhorn.de" class="md:ml-auto bg-nbc-purple hover:bg-purple-600 text-white px-6 py-3 rounded-full font-bold transition-colors">
+                <a href="mailto:anika.luther@nbc-nordhorn.de" class="md:ml-auto bg-nbc-purple hover:bg-purple-600 text-[#1a1a2e] px-6 py-3 rounded-full font-bold transition-colors">
                     Kontaktieren
                 </a>
             </div>
@@ -103,94 +103,102 @@
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Anika Luther</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Anika Luther</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSE-Lizenz</p>
                 <span class="inline-block mt-2 text-xs bg-nbc-purple/20 text-nbc-purple px-2 py-1 rounded">Schiedsrichterwart</span>
+                <a href="mailto:anika.luther@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">anika.luther@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Nadine Pund</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Nadine Pund</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSD-Lizenz</p>
+                <a href="mailto:nadine.pund@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">nadine.pund@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Arton Colin</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Arton Colin</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSE-Lizenz</p>
+                <a href="mailto:arton.colin@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">arton.colin@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">David Rosenblack</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">David Rosenblack</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSE-Lizenz</p>
+                <a href="mailto:david.rosenblack@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">david.rosenblack@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Laura Noch</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Laura Noch</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSD-Lizenz</p>
+                <a href="mailto:laura.noch@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">laura.noch@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Nele Bramlage</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Nele Bramlage</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSE-Lizenz</p>
+                <a href="mailto:nele.bramlage@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">nele.bramlage@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Phillip Heils</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Phillip Heils</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSE-Lizenz</p>
-                <span class="inline-block mt-2 text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">auch Fotograf</span>
+                <span class="inline-block mt-2 text-xs bg-gray-700 text-[#4a4a5a] px-2 py-1 rounded">auch Fotograf</span>
+                <a href="mailto:phillip.heils@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">phillip.heils@nbc-nordhorn.de</a>
             </div>
 
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center hover:border-nbc-purple transition-colors group">
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center hover:border-nbc-purple transition-colors group">
                 <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-transparent group-hover:border-nbc-purple text-2xl">
                     👤
                 </div>
-                <h3 class="font-bold text-white text-lg">Louisa Eckel</h3>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Louisa Eckel</h3>
                 <p class="text-nbc-purple text-sm font-bold">LSD-Lizenz</p>
+                <a href="mailto:louisa.eckel@nbc-nordhorn.de" class="block mt-3 text-sm text-[#6a6a7a] hover:text-nbc-orange transition-colors">louisa.eckel@nbc-nordhorn.de</a>
             </div>
             
-            <div class="bg-gray-900 p-6 rounded-lg border border-gray-800 text-center opacity-70 hover:opacity-100 transition-opacity">
-                <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center text-gray-500 text-2xl font-bold border-2 border-dashed border-gray-700">?</div>
-                <h3 class="font-bold text-white text-lg">Dein Name</h3>
-                <p class="text-gray-500 text-sm">Werde Schiri</p>
+            <div class="bg-[#ffffff] p-6 rounded-lg border border-[#e0e0e5] text-center opacity-70 hover:opacity-100 transition-opacity">
+                <div class="w-20 h-20 bg-gray-800 rounded-full mx-auto mb-4 flex items-center justify-center text-[#6a6a7a] text-2xl font-bold border-2 border-dashed border-gray-700">?</div>
+                <h3 class="font-bold text-[#1a1a2e] text-lg">Dein Name</h3>
+                <p class="text-[#6a6a7a] text-sm">Werde Schiri</p>
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-gray-900 to-black border border-gray-800 rounded-2xl p-8 md:p-12 relative overflow-hidden">
+        <div class="bg-gradient-to-r from-gray-900 to-black border border-[#e0e0e5] rounded-2xl p-8 md:p-12 relative overflow-hidden">
             <div class="absolute top-0 right-0 w-64 h-64 bg-nbc-orange opacity-10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
             
             <div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
                 <div>
-                    <h2 class="text-3xl font-heading font-bold text-white mb-4">WERDE TEIL DES TEAMS!</h2>
-                    <p class="text-gray-300 mb-6 leading-relaxed">
+                    <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4">WERDE TEIL DES TEAMS!</h2>
+                    <p class="text-[#4a4a5a] mb-6 leading-relaxed">
                         Schiedsrichter sind unverzichtbar. Wir unterstützen dich bei der Ausbildung (LSE-Lehrgang), übernehmen die Kosten und statten dich aus. Zudem verdienst du dir bei Spielen ein Taschengeld dazu!
                     </p>
-                    <ul class="space-y-2 text-gray-400 mb-8">
+                    <ul class="space-y-2 text-[#4a4a5a] mb-8">
                         <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Kostenlose Ausbildung</li>
                         <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Schiri-Ausrüstung vom Verein</li>
                         <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Aufwandsentschädigung pro Spiel</li>
                     </ul>
-                    <a href="mailto:anika.luther@nbc-nordhorn.de" class="inline-block bg-nbc-orange text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1">
+                    <a href="mailto:anika.luther@nbc-nordhorn.de" class="inline-block bg-nbc-orange text-[#1a1a2e] font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition-all shadow-lg hover:shadow-orange-500/30 transform hover:-translate-y-1">
                         ICH WILL PFEIFEN
                     </a>
                 </div>
@@ -202,7 +210,7 @@
 
     </main>
 
-    <footer class="bg-black py-8 text-center text-gray-600 text-sm border-t border-gray-900 mt-auto">
+    <footer class="bg-[#f8f9fa] py-8 text-center text-[#8a8a9a] text-sm border-t border-[#e0e0e5] mt-auto">
         <p>© 2026 NBC Baskets Nordhorn e.V.</p>
     </footer>
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
