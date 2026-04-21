@@ -18,8 +18,9 @@
             }
         }
     </script>
-    <style>body { background-color: #f8f9fa; color: #f4f4f4; }
-        /* Mitglied Werden Button Animation */
+    <style>
+        body { background-color: #f8f9fa; color: #f4f4f4; }
+
         @keyframes glow-pulse {
             0%, 100% { 
                 box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
@@ -30,10 +31,12 @@
                 transform: scale(1.02);
             }
         }
+
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-5px); }
         }
+
         .member-btn {
             position: fixed;
             bottom: 20px;
@@ -54,6 +57,7 @@
             transition: all 0.3s ease;
             border: 2px solid rgba(255, 255, 255, 0.2);
         }
+
         .member-btn:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
@@ -81,29 +85,29 @@
     </header>
 
     <main class="flex-grow max-w-5xl mx-auto px-4 w-full pb-20">
-        
+
         <div class="bg-gradient-to-br from-nbc-orange/20 to-nbc-purple/20 border border-nbc-orange rounded-2xl p-8 mb-12 text-center">
             <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4">WIE LÄUFT'S?</h2>
             <div class="grid md:grid-cols-3 gap-6 text-left">
                 <div class="flex items-start gap-3">
                     <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-[#1a1a2e] shrink-0">1</div>
                     <div>
-                        <h3 class="font-bold text-[#1a1a2e]">Termin wählen</h3>
-                        <p class="text-[#4a4a5a] text-sm">Schau dir unsere Trainingszeiten an und komm vorbei.</p>
+                        <h3 class="font-bold text-[#1a1a2e]">Anmelden</h3>
+                        <p class="text-[#4a4a5a] text-sm">Fülle kurz das Formular aus, damit wir Bescheid wissen.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-3">
                     <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-[#1a1a2e] shrink-0">2</div>
                     <div>
                         <h3 class="font-bold text-[#1a1a2e]">Schnuppern</h3>
-                        <p class="text-[#4a4a5a] text-sm">Mach mit beim Training - ohne Verpflichtung!</p>
+                        <p class="text-[#4a4a5a] text-sm">Mach beim Training mit und lerne Team und Coaches kennen.</p>
                     </div>
                 </div>
                 <div class="flex items-start gap-3">
                     <div class="w-8 h-8 bg-nbc-orange rounded-full flex items-center justify-center font-bold text-[#1a1a2e] shrink-0">3</div>
                     <div>
                         <h3 class="font-bold text-[#1a1a2e]">Entscheiden</h3>
-                        <p class="text-[#4a4a5a] text-sm">Gefällt's dir? Dann werde Mitglied!</p>
+                        <p class="text-[#4a4a5a] text-sm">Wenn es dir gefällt, kannst du danach Mitglied werden.</p>
                     </div>
                 </div>
             </div>
@@ -128,31 +132,86 @@
         </div>
 
         <div class="bg-[#ffffff] p-8 rounded-2xl border border-[#e0e0e5] mb-12">
-            <h2 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">ANMELDUNG ZUM PROBETRAINING</h2>
-            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir bestätigen dein Probetraining.');">
+            <h2 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-2">ANMELDUNG ZUM PROBETRAINING</h2>
+            <p class="text-[#6a6a7a] mb-6 text-sm">
+                Trag dich kurz ein. Wir melden uns bei dir bzw. haben deine Anfrage direkt auf dem Schirm.
+            </p>
+
+            <form id="probetraining-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
+                <!-- Web3Forms -->
+                <input type="hidden" name="access_key" value="12b361cf-7228-43f4-8f45-841acdf4139e">
+                <input type="hidden" name="subject" value="Neue Probetraining-Anmeldung">
+                <input type="hidden" name="from_name" value="NBC Nordhorn Website">
+                <input type="hidden" name="replyto" value="email">
+                <input type="checkbox" name="botcheck" style="display:none;">
+
                 <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" placeholder="Vorname" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
-                    <input type="text" placeholder="Nachname" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+                    <input
+                        type="text"
+                        name="vorname"
+                        placeholder="Vorname"
+                        required
+                        class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none"
+                    >
+                    <input
+                        type="text"
+                        name="nachname"
+                        placeholder="Nachname"
+                        required
+                        class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none"
+                    >
                 </div>
-                <input type="email" placeholder="E-Mail" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
-                <input type="tel" placeholder="Telefon" class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
-                <select required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="E-Mail"
+                    required
+                    class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none"
+                >
+
+                <input
+                    type="tel"
+                    name="telefon"
+                    placeholder="Telefon"
+                    class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none"
+                >
+
+                <select
+                    name="interesse"
+                    required
+                    class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none"
+                >
                     <option value="">Interessiert für...</option>
-                    <option value="u8">U8 Minis</option>
-                    <option value="u10">U10 Kids</option>
-                    <option value="u12m">U12 männlich</option>
-                    <option value="u12w">U12 weiblich</option>
-                    <option value="u14">U14</option>
-                    <option value="u16">U16</option>
-                    <option value="u18">U18</option>
-                    <option value="herren">1. Herren</option>
-                    <option value="damen">1. Damen</option>
-                    <option value="cheer">Cheerleading</option>
+                    <option>U8 Minis</option>
+                    <option>U10 Kids</option>
+                    <option>U12 männlich</option>
+                    <option>U12 weiblich</option>
+                    <option>U14</option>
+                    <option>U16</option>
+                    <option>U18</option>
+                    <option>1. Herren</option>
+                    <option>1. Damen</option>
+                    <option>Cheerleading</option>
                 </select>
-                <button type="submit" class="w-full bg-nbc-orange hover:bg-orange-600 text-[#1a1a2e] font-bold py-4 rounded-lg transition-colors">
+
+                <textarea
+                    name="nachricht"
+                    placeholder="Nachricht"
+                    rows="5"
+                    class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none resize-none"
+                ></textarea>
+
+                <button
+                    type="submit"
+                    class="w-full bg-nbc-orange hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-colors"
+                >
                     ANMELDEN
                 </button>
+
+                <p id="form-status" class="mt-4 text-sm text-center text-[#4a4a5a]"></p>
             </form>
+
             <p class="text-center mt-4 text-[#6a6a7a] text-sm">
                 Oder spontan vorbeikommen? Kein Problem!
             </p>
@@ -161,8 +220,8 @@
         <div class="text-center">
             <h3 class="text-xl font-bold text-[#1a1a2e] mb-4">FRAGEN?</h3>
             <p class="text-[#4a4a5a] mb-4">Schreib uns oder ruf an:</p>
-            <a href="mailto:info@nbc-nordhorn.de" class="inline-block bg-gray-800 text-[#1a1a2e] px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors mr-2">E-Mail</a>
-            <a href="tel:+491739042341" class="inline-block bg-gray-800 text-[#1a1a2e] px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors">Anrufen</a>
+            <a href="mailto:info@nbc-nordhorn.de" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors mr-2">E-Mail</a>
+            <a href="tel:+491739042341" class="inline-block bg-gray-800 text-white px-6 py-3 rounded-full hover:bg-nbc-purple transition-colors">Anrufen</a>
         </div>
 
     </main>
@@ -170,8 +229,41 @@
     <footer class="bg-[#f8f9fa] py-8 text-center text-[#8a8a9a] text-sm border-t border-[#e0e0e5] mt-auto">
         <p>© 2026 NBC Baskets Nordhorn e.V.</p>
     </footer>
+
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
         Mitglied Werden
     </a>
+
+    <script>
+        const form = document.getElementById("probetraining-form");
+        const status = document.getElementById("form-status");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+
+            const data = new FormData(form);
+            status.textContent = "Wird gesendet...";
+
+            try {
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: data,
+                    headers: { "Accept": "application/json" }
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    status.textContent = "Danke. Die Anmeldung wurde erfolgreich gesendet.";
+                    form.reset();
+                } else {
+                    status.textContent = result.message || "Fehler beim Senden. Bitte später erneut versuchen.";
+                }
+            } catch (error) {
+                status.textContent = "Fehler beim Senden. Bitte später erneut versuchen.";
+            }
+        });
+    </script>
+
 </body>
 </html>
