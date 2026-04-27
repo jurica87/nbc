@@ -65,23 +65,60 @@
 </head>
 <body class="font-sans antialiased bg-[#f8f9fa] text-[#1a1a2e] flex flex-col min-h-screen">
 
-    <nav class="fixed w-full z-50 glass-nav h-20 flex items-center">
-        <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
-            <a href="./index.html" class="flex items-center gap-3 group">
-                <img src="./NBC_Logo.png" alt="NBC Logo" class="h-10 w-auto" onerror="this.style.display='none'">
-                <span class="text-2xl mr-2 group-hover:-translate-x-1 transition-transform">←</span>
-                <div>
-                    <span class="block font-heading font-bold text-xl uppercase text-[#1a1a2e]">NBC Baskets</span>
-                    <span class="block text-xs text-nbc-orange uppercase tracking-widest font-bold">Zurück zur Startseite</span>
+        <nav class="bg-[#f8f9fa]/95 backdrop-blur border-b border-[#e0e0e5] sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between gap-4 min-h-[80px] py-3">
+                <a href="./index.html" class="flex items-center gap-3 group shrink-0">
+                    <img src="./NBC_Logo.png" alt="NBC Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+                    <div class="leading-tight">
+                        <span class="block font-heading font-bold text-lg md:text-xl uppercase text-[#1a1a2e]">NBC Baskets</span>
+                        <span class="block text-[11px] text-nbc-orange uppercase tracking-[0.2em] font-bold">Nordhorn</span>
+                    </div>
+                </a>
+
+                <div class="hidden lg:flex items-center gap-6 text-sm font-bold uppercase tracking-wider text-[#4a4a5a]">
+                    <div class="relative group">
+                        <a href="./index.html#about" class="hover:text-nbc-orange transition-colors flex items-center gap-1">
+                            Verein
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
+                        <div class="absolute left-0 mt-2 w-52 bg-white border border-[#e0e0e5] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <a href="./Vorstand.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100 border-b border-[#e0e0e5]">Vorstand</a>
+                            <a href="./Trainer.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100 border-b border-[#e0e0e5]">Trainer</a>
+                            <a href="./Schiedsrichter.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100">Schiedsrichter</a>
+                        </div>
+                    </div>
+                    <a href="./index.html#teams" class="hover:text-nbc-orange transition-colors">Teams</a>
+                    <a href="./index.html#halle" class="hover:text-nbc-orange transition-colors">Halle</a>
+                    <a href="./Cheerleader.html" class="hover:text-nbc-orange transition-colors">Breitensport</a>
+                    <a href="./index.html#kontakt" class="hover:text-nbc-orange transition-colors">Kontakt</a>
+                    <a href="./Probetraining.html" class="hover:text-nbc-orange transition-colors">Probetraining</a>
+                    <a href="./Mitgliedschaft.html" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-5 py-2 rounded-full font-heading">Mitglied werden</a>
                 </div>
-            </a>
-            <a href="./Probetraining.html" class="hidden md:block bg-nbc-purple hover:bg-opacity-80 text-[#1a1a2e] px-5 py-2 rounded-full font-heading font-bold text-sm uppercase transition-all">
-                Probetraining
-            </a>
+
+                <button type="button" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-[#4a4a5a] hover:text-[#1a1a2e] hover:bg-gray-100" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Menü öffnen">
+                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="hidden lg:hidden bg-[#f8f9fa] border-t border-[#e0e0e5]" id="mobile-menu">
+            <div class="px-4 py-4 space-y-2 text-[#1a1a2e]">
+                <a href="./index.html" class="block px-3 py-2 font-heading font-bold uppercase">Startseite</a>
+                <a href="./Vorstand.html" class="block px-3 py-2">Vorstand</a>
+                <a href="./Trainer.html" class="block px-3 py-2">Trainer</a>
+                <a href="./Schiedsrichter.html" class="block px-3 py-2">Schiedsrichter</a>
+                <a href="./index.html#teams" class="block px-3 py-2">Teams</a>
+                <a href="./Cheerleader.html" class="block px-3 py-2">Breitensport</a>
+                <a href="./Probetraining.html" class="block px-3 py-2">Probetraining</a>
+                <a href="./Mitgliedschaft.html" class="block px-3 py-2 font-heading font-bold text-nbc-orange uppercase">Mitglied werden</a>
+                <a href="./index.html#kontakt" class="block px-3 py-2">Kontakt</a>
+            </div>
         </div>
     </nav>
 
-    <header class="relative h-[60vh] flex items-end pb-12 overflow-hidden mt-20">
+
+    <header class="relative h-[60vh] flex items-end pb-12 overflow-hidden mt-0">
         <div class="absolute inset-0 z-0">
             <img src="https://placehold.co/1920x600/f5f5f7/EC4899?text=Cheerleading" alt="Cheerleader" class="w-full h-full object-cover opacity-50">
             <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
