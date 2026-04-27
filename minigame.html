@@ -317,7 +317,12 @@
                     vy: 0,
                     isDragging: false,
                     isFlying: false,
-                    trail: []
+                    trail: [],
+                    dragStartX: canvas.width / 2,
+                    dragStartY: canvas.height - 150,
+                    aimX: canvas.width / 2,
+                    aimY: canvas.height - 150,
+                    aimPower: 0
                 };
                 
                 // Korb bleibt immer im Bildschirm!
@@ -345,37 +350,66 @@
             }
             
             setupInputs() {
-                let startX, startY;
+                const getPointerPos = (e) => e.touches ? e.touches[0] : (e.changedTouches ? e.changedTouches[0] : e);
                 
                 const startDrag = (e) => {
                     if (this.state !== 'playing' || this.ball.isFlying) return;
-                    const pos = e.touches ? e.touches[0] : e;
-                    startX = pos.clientX;
-                    startY = pos.clientY;
+                    const pos = getPointerPos(e);
+                    const distToBall = Math.hypot(pos.clientX - this.ball.x, pos.clientY - this.ball.y);
+                    if (distToBall > this.ball.radius + 35) return;
+                    
                     this.ball.isDragging = true;
+                    this.ball.dragStartX = this.ball.x;
+                    this.ball.dragStartY = this.ball.y;
+                    this.ball.aimX = pos.clientX;
+                    this.ball.aimY = pos.clientY;
+                    this.ball.aimPower = 0;
+                };
+
+                const moveDrag = (e) => {
+                    if (!this.ball.isDragging) return;
+                    const pos = getPointerPos(e);
+                    const maxPull = Math.min(canvas.width * 0.28, 220);
+                    const rawDx = pos.clientX - this.ball.dragStartX;
+                    const rawDy = pos.clientY - this.ball.dragStartY;
+                    const distance = Math.hypot(rawDx, rawDy);
+                    const clampRatio = distance > maxPull ? maxPull / distance : 1;
+                    
+                    this.ball.aimX = this.ball.dragStartX + rawDx * clampRatio;
+                    this.ball.aimY = this.ball.dragStartY + rawDy * clampRatio;
+                    this.ball.aimPower = Math.min(distance, maxPull) / maxPull;
                 };
                 
                 const endDrag = (e) => {
                     if (!this.ball.isDragging) return;
+                    const pos = getPointerPos(e);
+                    moveDrag(pos);
                     this.ball.isDragging = false;
                     
-                    const pos = e.changedTouches ? e.changedTouches[0] : e;
-                    const dx = startX - pos.clientX;
-                    const dy = startY - pos.clientY;
+                    const dx = this.ball.dragStartX - this.ball.aimX;
+                    const dy = this.ball.dragStartY - this.ball.aimY;
+                    const power = Math.hypot(dx, dy);
                     
-                    const power = Math.sqrt(dx*dx + dy*dy);
-                    if (power > 30) {
+                    if (power > 20) {
                         this.ball.isFlying = true;
                         const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                        this.ball.vx = dx * 0.15 * multiplier;
-                        this.ball.vy = dy * 0.15 * multiplier;
+                        const velocityScale = 0.16 + this.ball.aimPower * 0.1;
+                        this.ball.vx = dx * velocityScale * multiplier;
+                        this.ball.vy = dy * velocityScale * multiplier;
                     }
+                    
+                    this.ball.aimPower = 0;
+                    this.ball.aimX = this.ball.dragStartX;
+                    this.ball.aimY = this.ball.dragStartY;
                 };
                 
                 canvas.addEventListener('mousedown', startDrag);
-                canvas.addEventListener('touchstart', startDrag);
+                canvas.addEventListener('touchstart', startDrag, { passive: true });
+                window.addEventListener('mousemove', moveDrag);
+                window.addEventListener('touchmove', moveDrag, { passive: true });
                 window.addEventListener('mouseup', endDrag);
                 window.addEventListener('touchend', endDrag);
+                window.addEventListener('touchcancel', endDrag);
             }
             
             start() {
@@ -427,7 +461,13 @@
                 this.ball.vx = 0;
                 this.ball.vy = 0;
                 this.ball.isFlying = false;
+                this.ball.isDragging = false;
                 this.ball.trail = [];
+                this.ball.dragStartX = this.ball.x;
+                this.ball.dragStartY = this.ball.y;
+                this.ball.aimX = this.ball.x;
+                this.ball.aimY = this.ball.y;
+                this.ball.aimPower = 0;
             }
             
             spawnPowerupItem() {
@@ -642,17 +682,37 @@
                     ctx.stroke();
                 }
                 
-                // Ziel-Linie
+                // Ziel-/Flugbahn-Vorschau
                 if (this.ball.isDragging && this.state === 'playing') {
-                    ctx.beginPath();
-                    ctx.moveTo(this.ball.x, this.ball.y);
-                    ctx.lineTo(this.ball.x - (this.ball.x - canvas.width/2) * 0.5, 
-                               this.ball.y - 100);
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                    const dx = this.ball.dragStartX - this.ball.aimX;
+                    const dy = this.ball.dragStartY - this.ball.aimY;
+                    const multiplier = this.powerups.fireball.active ? 1.3 : 1;
+                    const velocityScale = 0.16 + this.ball.aimPower * 0.1;
+                    let previewX = this.ball.x;
+                    let previewY = this.ball.y;
+                    let previewVx = dx * velocityScale * multiplier;
+                    let previewVy = dy * velocityScale * multiplier;
+                    
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 + this.ball.aimPower * 0.35})`;
                     ctx.lineWidth = 3;
-                    ctx.setLineDash([10, 10]);
+                    ctx.setLineDash([8, 10]);
+                    ctx.beginPath();
+                    ctx.moveTo(previewX, previewY);
+                    
+                    for (let i = 0; i < 22; i++) {
+                        previewVy += 0.5;
+                        previewX += previewVx;
+                        previewY += previewVy;
+                        ctx.lineTo(previewX, previewY);
+                    }
+                    
                     ctx.stroke();
                     ctx.setLineDash([]);
+                    
+                    ctx.fillStyle = `rgba(242, 114, 44, ${0.2 + this.ball.aimPower * 0.45})`;
+                    ctx.beginPath();
+                    ctx.arc(this.ball.aimX, this.ball.aimY, 18 + this.ball.aimPower * 12, 0, Math.PI * 2);
+                    ctx.fill();
                 }
                 
                 // Power-up Items
@@ -781,10 +841,18 @@
                 
                 // Drag Indikator
                 if (this.ball.isDragging) {
-                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+                    const ringAlpha = 0.35 + this.ball.aimPower * 0.45;
+                    ctx.strokeStyle = `rgba(255, 255, 255, ${ringAlpha})`;
                     ctx.lineWidth = 3;
                     ctx.beginPath();
-                    ctx.arc(this.ball.x, this.ball.y, this.ball.radius + 10, 0, Math.PI * 2);
+                    ctx.arc(this.ball.x, this.ball.y, this.ball.radius + 10 + this.ball.aimPower * 10, 0, Math.PI * 2);
+                    ctx.stroke();
+                    
+                    ctx.strokeStyle = `rgba(242, 114, 44, ${0.35 + this.ball.aimPower * 0.45})`;
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(this.ball.x, this.ball.y);
+                    ctx.lineTo(this.ball.aimX, this.ball.aimY);
                     ctx.stroke();
                 }
             }
