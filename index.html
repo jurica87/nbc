@@ -28,38 +28,91 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SportsOrganization",
-      "name": "NBC Baskets Nordhorn e.V.",
-      "alternateName": "NBC Baskets",
-      "url": "https://nbc-nordhorn.de/",
-      "logo": "https://nbc-nordhorn.de/android-chrome-512x512.png",
-      "description": "Basketballverein in Nordhorn mit Teams für Kinder, Jugend, Damen, Herren, Cheerleading und Breitensport.",
-      "sport": "Basketball",
-      "email": "info@nbc-nordhorn.de",
-      "telephone": "+49-173-9042341",
-      "foundingDate": "2026",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "De-Vries-Straße 5",
-        "postalCode": "48531",
-        "addressLocality": "Nordhorn",
-        "addressCountry": "DE"
-      },
-      "location": {
-        "@type": "Place",
-        "name": "Ludwig-Povel-Halle",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Zamenhofstraße",
-          "postalCode": "48529",
-          "addressLocality": "Nordhorn",
-          "addressCountry": "DE"
+      "@graph": [
+        {
+          "@type": "SportsOrganization",
+          "@id": "https://nbc-nordhorn.de/#organization",
+          "name": "NBC Baskets Nordhorn e.V.",
+          "alternateName": "NBC Baskets",
+          "url": "https://nbc-nordhorn.de/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://nbc-nordhorn.de/android-chrome-512x512.png",
+            "width": 512,
+            "height": 512
+          },
+          "image": [
+            "https://nbc-nordhorn.de/android-chrome-512x512.png",
+            "https://nbc-nordhorn.de/NBC_Logo.png"
+          ],
+          "description": "Basketballverein in Nordhorn mit Teams für Kinder, Jugend, Damen, Herren, Cheerleading und Breitensport.",
+          "sport": "Basketball",
+          "email": "info@nbc-nordhorn.de",
+          "telephone": "+49-173-9042341",
+          "foundingDate": "2026",
+          "sameAs": [
+            "https://www.instagram.com/nbc_nordhorn"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "De-Vries-Straße 5",
+            "postalCode": "48531",
+            "addressLocality": "Nordhorn",
+            "addressCountry": "DE"
+          },
+          "location": {
+            "@type": "Place",
+            "name": "Ludwig-Povel-Halle",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Zamenhofstraße",
+              "postalCode": "48529",
+              "addressLocality": "Nordhorn",
+              "addressCountry": "DE"
+            }
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "info@nbc-nordhorn.de",
+            "telephone": "+49-173-9042341",
+            "availableLanguage": [
+              "de",
+              "en"
+            ]
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://nbc-nordhorn.de/#website",
+          "url": "https://nbc-nordhorn.de/",
+          "name": "NBC Baskets Nordhorn e.V.",
+          "alternateName": "NBC Baskets",
+          "description": "Offizielle Website des NBC Baskets Nordhorn e.V.",
+          "publisher": {
+            "@id": "https://nbc-nordhorn.de/#organization"
+          },
+          "inLanguage": "de-DE"
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://nbc-nordhorn.de/#webpage",
+          "url": "https://nbc-nordhorn.de/",
+          "name": "NBC Baskets Nordhorn e.V. | Home of the Baskets",
+          "isPartOf": {
+            "@id": "https://nbc-nordhorn.de/#website"
+          },
+          "about": {
+            "@id": "https://nbc-nordhorn.de/#organization"
+          },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://nbc-nordhorn.de/android-chrome-512x512.png"
+          },
+          "description": "Offizielle Website des NBC Baskets Nordhorn e.V. Basketball in Nordhorn für Kinder, Jugend, Damen, Herren, Cheerleading und Breitensport.",
+          "inLanguage": "de-DE"
         }
-      },
-      "sameAs": [
-        "https://www.instagram.com/nbc_nordhorn"
-      ],
-      "image": "https://nbc-nordhorn.de/android-chrome-512x512.png"
+      ]
     }
     </script>
     
