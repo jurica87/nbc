@@ -207,48 +207,35 @@
         </div>
 
         <div class="bg-[#ffffff] p-8 rounded-2xl border border-[#e0e0e5]">
-            <h2 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-2">ANMELDUNG</h2>
-            <p class="text-[#6a6a7a] mb-6 text-sm">
-                Trag dich kurz ein. Wir melden uns bei dir und senden dir alles Weitere zur Mitgliedschaft.
+            <h2 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">ANMELDUNG</h2>
+            <p class="text-[#4a4a5a] mb-6">
+                Fülle das Formular aus oder sende uns eine E-Mail. Wir melden uns bei dir!
             </p>
-            <form id="mitgliedschaft-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-4">
-                <input type="hidden" name="access_key" value="12b361cf-7228-43f4-8f45-841acdf4139e">
-                <input type="hidden" name="subject" value="Neue Mitgliedschaftsanfrage">
-                <input type="hidden" name="from_name" value="NBC Nordhorn Website">
-                <input type="hidden" name="replyto" value="email">
-                <input type="checkbox" name="botcheck" style="display:none;">
-
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Vielen Dank! Wir melden uns bei dir.');">
                 <div class="grid md:grid-cols-2 gap-4">
-                    <input type="text" name="vorname" placeholder="Vorname" required class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none">
-                    <input type="text" name="nachname" placeholder="Nachname" required class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none">
+                    <input type="text" placeholder="Vorname" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+                    <input type="text" placeholder="Nachname" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
                 </div>
-
-                <input type="email" name="email" placeholder="E-Mail" required class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none">
-                <input type="tel" name="telefon" placeholder="Telefon" class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none">
-
-                <select name="interesse" required class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+                <input type="email" placeholder="E-Mail" required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+                <input type="tel" placeholder="Telefon" class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
+                <select required class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none">
                     <option value="">Interessiert für...</option>
-                    <option>U8 Minis</option>
-                    <option>U10 Kids</option>
-                    <option>U12 männlich</option>
-                    <option>U12 weiblich</option>
-                    <option>U14</option>
-                    <option>U16</option>
-                    <option>U18</option>
-                    <option>1. Herren</option>
-                    <option>1. Damen</option>
-                    <option>Cheerleading</option>
-                    <option>Fördermitglied</option>
-                    <option>Familienbeitrag</option>
+                    <option value="u8">U8 Minis</option>
+                    <option value="u10">U10 Kids</option>
+                    <option value="u12m">U12 männlich</option>
+                    <option value="u12w">U12 weiblich</option>
+                    <option value="u14">U14</option>
+                    <option value="u16">U16</option>
+                    <option value="u18">U18</option>
+                    <option value="herren">1. Herren</option>
+                    <option value="damen">1. Damen</option>
+                    <option value="cheer">Cheerleading</option>
+                    <option value="foerder">Fördermitglied</option>
                 </select>
-
-                <textarea name="nachricht" placeholder="Nachricht (optional)" rows="4" class="w-full bg-[#f8f9fa] border border-[#d6d6dc] rounded-lg px-4 py-3 text-[#1a1a2e] placeholder:text-[#8a8a9a] focus:border-nbc-orange focus:outline-none resize-none"></textarea>
-
-                <button type="submit" class="w-full bg-nbc-orange hover:bg-orange-600 text-white font-bold py-4 rounded-lg transition-colors">
+                <textarea placeholder="Nachricht (optional)" rows="4" class="w-full bg-[#f8f9fa]/50 border border-gray-700 rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none"></textarea>
+                <button type="submit" class="w-full bg-nbc-orange hover:bg-orange-600 text-[#1a1a2e] font-bold py-4 rounded-lg transition-colors">
                     JETZT ANMELDEN
                 </button>
-
-                <p id="mitgliedschaft-status" class="mt-4 text-sm text-center text-[#4a4a5a]"></p>
             </form>
             <p class="text-center mt-4 text-[#6a6a7a] text-sm">
                 Oder per E-Mail: <a href="mailto:info@nbc-nordhorn.de" class="text-nbc-orange hover:underline">info@nbc-nordhorn.de</a>
@@ -263,35 +250,5 @@
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
         Mitglied Werden
     </a>
-    <script>
-        const membershipForm = document.getElementById("mitgliedschaft-form");
-        const membershipStatus = document.getElementById("mitgliedschaft-status");
-
-        membershipForm.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const data = new FormData(membershipForm);
-            membershipStatus.textContent = "Wird gesendet...";
-
-            try {
-                const response = await fetch(membershipForm.action, {
-                    method: "POST",
-                    body: data,
-                    headers: { "Accept": "application/json" }
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    membershipStatus.textContent = "Danke. Die Anfrage wurde erfolgreich gesendet.";
-                    membershipForm.reset();
-                } else {
-                    membershipStatus.textContent = result.message || "Fehler beim Senden. Bitte später erneut versuchen.";
-                }
-            } catch (error) {
-                membershipStatus.textContent = "Fehler beim Senden. Bitte später erneut versuchen.";
-            }
-        });
-    </script>
 </body>
 </html>
