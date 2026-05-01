@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NBC Baskets Nordhorn – News</title>
+    <link>https://nbc-nordhorn.de/news.html</link>
+    <description>Aktuelle News der NBC Baskets Nordhorn zu Basketball in Nordhorn, Teams, Probetraining und Vereinsentwicklung.</description>
+    <language>de-DE</language>
+    <lastBuildDate>Fri, 01 May 2026 20:45:00 GMT</lastBuildDate>
+    <atom:link href="https://nbc-nordhorn.de/feed.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</managingEditor>
+    <webMaster>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</webMaster>
+    <image>
+      <url>https://nbc-nordhorn.de/android-chrome-192x192.png</url>
+      <title>NBC Baskets Nordhorn – News</title>
+      <link>https://nbc-nordhorn.de/news.html</link>
+    </image>
+    <item>
+      <title>Probetraining Basketball in Nordhorn: So läuft der Einstieg bei den NBC Baskets ab</title>
+      <link>https://nbc-nordhorn.de/news/probetraining-basketball-nordhorn.html</link>
+      <guid isPermaLink="true">https://nbc-nordhorn.de/news/probetraining-basketball-nordhorn.html</guid>
+      <pubDate>Fri, 01 May 2026 08:00:00 GMT</pubDate>
+      <description><![CDATA[Probetraining Basketball in Nordhorn: Musterartikel für eine saubere NBC-News-Struktur mit lokalem Bezug, strukturierten Daten und suchmaschinenfreundlichem Aufbau.]]></description>
+      <category>Probetraining</category>
+    </item>
+  </channel>
+</rss>
