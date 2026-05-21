@@ -1029,7 +1029,7 @@
                 this.shotMeter.startedAt = performance.now();
                 document.getElementById('shotMeterWrap').classList.add('visible');
                 document.getElementById('meterSpeed').textContent = `Tempo ${profile.speed.toFixed(3)}x`;
-                document.getElementById('meterTip').textContent = 'Die Pull-Down-Bewegung setzt das Timing direkt beim Loslassen fest.';
+                document.getElementById('meterTip').textContent = 'Zieh sauber nach unten und lass im richtigen Moment los – das Timing sitzt direkt im Release.';
                 this.updateShotMeterUI();
                 this.updateDifficultyBanner();
             }
@@ -1058,12 +1058,12 @@
                 const normalized = delta / (this.shotMeter.greenSize / 2);
 
                 if (value >= this.shotMeter.greenStart && value <= this.shotMeter.greenStart + this.shotMeter.greenSize) {
-                    return { tier: 'perfect', modifier: 1.08, accuracyBonus: 0.35, label: 'Perfect Shot', color: '#2ecc71', autoMakeChance: 0.32 };
+                    return { tier: 'perfect', modifier: 1.06, arcBoost: 1.08, horizontalAssist: 0.72, label: 'Perfect Shot', color: '#2ecc71' };
                 }
-                if (normalized <= 1.8) {
-                    return { tier: 'good', modifier: 0.98, accuracyBonus: 0.12, label: value < center ? 'Etwas früh' : 'Etwas spät', color: '#f1c40f', autoMakeChance: 0.08 };
+                if (normalized <= 1.45) {
+                    return { tier: 'good', modifier: 0.98, arcBoost: 1, horizontalAssist: 0.9, label: value < center ? 'Etwas früh' : 'Etwas spät', color: '#f1c40f' };
                 }
-                return { tier: 'bad', modifier: 0.88, accuracyBonus: -0.18, label: value < center ? 'Zu früh' : 'Zu spät', color: '#ff5b5b', autoMakeChance: 0 };
+                return { tier: 'bad', modifier: 0.9, arcBoost: 0.93, horizontalAssist: 1.08, label: value < center ? 'Zu früh' : 'Zu spät', color: '#ff5b5b' };
             }
 
             launchBall(result) {
@@ -1072,13 +1072,12 @@
                 this.ball.isFlying = true;
                 this.ball.trail = [];
                 const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                const verticalStrength = 13 + aimPower * 9 + releaseLift * 0.03;
-                const arcBoost = result.tier === 'perfect' ? 1.05 : result.tier === 'bad' ? 0.92 : 1;
-                const sideControl = horizontalOffset * 0.045;
+                const verticalStrength = 12.8 + aimPower * 8.2 + releaseLift * 0.024;
+                const sideControl = horizontalOffset * 0.036 * result.horizontalAssist;
                 this.ball.vx = sideControl * multiplier;
-                this.ball.vy = -verticalStrength * result.modifier * arcBoost;
-                this.ball.x += horizontalOffset * 0.08;
-                this.ball.y += Math.min(pullDistance * 0.08, 10);
+                this.ball.vy = -verticalStrength * result.modifier * result.arcBoost;
+                this.ball.x += horizontalOffset * 0.06;
+                this.ball.y += Math.min(pullDistance * 0.06, 8);
                 this.ball.aimPower = 0;
                 this.ball.aimX = this.ball.dragStartX;
                 this.ball.aimY = this.ball.dragStartY;
@@ -1212,7 +1211,7 @@
                 this.maxCombo = Math.max(this.maxCombo, this.combo);
                 this.lastScoreTime = now;
 
-                const timing = this.currentShotResult || { tier: 'good', modifier: 1, autoMakeChance: 0 };
+                const timing = this.currentShotResult || { tier: 'good', modifier: 1, horizontalAssist: 1, arcBoost: 1 };
                 const isPerfect = timing.tier === 'perfect';
                 const comboBonus = this.combo > 1 ? Math.min(6, Math.floor(this.combo / 2)) : 0;
                 const perfectBonus = isPerfect ? 2 : 0;
@@ -1325,10 +1324,10 @@
 
                 if (this.ball.isDragging && this.state === 'playing') {
                     const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                    const verticalStrength = 13 + this.ball.aimPower * 9 + this.ball.releaseLift * 0.03;
-                    let previewX = this.ball.x + this.ball.horizontalOffset * 0.08;
-                    let previewY = this.ball.y + Math.min(this.ball.pullDistance * 0.08, 10);
-                    let previewVx = this.ball.horizontalOffset * 0.045 * multiplier;
+                    const verticalStrength = 12.8 + this.ball.aimPower * 8.2 + this.ball.releaseLift * 0.024;
+                    let previewX = this.ball.x + this.ball.horizontalOffset * 0.06;
+                    let previewY = this.ball.y + Math.min(this.ball.pullDistance * 0.06, 8);
+                    let previewVx = this.ball.horizontalOffset * 0.036 * multiplier;
                     let previewVy = -verticalStrength;
 
                     ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 + this.ball.aimPower * 0.35})`;
