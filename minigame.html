@@ -623,7 +623,7 @@
                 <div class="green-zone" id="greenZone"></div>
                 <div class="meter-pointer" id="meterPointer"></div>
             </div>
-            <div class="meter-tip" id="meterTip">Loslassen oder tippen, wenn der Marker im grünen Bereich ist.</div>
+            <div class="meter-tip" id="meterTip">Während des Ziehens lädt sich dein Release auf – loslassen wirft sofort.</div>
         </div>
 
         <div class="powerup-indicator">
@@ -636,9 +636,9 @@
         <h1>🏀 Beat the Buzzer</h1>
         <button class="btn" onclick="game.start()">Spiel starten</button>
         <div class="instructions">
-            Ziehe den Ball zum Zielen zurück und <strong>lasse im grünen Bereich los</strong>.<br>
-            Perfekte Würfe bringen Bonuspunkte, starke Serien und mehr Momentum.<br>
-            Je länger du überlebst, desto schneller wird das Timing.
+            Halte den Ball, <strong>zieh sauber nach unten</strong> und lass im richtigen Moment los.<br>
+            Das Loslassen ist direkt dein Release — ohne Extra-Klick.<br>
+            Perfekte Würfe bringen Bonuspunkte, starke Serien und mehr Momentum.
         </div>
     </div>
 
@@ -670,6 +670,20 @@
         <div class="actions">
             <button class="btn" onclick="game.restart()">Nochmal spielen</button>
             <button class="btn secondary-btn" onclick="game.clearLeaderboard()">Leaderboard leeren</button>
+        </div>
+    </div>
+
+    <div class="corner-actions">
+        <button class="ghost-btn" onclick="game.toggleLeaderboardOverlay()">Leaderboard</button>
+    </div>
+
+    <div id="leaderboardOverlay" class="hidden" style="position:absolute;inset:0;background:rgba(4,7,16,0.88);z-index:12;pointer-events:all;display:flex;align-items:center;justify-content:center;padding:24px;">
+        <div class="panel" style="width:min(760px,100%);padding:24px;max-height:90vh;overflow:auto;">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px;">
+                <h2 style="font-family:'Black Ops One',cursive;color:#f2722c;font-size:clamp(28px,5vw,42px);">Highscores</h2>
+                <button class="ghost-btn" onclick="game.toggleLeaderboardOverlay(false)">Schließen</button>
+            </div>
+            <div class="leaderboard" id="leaderboardOverlayTable"></div>
         </div>
     </div>
 
@@ -708,6 +722,7 @@
                 this.comboTimeout = null;
                 this.difficultyTimeout = null;
                 this.nameSavedThisRound = false;
+                this.dragHoldStart = 0;
 
                 this.audioCtx = null;
 
@@ -790,6 +805,8 @@
                     this.ball.aimX = pos.clientX;
                     this.ball.aimY = pos.clientY;
                     this.ball.aimPower = 0;
+                    this.dragHoldStart = performance.now();
+                    this.startShotMeter();
                 };
 
                 const moveDrag = (e) => {
@@ -808,6 +825,11 @@
                     this.ball.aimX = this.ball.dragStartX + clampedDx * 0.35;
                     this.ball.aimY = this.ball.dragStartY + clampedDy;
                     this.ball.aimPower = clampedDy / maxPull;
+                    if (this.shotMeter.active) {
+                        const holdProgress = Math.min((performance.now() - this.dragHoldStart) / 900, 1);
+                        this.shotMeter.value = Math.max(0, Math.min(1, this.ball.aimPower * 0.68 + holdProgress * 0.32));
+                        this.updateShotMeterUI();
+                    }
                 };
 
                 const endDrag = (e) => {
@@ -821,6 +843,9 @@
                     if (power > 18) {
                         this.prepareShot();
                     } else {
+                        this.shotMeter.active = false;
+                        this.shotMeter.running = false;
+                        document.getElementById('shotMeterWrap').classList.remove('visible');
                         this.ball.aimPower = 0;
                         this.ball.aimX = this.ball.dragStartX;
                         this.ball.aimY = this.ball.dragStartY;
@@ -830,34 +855,13 @@
                     }
                 };
 
-                const resolveMeterInput = () => {
-                    if (this.state === 'playing' && this.shotMeter.active && this.shotMeter.running) {
-                        this.resolveShotMeter();
-                    }
-                };
-
                 canvas.addEventListener('mousedown', startDrag);
                 canvas.addEventListener('touchstart', startDrag, { passive: true });
                 window.addEventListener('mousemove', moveDrag);
                 window.addEventListener('touchmove', moveDrag, { passive: true });
-                window.addEventListener('mouseup', (e) => {
-                    endDrag(e);
-                    resolveMeterInput();
-                });
-                window.addEventListener('touchend', (e) => {
-                    endDrag(e);
-                    resolveMeterInput();
-                });
-                window.addEventListener('touchcancel', (e) => {
-                    endDrag(e);
-                    resolveMeterInput();
-                });
-                window.addEventListener('keydown', (e) => {
-                    if (e.code === 'Space' && this.state === 'playing' && this.shotMeter.active) {
-                        e.preventDefault();
-                        resolveMeterInput();
-                    }
-                });
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchend', endDrag);
+                window.addEventListener('touchcancel', endDrag);
             }
 
             ensureAudio() {
@@ -992,10 +996,11 @@
                     aimPower: this.ball.aimPower,
                     pullDistance: this.ball.pullDistance,
                     horizontalOffset: this.ball.horizontalOffset,
-                    releaseLift: this.ball.releaseLift
+                    releaseLift: this.ball.releaseLift,
+                    meterValue: this.shotMeter.value,
+                    holdTime: performance.now() - this.dragHoldStart
                 };
                 this.totalShots++;
-                this.startShotMeter();
                 this.resolveShotMeter();
                 this.updateLiveStats();
             }
@@ -1028,8 +1033,8 @@
                 this.shotMeter.greenStart = 0.5 - profile.greenSize / 2;
                 this.shotMeter.startedAt = performance.now();
                 document.getElementById('shotMeterWrap').classList.add('visible');
-                document.getElementById('meterSpeed').textContent = `Tempo ${profile.speed.toFixed(3)}x`;
-                document.getElementById('meterTip').textContent = 'Zieh sauber nach unten und lass im richtigen Moment los – das Timing sitzt direkt im Release.';
+                document.getElementById('meterSpeed').textContent = `Release ${profile.speed.toFixed(3)}x`;
+                document.getElementById('meterTip').textContent = 'Während des Ziehens lädt sich dein Release auf – loslassen wirft sofort.';
                 this.updateShotMeterUI();
                 this.updateDifficultyBanner();
             }
@@ -1048,7 +1053,7 @@
                 this.shotMeter.active = false;
                 document.getElementById('shotMeterWrap').classList.remove('visible');
 
-                const result = this.evaluateShotMeter(this.shotMeter.value);
+                const result = this.evaluateShotMeter(this.pendingShot.meterValue);
                 this.launchBall(result);
             }
 
@@ -1498,6 +1503,7 @@
                 document.getElementById('bestScoreStored').textContent = this.storageStats.highScore;
                 document.getElementById('playerNameInput').value = '';
                 this.renderLeaderboard();
+                this.renderLeaderboard('leaderboardOverlayTable');
                 document.getElementById('gameOverScreen').classList.remove('hidden');
             }
 
@@ -1557,8 +1563,15 @@
                 this.nameSavedThisRound = false;
             }
 
-            renderLeaderboard() {
-                const board = document.getElementById('leaderboard');
+            toggleLeaderboardOverlay(force) {
+                const overlay = document.getElementById('leaderboardOverlay');
+                const shouldShow = typeof force === 'boolean' ? force : overlay.classList.contains('hidden');
+                overlay.classList.toggle('hidden', !shouldShow);
+                if (shouldShow) this.renderLeaderboard('leaderboardOverlayTable');
+            }
+
+            renderLeaderboard(targetId = 'leaderboard') {
+                const board = document.getElementById(targetId);
                 if (!this.leaderboard.length) {
                     board.innerHTML = '<div class="leaderboard-header"><div>#</div><div>Name</div><div>Punkte</div><div>Quote</div><div>Serie</div></div><div class="leaderboard-empty">Noch keine Einträge gespeichert.</div>';
                     return;
