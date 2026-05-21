@@ -725,7 +725,10 @@
                     aimX: canvas.width / 2,
                     aimY: canvas.height - 150,
                     aimPower: 0,
-                    baseVelocityScale: 0.16
+                    baseVelocityScale: 0.16,
+                    pullDistance: 0,
+                    releaseLift: 0,
+                    horizontalOffset: 0
                 };
 
                 this.hoop = {
@@ -792,15 +795,19 @@
                 const moveDrag = (e) => {
                     if (!this.ball.isDragging) return;
                     const pos = getPointerPos(e);
-                    const maxPull = Math.min(canvas.width * 0.28, 220);
+                    const maxPull = Math.min(canvas.height * 0.22, 240);
+                    const maxSide = Math.min(canvas.width * 0.12, 90);
                     const rawDx = pos.clientX - this.ball.dragStartX;
                     const rawDy = pos.clientY - this.ball.dragStartY;
-                    const distance = Math.hypot(rawDx, rawDy);
-                    const clampRatio = distance > maxPull ? maxPull / distance : 1;
+                    const clampedDy = Math.max(0, Math.min(rawDy, maxPull));
+                    const clampedDx = Math.max(-maxSide, Math.min(maxSide, rawDx));
 
-                    this.ball.aimX = this.ball.dragStartX + rawDx * clampRatio;
-                    this.ball.aimY = this.ball.dragStartY + rawDy * clampRatio;
-                    this.ball.aimPower = Math.min(distance, maxPull) / maxPull;
+                    this.ball.pullDistance = clampedDy;
+                    this.ball.horizontalOffset = clampedDx;
+                    this.ball.releaseLift = clampedDy * 0.18;
+                    this.ball.aimX = this.ball.dragStartX + clampedDx * 0.35;
+                    this.ball.aimY = this.ball.dragStartY + clampedDy;
+                    this.ball.aimPower = clampedDy / maxPull;
                 };
 
                 const endDrag = (e) => {
@@ -809,16 +816,17 @@
                     moveDrag(pos);
                     this.ball.isDragging = false;
 
-                    const dx = this.ball.dragStartX - this.ball.aimX;
-                    const dy = this.ball.dragStartY - this.ball.aimY;
-                    const power = Math.hypot(dx, dy);
+                    const power = this.ball.pullDistance;
 
-                    if (power > 20) {
-                        this.prepareShot(dx, dy);
+                    if (power > 18) {
+                        this.prepareShot();
                     } else {
                         this.ball.aimPower = 0;
                         this.ball.aimX = this.ball.dragStartX;
                         this.ball.aimY = this.ball.dragStartY;
+                        this.ball.pullDistance = 0;
+                        this.ball.releaseLift = 0;
+                        this.ball.horizontalOffset = 0;
                     }
                 };
 
@@ -979,10 +987,16 @@
                 }, p.duration);
             }
 
-            prepareShot(dx, dy) {
-                this.pendingShot = { dx, dy, aimPower: this.ball.aimPower };
+            prepareShot() {
+                this.pendingShot = {
+                    aimPower: this.ball.aimPower,
+                    pullDistance: this.ball.pullDistance,
+                    horizontalOffset: this.ball.horizontalOffset,
+                    releaseLift: this.ball.releaseLift
+                };
                 this.totalShots++;
                 this.startShotMeter();
+                this.resolveShotMeter();
                 this.updateLiveStats();
             }
 
@@ -1015,7 +1029,7 @@
                 this.shotMeter.startedAt = performance.now();
                 document.getElementById('shotMeterWrap').classList.add('visible');
                 document.getElementById('meterSpeed').textContent = `Tempo ${profile.speed.toFixed(3)}x`;
-                document.getElementById('meterTip').textContent = 'Loslassen oder tippen, wenn der Marker im grünen Bereich ist.';
+                document.getElementById('meterTip').textContent = 'Die Pull-Down-Bewegung setzt das Timing direkt beim Loslassen fest.';
                 this.updateShotMeterUI();
                 this.updateDifficultyBanner();
             }
@@ -1053,17 +1067,24 @@
             }
 
             launchBall(result) {
-                const { dx, dy, aimPower } = this.pendingShot;
+                const { aimPower, pullDistance, horizontalOffset, releaseLift } = this.pendingShot;
                 this.pendingShot = null;
                 this.ball.isFlying = true;
                 this.ball.trail = [];
                 const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                const velocityScale = (this.ball.baseVelocityScale + aimPower * 0.1) * result.modifier;
-                this.ball.vx = dx * velocityScale * multiplier;
-                this.ball.vy = dy * velocityScale * multiplier;
+                const verticalStrength = 13 + aimPower * 9 + releaseLift * 0.03;
+                const arcBoost = result.tier === 'perfect' ? 1.05 : result.tier === 'bad' ? 0.92 : 1;
+                const sideControl = horizontalOffset * 0.045;
+                this.ball.vx = sideControl * multiplier;
+                this.ball.vy = -verticalStrength * result.modifier * arcBoost;
+                this.ball.x += horizontalOffset * 0.08;
+                this.ball.y += Math.min(pullDistance * 0.08, 10);
                 this.ball.aimPower = 0;
                 this.ball.aimX = this.ball.dragStartX;
                 this.ball.aimY = this.ball.dragStartY;
+                this.ball.pullDistance = 0;
+                this.ball.releaseLift = 0;
+                this.ball.horizontalOffset = 0;
                 this.currentShotResult = result;
                 this.showFeedback(result.label, result.tier === 'perfect' ? 'good' : result.tier === 'good' ? 'okay' : 'bad');
                 if (result.tier === 'perfect') {
@@ -1303,14 +1324,12 @@
                 }
 
                 if (this.ball.isDragging && this.state === 'playing') {
-                    const dx = this.ball.dragStartX - this.ball.aimX;
-                    const dy = this.ball.dragStartY - this.ball.aimY;
                     const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                    const velocityScale = this.ball.baseVelocityScale + this.ball.aimPower * 0.1;
-                    let previewX = this.ball.x;
-                    let previewY = this.ball.y;
-                    let previewVx = dx * velocityScale * multiplier;
-                    let previewVy = dy * velocityScale * multiplier;
+                    const verticalStrength = 13 + this.ball.aimPower * 9 + this.ball.releaseLift * 0.03;
+                    let previewX = this.ball.x + this.ball.horizontalOffset * 0.08;
+                    let previewY = this.ball.y + Math.min(this.ball.pullDistance * 0.08, 10);
+                    let previewVx = this.ball.horizontalOffset * 0.045 * multiplier;
+                    let previewVy = -verticalStrength;
 
                     ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 + this.ball.aimPower * 0.35})`;
                     ctx.lineWidth = 3;
@@ -1330,6 +1349,11 @@
                     ctx.beginPath();
                     ctx.arc(this.ball.aimX, this.ball.aimY, 18 + this.ball.aimPower * 12, 0, Math.PI * 2);
                     ctx.fill();
+
+                    ctx.fillStyle = 'rgba(255,255,255,0.7)';
+                    ctx.font = '14px Roboto Condensed';
+                    ctx.textAlign = 'center';
+                    ctx.fillText('Pull Down', this.ball.dragStartX, this.ball.dragStartY + 46 + this.ball.pullDistance * 0.15);
                 }
 
                 this.activePowerups.forEach(p => {
@@ -1452,6 +1476,14 @@
                     ctx.moveTo(this.ball.x, this.ball.y);
                     ctx.lineTo(this.ball.aimX, this.ball.aimY);
                     ctx.stroke();
+
+                    ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+                    ctx.setLineDash([5, 8]);
+                    ctx.beginPath();
+                    ctx.moveTo(this.ball.dragStartX, this.ball.dragStartY - 28);
+                    ctx.lineTo(this.ball.dragStartX, this.ball.dragStartY + 160);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
                 }
             }
 
