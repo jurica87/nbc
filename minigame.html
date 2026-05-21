@@ -468,6 +468,7 @@
                 this.ball.isFlying = false;
                 this.ball.isDragging = false;
                 this.ball.trail = [];
+                this.ball.scored = false;
                 this.ball.dragStartX = this.ball.x;
                 this.ball.dragStartY = this.ball.y;
                 this.ball.aimX = this.ball.x;
@@ -544,8 +545,10 @@
                         this.ball.x > hoopLeft && 
                         this.ball.x < hoopRight &&
                         this.ball.y > hoopTop - 30 && 
-                        this.ball.y < hoopTop + 20) {
+                        this.ball.y < hoopTop + 20 &&
+                        !this.ball.scored) {
                         
+                        this.ball.scored = true;
                         this.scorePoint();
                     }
                     
@@ -632,8 +635,8 @@
                 this.createParticles(this.hoop.x, this.hoop.y, color, 
                     this.combo >= 5 ? 20 : 12);
                 
-                // Schneller zurücksetzen bei guter Performance
-                setTimeout(() => this.resetBall(), this.combo > 3 ? 150 : 300);
+                // Ballflug nach Treffer noch kurz sichtbar lassen
+                setTimeout(() => this.resetBall(), this.combo > 3 ? 420 : 520);
             }
             
             showStreakBonus() {
