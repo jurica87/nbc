@@ -970,6 +970,12 @@
                 this.ball.releaseVelocityY = -verticalLift;
 
                 const swishWindow = Math.abs(horizontalForce) < 2.6 && aimPower > 0.48 && swipeSpeed > 0.2;
+                if (swishWindow) {
+                    this.ball.vx = 0;
+                    this.ball.x = this.hoop.x;
+                    this.ball.y = this.hoop.y - 42;
+                    this.ball.vy = 5.2;
+                }
                 this.currentShotResult = {
                     tier: swishWindow ? 'perfect' : (aimPower > 0.28 ? 'good' : 'bad'),
                     label: swishWindow ? 'Clean Release' : (aimPower > 0.28 ? 'On Line' : 'Off Balance')
