@@ -788,13 +788,26 @@
                 
                 // Ball Trail
                 this.ball.trail.forEach((point, i) => {
-                    const alpha = (i / this.ball.trail.length) * 0.5;
+                    const alpha = (i / this.ball.trail.length) * 0.65;
                     ctx.fillStyle = this.powerups.fireball.active ? 
-                        `rgba(231, 76, 60, ${alpha})` : `rgba(230, 126, 34, ${alpha})`;
+                        `rgba(231, 76, 60, ${alpha})` : `rgba(242, 114, 44, ${alpha})`;
                     ctx.beginPath();
-                    ctx.arc(point.x, point.y, this.ball.radius * (i/10), 0, Math.PI * 2);
+                    ctx.arc(point.x, point.y, Math.max(5, this.ball.radius * (i / 9)), 0, Math.PI * 2);
                     ctx.fill();
                 });
+
+                if (this.ball.isFlying) {
+                    ctx.strokeStyle = 'rgba(255,255,255,0.22)';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([6, 10]);
+                    ctx.beginPath();
+                    const futureX = this.ball.x + this.ball.vx * 6;
+                    const futureY = this.ball.y + this.ball.vy * 6;
+                    ctx.moveTo(this.ball.x, this.ball.y);
+                    ctx.lineTo(futureX, futureY);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
                 
                 // Ball
                 const ballGradient = ctx.createRadialGradient(
