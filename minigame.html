@@ -202,48 +202,6 @@
             text-shadow: 0 0 30px rgba(46, 204, 113, 0.5);
         }
 
-        .shot-meter-wrap {
-            position: absolute;
-            left: 50%;
-            bottom: 112px;
-            transform: translateX(-50%);
-            width: min(360px, calc(100vw - 48px));
-            opacity: 0;
-            transition: opacity 0.18s ease;
-        }
-
-        .shot-meter-wrap.visible {
-            opacity: 1;
-        }
-
-        .shot-meter-track {
-            position: relative;
-            height: 8px;
-            border-radius: 999px;
-            overflow: hidden;
-            background: linear-gradient(90deg, #ff4d4d 0%, #ff8c42 22%, #ffd34d 45%, #29d97c 57%, #ffd34d 69%, #ff8c42 82%, #ff4d4d 100%);
-            box-shadow: 0 0 18px rgba(0,0,0,0.24);
-        }
-
-        .green-zone {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            background: rgba(46, 204, 113, 0.42);
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.45);
-        }
-
-        .meter-pointer {
-            position: absolute;
-            top: -3px;
-            bottom: -3px;
-            width: 4px;
-            border-radius: 999px;
-            background: #ffffff;
-            box-shadow: 0 0 14px rgba(255,255,255,0.85);
-            transform: translateX(-50%);
-        }
-
         .powerup-indicator {
             position: absolute;
             bottom: 22px;
@@ -280,6 +238,29 @@
 
         .fireball { background: linear-gradient(45deg, #e74c3c, #c0392b); color: white; }
         .slowmo { background: linear-gradient(45deg, #3498db, #2980b9); color: white; }
+
+        .corner-actions {
+            position: absolute;
+            bottom: 18px;
+            right: 18px;
+            display: flex;
+            gap: 10px;
+            pointer-events: all;
+            z-index: 5;
+        }
+
+        .ghost-btn {
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(9, 12, 24, 0.72);
+            color: #fff;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+        }
 
         #startScreen, #gameOverScreen {
             position: absolute;
@@ -528,10 +509,6 @@
                 top: 238px;
             }
 
-            .shot-meter-wrap {
-                bottom: 94px;
-            }
-
             .leaderboard-header,
             .leaderboard-row {
                 grid-template-columns: 44px 1.2fr 0.9fr 0.7fr 0.7fr;
@@ -592,13 +569,6 @@
         <div class="difficulty-banner" id="difficultyBanner">Rookie Rhythm</div>
         <div class="streak-bonus" id="streakBonus">Perfect Streak!</div>
 
-        <div class="shot-meter-wrap" id="shotMeterWrap">
-            <div class="shot-meter-track">
-                <div class="green-zone" id="greenZone"></div>
-                <div class="meter-pointer" id="meterPointer"></div>
-            </div>
-        </div>
-
         <div class="powerup-indicator">
             <div class="powerup fireball" id="fireballIcon">🔥</div>
             <div class="powerup slowmo" id="slowmoIcon">❄️</div>
@@ -609,9 +579,9 @@
         <h1>🏀 Beat the Buzzer</h1>
         <button class="btn" onclick="game.start()">Spiel starten</button>
         <div class="instructions">
-            Halte den Ball, <strong>zieh sauber nach unten</strong> und lass im richtigen Moment los.<br>
-            Das Loslassen ist direkt dein Release — ohne Extra-Klick.<br>
-            Perfekte Würfe bringen Bonuspunkte, starke Serien und mehr Momentum.
+            Halte den Ball, <strong>zieh flüssig in deine Wurfrichtung</strong> und lass los.<br>
+            Entfernung, Winkel und Swipe-Geschwindigkeit bestimmen den Wurf direkt.<br>
+            Perfekte Serien bringen Bonuspunkte und Momentum.
         </div>
     </div>
 
@@ -622,7 +592,7 @@
         <div class="summary-grid">
             <div class="summary-card"><span>Beste Serie</span><strong id="bestStreak">0</strong></div>
             <div class="summary-card"><span>Trefferquote</span><strong id="finalAccuracy">0%</strong></div>
-            <div class="summary-card"><span>Perfect Shots</span><strong id="perfectShots">0</strong></div>
+            <div class="summary-card"><span>Swish-Serie</span><strong id="perfectShots">0</strong></div>
             <div class="summary-card"><span>Best Score</span><strong id="bestScoreStored">0</strong></div>
         </div>
 
@@ -674,8 +644,8 @@
         class BasketballGame {
             constructor() {
                 this.storageKeys = {
-                    stats: 'nbc_minigame_stats_v2',
-                    leaderboard: 'nbc_minigame_leaderboard_v2'
+                    stats: 'nbc_minigame_stats_v3',
+                    leaderboard: 'nbc_minigame_leaderboard_v3'
                 };
 
                 this.state = 'menu';
@@ -695,9 +665,9 @@
                 this.comboTimeout = null;
                 this.difficultyTimeout = null;
                 this.nameSavedThisRound = false;
-                this.dragHoldStart = 0;
 
                 this.audioCtx = null;
+                this.swipeSample = null;
 
                 this.ball = {
                     x: canvas.width / 2,
@@ -713,10 +683,12 @@
                     aimX: canvas.width / 2,
                     aimY: canvas.height - 150,
                     aimPower: 0,
-                    baseVelocityScale: 0.16,
+                    baseVelocityScale: 0.165,
                     pullDistance: 0,
-                    releaseLift: 0,
-                    horizontalOffset: 0
+                    horizontalOffset: 0,
+                    releaseVelocityX: 0,
+                    releaseVelocityY: 0,
+                    dragHistory: []
                 };
 
                 this.hoop = {
@@ -728,21 +700,6 @@
                     amplitude: 0,
                     centerX: canvas.width / 2,
                     angle: 0
-                };
-
-                this.shotMeter = {
-                    active: false,
-                    running: false,
-                    value: 0,
-                    direction: 1,
-                    speed: 0.018,
-                    greenStart: 0.42,
-                    greenSize: 0.16,
-                    result: null,
-                    maxWindowMs: 2200,
-                    startedAt: 0,
-                    pendingRelease: false,
-                    lockAt: 0
                 };
 
                 this.powerups = {
@@ -766,7 +723,7 @@
                 const getPointerPos = (e) => e.touches ? e.touches[0] : (e.changedTouches ? e.changedTouches[0] : e);
 
                 const startDrag = (e) => {
-                    if (this.state !== 'playing' || this.ball.isFlying || this.shotMeter.active) return;
+                    if (this.state !== 'playing' || this.ball.isFlying) return;
                     const pos = getPointerPos(e);
                     const distToBall = Math.hypot(pos.clientX - this.ball.x, pos.clientY - this.ball.y);
                     if (distToBall > this.ball.radius + 35) return;
@@ -778,31 +735,29 @@
                     this.ball.aimX = pos.clientX;
                     this.ball.aimY = pos.clientY;
                     this.ball.aimPower = 0;
-                    this.dragHoldStart = performance.now();
-                    this.startShotMeter();
+                    this.ball.pullDistance = 0;
+                    this.ball.horizontalOffset = 0;
+                    this.ball.dragHistory = [{ x: pos.clientX, y: pos.clientY, t: performance.now() }];
                 };
 
                 const moveDrag = (e) => {
                     if (!this.ball.isDragging) return;
                     const pos = getPointerPos(e);
-                    const maxPull = Math.min(canvas.height * 0.22, 240);
-                    const maxSide = Math.min(canvas.width * 0.12, 90);
+                    const maxDistance = Math.min(Math.min(canvas.width, canvas.height) * 0.28, 260);
                     const rawDx = pos.clientX - this.ball.dragStartX;
                     const rawDy = pos.clientY - this.ball.dragStartY;
-                    const clampedDy = Math.max(0, Math.min(rawDy, maxPull));
-                    const clampedDx = Math.max(-maxSide, Math.min(maxSide, rawDx));
+                    const distance = Math.hypot(rawDx, rawDy);
+                    const ratio = distance > maxDistance ? maxDistance / distance : 1;
+                    const clampedDx = rawDx * ratio;
+                    const clampedDy = rawDy * ratio;
 
-                    this.ball.pullDistance = clampedDy;
                     this.ball.horizontalOffset = clampedDx;
-                    this.ball.releaseLift = clampedDy * 0.18;
-                    this.ball.aimX = this.ball.dragStartX + clampedDx * 0.35;
+                    this.ball.pullDistance = Math.hypot(clampedDx, clampedDy);
+                    this.ball.aimX = this.ball.dragStartX + clampedDx;
                     this.ball.aimY = this.ball.dragStartY + clampedDy;
-                    this.ball.aimPower = clampedDy / maxPull;
-                    if (this.shotMeter.active) {
-                        const holdProgress = Math.min((performance.now() - this.dragHoldStart) / 900, 1);
-                        this.shotMeter.value = Math.max(0, Math.min(1, this.ball.aimPower * 0.68 + holdProgress * 0.32));
-                        this.updateShotMeterUI();
-                    }
+                    this.ball.aimPower = Math.min(1, this.ball.pullDistance / maxDistance);
+                    this.ball.dragHistory.push({ x: this.ball.aimX, y: this.ball.aimY, t: performance.now() });
+                    if (this.ball.dragHistory.length > 8) this.ball.dragHistory.shift();
                 };
 
                 const endDrag = (e) => {
@@ -811,20 +766,10 @@
                     moveDrag(pos);
                     this.ball.isDragging = false;
 
-                    const power = this.ball.pullDistance;
-
-                    if (power > 18) {
+                    if (this.ball.pullDistance > 16) {
                         this.prepareShot();
                     } else {
-                        this.shotMeter.active = false;
-                        this.shotMeter.running = false;
-                        document.getElementById('shotMeterWrap').classList.remove('visible');
-                        this.ball.aimPower = 0;
-                        this.ball.aimX = this.ball.dragStartX;
-                        this.ball.aimY = this.ball.dragStartY;
-                        this.ball.pullDistance = 0;
-                        this.ball.releaseLift = 0;
-                        this.ball.horizontalOffset = 0;
+                        this.resetAimState();
                     }
                 };
 
@@ -832,9 +777,9 @@
                 canvas.addEventListener('touchstart', startDrag, { passive: true });
                 window.addEventListener('mousemove', moveDrag);
                 window.addEventListener('touchmove', moveDrag, { passive: true });
-                canvas.addEventListener('mouseup', endDrag);
-                canvas.addEventListener('touchend', endDrag);
-                canvas.addEventListener('touchcancel', endDrag);
+                window.addEventListener('mouseup', endDrag);
+                window.addEventListener('touchend', endDrag);
+                window.addEventListener('touchcancel', endDrag);
             }
 
             ensureAudio() {
@@ -854,9 +799,7 @@
                 const gainNode = this.audioCtx.createGain();
                 oscillator.type = type;
                 oscillator.frequency.setValueAtTime(frequency, now);
-                if (slideTo) {
-                    oscillator.frequency.linearRampToValueAtTime(slideTo, now + duration);
-                }
+                if (slideTo) oscillator.frequency.linearRampToValueAtTime(slideTo, now + duration);
                 gainNode.gain.setValueAtTime(gain, now);
                 gainNode.gain.exponentialRampToValueAtTime(0.001, now + duration);
                 oscillator.connect(gainNode);
@@ -881,8 +824,6 @@
                 this.difficultyLevel = 0;
                 this.nameSavedThisRound = false;
                 this.lastScoreTime = 0;
-                this.shotMeter.active = false;
-                this.shotMeter.running = false;
                 this.activePowerups = [];
                 this.particles = [];
                 clearInterval(this.timerInterval);
@@ -915,6 +856,17 @@
                 this.hoop.amplitude = Math.min(300, (canvas.width / 2) - margin - this.hoop.width / 2);
             }
 
+            resetAimState() {
+                this.ball.aimX = this.ball.dragStartX;
+                this.ball.aimY = this.ball.dragStartY;
+                this.ball.aimPower = 0;
+                this.ball.pullDistance = 0;
+                this.ball.horizontalOffset = 0;
+                this.ball.releaseVelocityX = 0;
+                this.ball.releaseVelocityY = 0;
+                this.ball.dragHistory = [];
+            }
+
             resetBall() {
                 this.ball.x = canvas.width / 2;
                 this.ball.y = canvas.height - 150;
@@ -925,12 +877,7 @@
                 this.ball.trail = [];
                 this.ball.dragStartX = this.ball.x;
                 this.ball.dragStartY = this.ball.y;
-                this.ball.aimX = this.ball.x;
-                this.ball.aimY = this.ball.y;
-                this.ball.aimPower = 0;
-                this.shotMeter.active = false;
-                this.shotMeter.running = false;
-                document.getElementById('shotMeterWrap').classList.remove('visible');
+                this.resetAimState();
             }
 
             spawnPowerupItem() {
@@ -965,16 +912,26 @@
             }
 
             prepareShot() {
-                this.pendingShot = {
+                const history = this.ball.dragHistory;
+                const last = history[history.length - 1] || { x: this.ball.aimX, y: this.ball.aimY, t: performance.now() };
+                const reference = history.length > 2 ? history[Math.max(0, history.length - 4)] : history[0] || last;
+                const dt = Math.max(16, last.t - reference.t);
+                const swipeVx = (last.x - reference.x) / dt;
+                const swipeVy = (last.y - reference.y) / dt;
+                const swipeSpeed = Math.min(1.4, Math.hypot(swipeVx, swipeVy) * 12);
+                const angleX = this.ball.dragStartX - this.ball.aimX;
+                const angleY = this.ball.dragStartY - this.ball.aimY;
+
+                this.totalShots++;
+                this.launchBall({
                     aimPower: this.ball.aimPower,
                     pullDistance: this.ball.pullDistance,
-                    horizontalOffset: this.ball.horizontalOffset,
-                    releaseLift: this.ball.releaseLift,
-                    meterValue: this.shotMeter.value,
-                    holdTime: performance.now() - this.dragHoldStart
-                };
-                this.totalShots++;
-                this.resolveShotMeter();
+                    angleX,
+                    angleY,
+                    swipeVx,
+                    swipeVy,
+                    swipeSpeed
+                });
                 this.updateLiveStats();
             }
 
@@ -989,87 +946,46 @@
                 const d = this.calculateDifficulty();
                 return {
                     raw: d,
-                    speed: 0.013 + d * 0.0085,
-                    greenSize: Math.max(0.08, 0.18 - d * 0.04),
                     label: d < 0.35 ? 'Rookie Rhythm' : d < 0.75 ? 'Hot Hands' : d < 1.15 ? 'Clutch Time' : d < 1.5 ? 'Pressure Cooker' : 'Hall of Flame'
                 };
             }
 
-            startShotMeter() {
-                const profile = this.getDifficultyProfile();
-                this.shotMeter.active = true;
-                this.shotMeter.running = true;
-                this.shotMeter.value = 0;
-                this.shotMeter.direction = 1;
-                this.shotMeter.speed = profile.speed;
-                this.shotMeter.greenSize = profile.greenSize;
-                this.shotMeter.greenStart = 0.5 - profile.greenSize / 2;
-                this.shotMeter.startedAt = performance.now();
-                document.getElementById('shotMeterWrap').classList.add('visible');
-                this.updateShotMeterUI();
-                this.updateDifficultyBanner();
-            }
-
-            updateShotMeterUI() {
-                const pointer = document.getElementById('meterPointer');
-                const zone = document.getElementById('greenZone');
-                pointer.style.left = `${this.shotMeter.value * 100}%`;
-                zone.style.left = `${this.shotMeter.greenStart * 100}%`;
-                zone.style.width = `${this.shotMeter.greenSize * 100}%`;
-            }
-
-            resolveShotMeter() {
-                if (!this.shotMeter.active || !this.pendingShot) return;
-                this.shotMeter.running = false;
-                this.shotMeter.active = false;
-                document.getElementById('shotMeterWrap').classList.remove('visible');
-
-                const result = this.evaluateShotMeter(this.pendingShot.meterValue);
-                this.launchBall(result);
-            }
-
-            evaluateShotMeter(value) {
-                const center = this.shotMeter.greenStart + this.shotMeter.greenSize / 2;
-                const delta = Math.abs(value - center);
-                const normalized = delta / (this.shotMeter.greenSize / 2);
-
-                if (value >= this.shotMeter.greenStart && value <= this.shotMeter.greenStart + this.shotMeter.greenSize) {
-                    return { tier: 'perfect', modifier: 1.06, arcBoost: 1.08, horizontalAssist: 0.72, label: 'Perfect Shot', color: '#2ecc71' };
-                }
-                if (normalized <= 1.45) {
-                    return { tier: 'good', modifier: 0.98, arcBoost: 1, horizontalAssist: 0.9, label: value < center ? 'Etwas früh' : 'Etwas spät', color: '#f1c40f' };
-                }
-                return { tier: 'bad', modifier: 0.9, arcBoost: 0.93, horizontalAssist: 1.08, label: value < center ? 'Zu früh' : 'Zu spät', color: '#ff5b5b' };
-            }
-
-            launchBall(result) {
-                const { aimPower, pullDistance, horizontalOffset, releaseLift } = this.pendingShot;
-                this.pendingShot = null;
+            launchBall(shot) {
+                const { aimPower, pullDistance, angleX, angleY, swipeVx, swipeVy, swipeSpeed } = shot;
                 this.ball.isFlying = true;
                 this.ball.trail = [];
-                const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                const verticalStrength = 12.8 + aimPower * 8.2 + releaseLift * 0.024;
-                const sideControl = horizontalOffset * 0.036 * result.horizontalAssist;
-                this.ball.vx = sideControl * multiplier;
-                this.ball.vy = -verticalStrength * result.modifier * result.arcBoost;
-                this.ball.x += horizontalOffset * 0.06;
-                this.ball.y += Math.min(pullDistance * 0.06, 8);
-                this.ball.aimPower = 0;
-                this.ball.aimX = this.ball.dragStartX;
-                this.ball.aimY = this.ball.dragStartY;
-                this.ball.pullDistance = 0;
-                this.ball.releaseLift = 0;
-                this.ball.horizontalOffset = 0;
-                this.currentShotResult = result;
-                this.showFeedback(result.label, result.tier === 'perfect' ? 'good' : result.tier === 'good' ? 'okay' : 'bad');
-                if (result.tier === 'perfect') {
+
+                const multiplier = this.powerups.fireball.active ? 1.24 : 1;
+                const difficulty = this.calculateDifficulty();
+                const releaseStrength = 10.8 + aimPower * 8.4 + swipeSpeed * 2.6;
+                const verticalLift = Math.max(10.4, releaseStrength + Math.max(0, -swipeVy) * 2.8);
+                const horizontalForce = (angleX * 0.05 + (-swipeVx * 4.8)) * (1 + difficulty * 0.03);
+                const arcSoftener = 1 - Math.min(0.14, Math.abs(horizontalForce) * 0.012);
+
+                this.ball.vx = horizontalForce * multiplier;
+                this.ball.vy = -verticalLift * arcSoftener;
+                this.ball.x += angleX * 0.04;
+                this.ball.y += Math.min(pullDistance * 0.05, 7);
+                this.ball.releaseVelocityX = horizontalForce;
+                this.ball.releaseVelocityY = -verticalLift;
+
+                const swishWindow = Math.abs(horizontalForce) < 2.6 && aimPower > 0.48 && swipeSpeed > 0.2;
+                this.currentShotResult = {
+                    tier: swishWindow ? 'perfect' : (aimPower > 0.28 ? 'good' : 'bad'),
+                    label: swishWindow ? 'Clean Release' : (aimPower > 0.28 ? 'On Line' : 'Off Balance')
+                };
+
+                this.showFeedback(this.currentShotResult.label, this.currentShotResult.tier === 'perfect' ? 'good' : this.currentShotResult.tier === 'good' ? 'okay' : 'bad');
+                if (this.currentShotResult.tier === 'perfect') {
                     this.perfectShots++;
-                    this.playTone({ frequency: 740, slideTo: 980, duration: 0.16, type: 'triangle', gain: 0.06 });
-                } else if (result.tier === 'good') {
-                    this.playTone({ frequency: 480, slideTo: 620, duration: 0.12, type: 'sine', gain: 0.04 });
+                    this.playTone({ frequency: 760, slideTo: 980, duration: 0.16, type: 'triangle', gain: 0.06 });
+                } else if (this.currentShotResult.tier === 'good') {
+                    this.playTone({ frequency: 500, slideTo: 640, duration: 0.11, type: 'sine', gain: 0.045 });
                 } else {
-                    this.playTone({ frequency: 240, slideTo: 180, duration: 0.12, type: 'sawtooth', gain: 0.04 });
+                    this.playTone({ frequency: 250, slideTo: 190, duration: 0.1, type: 'sawtooth', gain: 0.035 });
                 }
+
+                this.resetAimState();
                 this.updateLiveStats();
             }
 
@@ -1083,33 +999,20 @@
                 this.hoop.angle += speed * 0.02 * slowFactor * timeScale;
                 this.hoop.x = this.hoop.centerX + Math.sin(this.hoop.angle) * this.hoop.amplitude;
 
-                if (this.shotMeter.running) {
-                    this.shotMeter.value += this.shotMeter.direction * this.shotMeter.speed * (this.powerups.slowmo.active ? 0.82 : 1);
-                    if (this.shotMeter.value >= 1) {
-                        this.shotMeter.value = 1;
-                        this.shotMeter.direction = -1;
-                    } else if (this.shotMeter.value <= 0) {
-                        this.shotMeter.value = 0;
-                        this.shotMeter.direction = 1;
-                    }
-                    if (performance.now() - this.shotMeter.startedAt > this.shotMeter.maxWindowMs) {
-                        this.shotMeter.value = Math.max(0, Math.min(1, this.ball.aimPower * 0.82));
-                    }
-                    this.updateShotMeterUI();
-                }
-
                 this.activePowerups.forEach(p => {
                     p.bobOffset += 0.05;
                 });
 
                 if (this.ball.isFlying) {
-                    const gravity = 0.5 * timeScale;
+                    const gravity = 0.42 * timeScale;
+                    const airResistance = 0.995;
                     this.ball.vy += gravity;
+                    this.ball.vx *= airResistance;
                     this.ball.x += this.ball.vx * timeScale;
                     this.ball.y += this.ball.vy * timeScale;
 
                     this.ball.trail.push({ x: this.ball.x, y: this.ball.y, alpha: 1 });
-                    if (this.ball.trail.length > 12) this.ball.trail.shift();
+                    if (this.ball.trail.length > 14) this.ball.trail.shift();
 
                     const hoopLeft = this.hoop.x - this.hoop.width / 2 + 10;
                     const hoopRight = this.hoop.x + this.hoop.width / 2 - 10;
@@ -1121,17 +1024,17 @@
 
                     if (this.ball.y > canvas.height - this.ball.radius) {
                         this.registerMiss();
-                        setTimeout(() => this.resetBall(), 350);
+                        setTimeout(() => this.resetBall(), 320);
                     }
 
                     if (this.ball.x < 0 || this.ball.x > canvas.width) {
-                        this.ball.vx *= -0.8;
+                        this.ball.vx *= -0.72;
                         this.ball.x = Math.max(0, Math.min(canvas.width, this.ball.x));
                     }
 
                     if (this.ball.y < -100) {
                         this.registerMiss();
-                        setTimeout(() => this.resetBall(), 420);
+                        setTimeout(() => this.resetBall(), 360);
                     }
                 }
 
@@ -1148,7 +1051,7 @@
                 this.particles = this.particles.filter(p => {
                     p.x += p.vx * timeScale;
                     p.y += p.vy * timeScale;
-                    p.vy += 0.2 * timeScale;
+                    p.vy += 0.18 * timeScale;
                     p.life -= 0.02 * timeScale;
                     p.alpha = p.life;
                     return p.life > 0;
@@ -1160,7 +1063,7 @@
                 this.ball.isFlying = false;
                 this.combo = 0;
                 this.updateCombo();
-                this.showFeedback(this.currentShotResult?.tier === 'bad' ? this.currentShotResult.label : 'Fehlwurf', 'bad');
+                this.showFeedback('Fehlwurf', 'bad');
                 this.createParticles(this.ball.x, Math.min(this.ball.y, canvas.height - 60), '#ff5b5b', 10);
                 this.currentShotResult = null;
                 this.updateLiveStats();
@@ -1187,7 +1090,7 @@
                 this.maxCombo = Math.max(this.maxCombo, this.combo);
                 this.lastScoreTime = now;
 
-                const timing = this.currentShotResult || { tier: 'good', modifier: 1, horizontalAssist: 1, arcBoost: 1 };
+                const timing = this.currentShotResult || { tier: 'good' };
                 const isPerfect = timing.tier === 'perfect';
                 const comboBonus = this.combo > 1 ? Math.min(6, Math.floor(this.combo / 2)) : 0;
                 const perfectBonus = isPerfect ? 2 : 0;
@@ -1196,10 +1099,8 @@
                 const pointsAwarded = 2 + comboBonus + perfectBonus + streakStyleBonus + fireballBonus;
                 this.score += pointsAwarded;
 
-                this.showFeedback(isPerfect ? 'Perfect Shot' : (this.combo >= 5 ? 'Perfect Streak' : `+${pointsAwarded} Punkte`), isPerfect ? 'good' : 'okay');
-                if (this.combo >= 2) {
-                    this.showComboBanner();
-                }
+                this.showFeedback(isPerfect ? 'Swish!' : (this.combo >= 5 ? 'Perfect Streak' : `+${pointsAwarded} Punkte`), isPerfect ? 'good' : 'okay');
+                if (this.combo >= 2) this.showComboBanner();
 
                 const color = isPerfect ? '#2ecc71' : this.combo >= 5 ? '#f1c40f' : '#f2722c';
                 this.createParticles(this.hoop.x, this.hoop.y, color, isPerfect ? 24 : 16);
@@ -1211,7 +1112,7 @@
 
                 this.currentShotResult = null;
                 this.updateLiveStats();
-                setTimeout(() => this.resetBall(), this.combo > 3 ? 180 : 260);
+                setTimeout(() => this.resetBall(), this.combo > 3 ? 170 : 240);
             }
 
             updateLiveStats() {
@@ -1262,7 +1163,7 @@
                 if (!force && Math.abs(level - this.difficultyLevel) < 0.2) return;
                 this.difficultyLevel = level;
                 const banner = document.getElementById('difficultyBanner');
-                banner.textContent = `${profile.label} • Meter ${profile.speed.toFixed(3)} • Grün ${Math.round(profile.greenSize * 100)}%`;
+                banner.textContent = `${profile.label} • Pace ${profile.raw.toFixed(2)}`;
                 banner.classList.add('active');
                 clearTimeout(this.difficultyTimeout);
                 this.difficultyTimeout = setTimeout(() => banner.classList.remove('active'), 1500);
@@ -1299,12 +1200,11 @@
                 }
 
                 if (this.ball.isDragging && this.state === 'playing') {
-                    const multiplier = this.powerups.fireball.active ? 1.3 : 1;
-                    const verticalStrength = 12.8 + this.ball.aimPower * 8.2 + this.ball.releaseLift * 0.024;
-                    let previewX = this.ball.x + this.ball.horizontalOffset * 0.06;
-                    let previewY = this.ball.y + Math.min(this.ball.pullDistance * 0.06, 8);
-                    let previewVx = this.ball.horizontalOffset * 0.036 * multiplier;
-                    let previewVy = -verticalStrength;
+                    const releaseStrength = 10.8 + this.ball.aimPower * 8.4;
+                    let previewX = this.ball.x;
+                    let previewY = this.ball.y;
+                    let previewVx = (this.ball.dragStartX - this.ball.aimX) * 0.05;
+                    let previewVy = -releaseStrength;
 
                     ctx.strokeStyle = `rgba(255, 255, 255, ${0.25 + this.ball.aimPower * 0.35})`;
                     ctx.lineWidth = 3;
@@ -1312,7 +1212,7 @@
                     ctx.beginPath();
                     ctx.moveTo(previewX, previewY);
                     for (let i = 0; i < 22; i++) {
-                        previewVy += 0.5;
+                        previewVy += 0.42;
                         previewX += previewVx;
                         previewY += previewVy;
                         ctx.lineTo(previewX, previewY);
@@ -1322,13 +1222,8 @@
 
                     ctx.fillStyle = `rgba(242, 114, 44, ${0.2 + this.ball.aimPower * 0.45})`;
                     ctx.beginPath();
-                    ctx.arc(this.ball.aimX, this.ball.aimY, 18 + this.ball.aimPower * 12, 0, Math.PI * 2);
+                    ctx.arc(this.ball.aimX, this.ball.aimY, 16 + this.ball.aimPower * 12, 0, Math.PI * 2);
                     ctx.fill();
-
-                    ctx.fillStyle = 'rgba(255,255,255,0.7)';
-                    ctx.font = '14px Roboto Condensed';
-                    ctx.textAlign = 'center';
-                    ctx.fillText('Pull Down', this.ball.dragStartX, this.ball.dragStartY + 46 + this.ball.pullDistance * 0.15);
                 }
 
                 this.activePowerups.forEach(p => {
@@ -1451,14 +1346,6 @@
                     ctx.moveTo(this.ball.x, this.ball.y);
                     ctx.lineTo(this.ball.aimX, this.ball.aimY);
                     ctx.stroke();
-
-                    ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-                    ctx.setLineDash([5, 8]);
-                    ctx.beginPath();
-                    ctx.moveTo(this.ball.dragStartX, this.ball.dragStartY - 28);
-                    ctx.lineTo(this.ball.dragStartX, this.ball.dragStartY + 160);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
                 }
             }
 
@@ -1524,6 +1411,7 @@
                 localStorage.setItem(this.storageKeys.leaderboard, JSON.stringify(this.leaderboard));
                 this.nameSavedThisRound = true;
                 this.renderLeaderboard();
+                this.renderLeaderboard('leaderboardOverlayTable');
                 input.value = '';
             }
 
@@ -1531,6 +1419,7 @@
                 this.leaderboard = [];
                 localStorage.removeItem(this.storageKeys.leaderboard);
                 this.renderLeaderboard();
+                this.renderLeaderboard('leaderboardOverlayTable');
                 this.nameSavedThisRound = false;
             }
 
