@@ -109,7 +109,7 @@
             100% { opacity: 0; transform: translate(-50%, -100%) scale(1); }
         }
         
-        #startScreen, #gameOverScreen {
+        #startScreen, #gameOverScreen, #leaderboardScreen {
             position: absolute;
             top: 0;
             left: 0;
@@ -141,8 +141,8 @@
         }
         
         .btn {
-            padding: 20px 50px;
-            font-size: 24px;
+            padding: 16px 40px;
+            font-size: 20px;
             font-family: 'Roboto Condensed', sans-serif;
             font-weight: bold;
             background: linear-gradient(45deg, #e67e22, #d35400);
@@ -152,6 +152,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(230, 126, 34, 0.4);
+            margin: 6px;
         }
         
         .btn:hover {
@@ -159,9 +160,18 @@
             box-shadow: 0 15px 40px rgba(230, 126, 34, 0.6);
         }
         
+        .btn-secondary {
+            background: linear-gradient(45deg, #7457A3, #5a3d8a);
+            box-shadow: 0 10px 30px rgba(116, 87, 163, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            box-shadow: 0 15px 40px rgba(116, 87, 163, 0.6);
+        }
+        
         .instructions {
             color: #bdc3c7;
-            margin-top: 30px;
+            margin-top: 24px;
             text-align: center;
             line-height: 1.6;
             font-size: 16px;
@@ -207,18 +217,131 @@
         .final-score {
             font-size: 48px;
             color: #f1c40f;
-            margin: 20px 0;
+            margin: 16px 0;
             text-shadow: 0 0 20px rgba(241, 196, 15, 0.8);
         }
         
         .stats {
             color: #95a5a6;
-            margin: 10px 0;
+            margin: 8px 0;
             font-size: 18px;
         }
         
         .hidden { display: none !important; }
-    
+        
+        /* Name Input */
+        .name-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .name-input-container label {
+            color: #bdc3c7;
+            font-size: 16px;
+        }
+        
+        .name-input-container input {
+            padding: 12px 24px;
+            font-size: 18px;
+            font-family: 'Roboto Condensed', sans-serif;
+            border: 2px solid #e67e22;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            text-align: center;
+            width: 280px;
+            outline: none;
+        }
+        
+        .name-input-container input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+        
+        .name-input-container input:focus {
+            border-color: #f39c12;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        /* Leaderboard */
+        .leaderboard-container {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 420px;
+            width: 90%;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .leaderboard-title {
+            font-family: 'Black Ops One', cursive;
+            font-size: 28px;
+            color: #f1c40f;
+            text-align: center;
+            margin-bottom: 16px;
+            text-shadow: 0 0 15px rgba(241, 196, 15, 0.6);
+        }
+        
+        .leaderboard-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .leaderboard-table th {
+            color: #e67e22;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+        
+        .leaderboard-table td {
+            color: #ecf0f1;
+            font-size: 16px;
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .leaderboard-table tr:nth-child(1) td { color: #f1c40f; font-weight: bold; }
+        .leaderboard-table tr:nth-child(2) td { color: #bdc3c7; }
+        .leaderboard-table tr:nth-child(3) td { color: #e67e22; }
+        
+        .leaderboard-table .rank {
+            width: 40px;
+            text-align: center;
+        }
+        
+        .leaderboard-table .score-cell {
+            text-align: right;
+            font-family: 'Black Ops One', cursive;
+        }
+        
+        .leaderboard-empty {
+            color: #7f8c8d;
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+        }
+        
+        .btn-small {
+            padding: 10px 24px;
+            font-size: 16px;
+        }
+        
+        .button-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
@@ -279,6 +402,9 @@
     <div id="startScreen">
         <h1>🏀 BEAT THE BUZZER</h1>
         <button class="btn" onclick="game.start()">SPIEL STARTEN</button>
+        <div class="button-row">
+            <button class="btn btn-secondary" onclick="game.showLeaderboard()">🏆 RANGLISTE</button>
+        </div>
         <div class="instructions">
             Ziehe zurück, um zu zielen • Lass los, um zu werfen<br>
             <strong>5 Treffer in Folge = +3 Sekunden</strong> (nur 3x pro Spiel!)<br>
@@ -290,7 +416,27 @@
         <h1>⏰ GAME OVER!</h1>
         <div class="final-score">PUNKTE: <span id="finalScore">0</span></div>
         <div class="stats">BESTE STREAK: <span id="bestStreak">0</span></div>
-        <button class="btn" onclick="game.restart()">NOCHMAL SPIELEN</button>
+        <div class="name-input-container">
+            <label for="playerName">Dein Name für die Rangliste:</label>
+            <input type="text" id="playerName" placeholder="Name eingeben..." maxlength="20" autocomplete="off">
+        </div>
+        <div class="button-row">
+            <button class="btn" onclick="game.saveScore()">💾 SPEICHERN & NOCHMAL</button>
+            <button class="btn btn-secondary" onclick="game.showLeaderboard()">🏆 RANGLISTE</button>
+        </div>
+        <div class="button-row">
+            <button class="btn btn-small" onclick="game.restart()">Ohne Speichern nochmal</button>
+        </div>
+    </div>
+    
+    <div id="leaderboardScreen" class="hidden">
+        <h1>🏆 RANGLISTE</h1>
+        <div class="leaderboard-container" id="leaderboardContainer">
+            <!-- Filled by JS -->
+        </div>
+        <div class="button-row" style="margin-top: 20px;">
+            <button class="btn" onclick="game.hideLeaderboard()">← ZURÜCK</button>
+        </div>
     </div>
 
     <script>
@@ -304,6 +450,55 @@
         window.addEventListener('resize', resize);
         resize();
         
+        // ── Leaderboard ──
+        const LEADERBOARD_KEY = 'nbc-beat-the-buzzer-lb';
+        const MAX_ENTRIES = 10;
+        
+        function getLeaderboard() {
+            try {
+                const raw = localStorage.getItem(LEADERBOARD_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) {
+                return [];
+            }
+        }
+        
+        function saveToLeaderboard(name, score) {
+            const lb = getLeaderboard();
+            lb.push({ name: name || 'Unbekannt', score: score, date: Date.now() });
+            lb.sort((a, b) => b.score - a.score);
+            lb.splice(MAX_ENTRIES);
+            try {
+                localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(lb));
+            } catch (e) {}
+            return lb;
+        }
+        
+        function renderLeaderboard() {
+            const container = document.getElementById('leaderboardContainer');
+            const lb = getLeaderboard();
+            
+            if (lb.length === 0) {
+                container.innerHTML = '<div class="leaderboard-empty">Noch keine Einträge.<br>Spiel jetzt und sei der Erste!</div>';
+                return;
+            }
+            
+            let html = '<table class="leaderboard-table"><thead><tr><th class="rank">#</th><th>Name</th><th class="score-cell">Punkte</th></tr></thead><tbody>';
+            lb.forEach((entry, i) => {
+                const medal = i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : (i + 1);
+                html += `<tr><td class="rank">${medal}</td><td>${escapeHtml(entry.name)}</td><td class="score-cell">${entry.score}</td></tr>`;
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+        
+        function escapeHtml(str) {
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+        
+        // ── Game ──
         class BasketballGame {
             constructor() {
                 this.state = 'menu';
@@ -314,6 +509,16 @@
                 this.lastScoreTime = 0;
                 this.streakBonusUsed = 0;
                 this.maxStreakBonuses = 3;
+                
+                // Player figure state
+                this.player = {
+                    x: 0,
+                    y: 0,
+                    armAngle: 0,
+                    armDirection: 1,
+                    throwFrame: 0,
+                    isThrowing: false
+                };
                 
                 this.ball = {
                     x: canvas.width / 2,
@@ -328,17 +533,17 @@
                     dragStartY: canvas.height - 150,
                     aimX: canvas.width / 2,
                     aimY: canvas.height - 150,
-                    aimPower: 0
+                    aimPower: 0,
+                    scored: false
                 };
                 
-                // Korb bleibt immer im Bildschirm!
                 this.hoop = {
                     x: canvas.width / 2,
                     y: 200,
                     width: 100,
                     baseSpeed: 2,
                     maxSpeed: 6,
-                    amplitude: 0, // Wie weit er sich bewegen darf
+                    amplitude: 0,
                     centerX: canvas.width / 2,
                     angle: 0
                 };
@@ -398,6 +603,8 @@
                     
                     if (power > 20) {
                         this.ball.isFlying = true;
+                        this.player.isThrowing = true;
+                        this.player.throwFrame = 0;
                         const multiplier = this.powerups.fireball.active ? 1.3 : 1;
                         const velocityScale = 0.16 + this.ball.aimPower * 0.1;
                         this.ball.vx = dx * velocityScale * multiplier;
@@ -421,6 +628,7 @@
             start() {
                 document.getElementById('startScreen').classList.add('hidden');
                 document.getElementById('gameOverScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.add('hidden');
                 this.state = 'playing';
                 this.score = 0;
                 this.time = 60;
@@ -429,6 +637,7 @@
                 this.streakBonusUsed = 0;
                 this.resetBall();
                 this.updateHoopBounds();
+                this.updatePlayerPos();
                 this.startTimer();
                 this.spawnPowerupItem();
             }
@@ -438,10 +647,14 @@
             }
             
             updateHoopBounds() {
-                // Korb darf sich nur innerhalb des sichtbaren Bereichs bewegen
                 const margin = 120;
                 this.hoop.centerX = canvas.width / 2;
                 this.hoop.amplitude = Math.min(300, (canvas.width / 2) - margin - this.hoop.width/2);
+            }
+            
+            updatePlayerPos() {
+                this.player.x = canvas.width / 2;
+                this.player.y = canvas.height - 100;
             }
             
             startTimer() {
@@ -462,8 +675,9 @@
             }
             
             resetBall() {
-                this.ball.x = canvas.width / 2;
-                this.ball.y = canvas.height - 150;
+                this.updatePlayerPos();
+                this.ball.x = this.player.x;
+                this.ball.y = this.player.y - 50;
                 this.ball.vx = 0;
                 this.ball.vy = 0;
                 this.ball.isFlying = false;
@@ -475,12 +689,15 @@
                 this.ball.aimX = this.ball.x;
                 this.ball.aimY = this.ball.y;
                 this.ball.aimPower = 0;
+                this.player.isThrowing = false;
+                this.player.throwFrame = 0;
             }
             
             spawnPowerupItem() {
                 if (this.state !== 'playing') return;
                 
                 setTimeout(() => {
+                    if (this.state !== 'playing') return;
                     if (Math.random() < 0.4 && this.activePowerups.length < 2) {
                         const types = ['fireball', 'slowmo'];
                         const type = types[Math.floor(Math.random() * types.length)];
@@ -514,8 +731,24 @@
                 
                 const timeScale = this.powerups.slowmo.active ? 0.5 : 1;
                 
-                // Korb Bewegung - Sinus-Wellen Muster, bleibt immer im Bildschirm!
-                const difficulty = Math.min(this.score * 0.02, 0.8); // Max 80% Speed-Erhöhung
+                // Player idle animation
+                if (!this.ball.isDragging && !this.ball.isFlying) {
+                    this.player.armAngle += 0.03 * this.player.armDirection;
+                    if (this.player.armAngle > 0.3) this.player.armDirection = -1;
+                    if (this.player.armAngle < -0.1) this.player.armDirection = 1;
+                }
+                
+                // Throw animation
+                if (this.player.isThrowing) {
+                    this.player.throwFrame += 0.15 * timeScale;
+                    if (this.player.throwFrame >= 1) {
+                        this.player.isThrowing = false;
+                        this.player.throwFrame = 0;
+                    }
+                }
+                
+                // Korb Bewegung
+                const difficulty = Math.min(this.score * 0.02, 0.8);
                 const speed = this.hoop.baseSpeed + (this.hoop.maxSpeed - this.hoop.baseSpeed) * difficulty;
                 const slowFactor = this.powerups.slowmo.active ? 0.4 : 1;
                 
@@ -604,11 +837,9 @@
                 const now = Date.now();
                 const timeDiff = now - this.lastScoreTime;
                 
-                // Combo System mit LIMITIERTEM Zeitbonus!
                 if (timeDiff < 4000) {
                     this.combo++;
                     
-                    // NUR 3 Zeitboni pro Spiel möglich!
                     if (this.combo >= 5 && this.streakBonusUsed < this.maxStreakBonuses) {
                         this.time += 3;
                         this.streakBonusUsed++;
@@ -622,7 +853,6 @@
                 this.maxCombo = Math.max(this.maxCombo, this.combo);
                 this.lastScoreTime = now;
                 
-                // Punkte-Berechnung
                 const basePoints = this.powerups.fireball.active ? 2 : 1;
                 const comboMultiplier = this.combo > 1 ? 1 + Math.floor(this.combo / 3) * 0.5 : 1;
                 this.score += Math.floor(basePoints * comboMultiplier);
@@ -630,13 +860,11 @@
                 document.getElementById('score').textContent = this.score;
                 this.updateCombo();
                 
-                // Effekte
                 const color = this.powerups.fireball.active ? '#e74c3c' : 
                              this.combo >= 5 ? '#2ecc71' : '#e67e22';
                 this.createParticles(this.hoop.x, this.hoop.y, color, 
                     this.combo >= 5 ? 20 : 12);
                 
-                // Ballflug nach Treffer noch kurz sichtbar lassen
                 setTimeout(() => this.resetBall(), this.combo > 3 ? 420 : 520);
             }
             
@@ -644,7 +872,7 @@
                 const el = document.getElementById('streakBonus');
                 el.textContent = `+3s STREAK! (${this.streakBonusUsed}/${this.maxStreakBonuses})`;
                 el.classList.remove('show');
-                void el.offsetWidth; // Trigger reflow
+                void el.offsetWidth;
                 el.classList.add('show');
             }
             
@@ -675,6 +903,154 @@
                         size: 3 + Math.random() * 5
                     });
                 }
+            }
+            
+            // ── Draw Player Figure ──
+            drawPlayer() {
+                const px = this.player.x;
+                const py = this.player.y;
+                const scale = 1;
+                
+                ctx.save();
+                ctx.translate(px, py);
+                ctx.scale(scale, scale);
+                
+                // Shadow
+                ctx.fillStyle = 'rgba(0,0,0,0.3)';
+                ctx.beginPath();
+                ctx.ellipse(0, 45, 25, 8, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Legs
+                ctx.strokeStyle = '#2c3e50';
+                ctx.lineWidth = 8;
+                ctx.lineCap = 'round';
+                // Left leg
+                ctx.beginPath();
+                ctx.moveTo(-10, 10);
+                ctx.lineTo(-15, 40);
+                ctx.stroke();
+                // Right leg
+                ctx.beginPath();
+                ctx.moveTo(10, 10);
+                ctx.lineTo(15, 40);
+                ctx.stroke();
+                
+                // Shoes
+                ctx.fillStyle = '#e67e22';
+                ctx.beginPath();
+                ctx.ellipse(-15, 42, 8, 5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.ellipse(15, 42, 8, 5, 0, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Body (jersey)
+                ctx.fillStyle = '#F2722C';
+                ctx.beginPath();
+                ctx.moveTo(-18, -25);
+                ctx.lineTo(18, -25);
+                ctx.lineTo(15, 12);
+                ctx.lineTo(-15, 12);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Jersey number
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Roboto Condensed';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('NBC', 0, -8);
+                
+                // Head
+                ctx.fillStyle = '#f0c090';
+                ctx.beginPath();
+                ctx.arc(0, -38, 14, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Hair
+                ctx.fillStyle = '#4a3728';
+                ctx.beginPath();
+                ctx.arc(0, -44, 12, Math.PI, Math.PI * 2);
+                ctx.fill();
+                
+                // Eyes
+                ctx.fillStyle = '#2c3e50';
+                ctx.beginPath();
+                ctx.arc(-5, -39, 2, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(5, -39, 2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Arm with ball (when not flying)
+                if (!this.ball.isFlying) {
+                    const armBaseAngle = this.ball.isDragging 
+                        ? Math.atan2(this.ball.aimY - this.ball.y, this.ball.aimX - this.ball.x)
+                        : -Math.PI / 2 + this.player.armAngle;
+                    
+                    const armLength = 30;
+                    const handX = Math.cos(armBaseAngle) * armLength;
+                    const handY = Math.sin(armBaseAngle) * armLength - 15;
+                    
+                    // Arm
+                    ctx.strokeStyle = '#f0c090';
+                    ctx.lineWidth = 7;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(12, -20);
+                    ctx.lineTo(handX, handY);
+                    ctx.stroke();
+                    
+                    // Ball in hand
+                    if (!this.ball.isDragging) {
+                        const ballGradient = ctx.createRadialGradient(
+                            handX - 3, handY - 3, 0,
+                            handX, handY, this.ball.radius * 0.7
+                        );
+                        ballGradient.addColorStop(0, '#ffad33');
+                        ballGradient.addColorStop(1, '#d35400');
+                        ctx.fillStyle = ballGradient;
+                        ctx.beginPath();
+                        ctx.arc(handX, handY, this.ball.radius * 0.7, 0, Math.PI * 2);
+                        ctx.fill();
+                        
+                        // Ball lines
+                        ctx.strokeStyle = '#2c3e50';
+                        ctx.lineWidth = 1.5;
+                        ctx.beginPath();
+                        ctx.arc(handX, handY, this.ball.radius * 0.7 - 2, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                } else {
+                    // Throwing arm follow-through
+                    const throwProgress = this.player.throwFrame;
+                    if (throwProgress < 1) {
+                        const armAngle = -Math.PI / 2 - throwProgress * 1.5;
+                        const armLength = 30;
+                        const handX = Math.cos(armAngle) * armLength;
+                        const handY = Math.sin(armAngle) * armLength - 15;
+                        
+                        ctx.strokeStyle = '#f0c090';
+                        ctx.lineWidth = 7;
+                        ctx.lineCap = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(12, -20);
+                        ctx.lineTo(handX, handY);
+                        ctx.stroke();
+                    } else {
+                        // Resting arm
+                        ctx.strokeStyle = '#f0c090';
+                        ctx.lineWidth = 7;
+                        ctx.lineCap = 'round';
+                        ctx.beginPath();
+                        ctx.moveTo(12, -20);
+                        ctx.lineTo(25, -5);
+                        ctx.stroke();
+                    }
+                }
+                
+                ctx.restore();
             }
             
             draw() {
@@ -759,7 +1135,6 @@
                 hoopGradient.addColorStop(0.5, '#f39c12');
                 hoopGradient.addColorStop(1, '#e67e22');
                 
-                // Glow Effekt bei hoher Geschwindigkeit
                 const speedFactor = Math.min(this.score * 0.02, 0.8);
                 if (speedFactor > 0.5) {
                     ctx.shadowColor = '#e67e22';
@@ -813,43 +1188,50 @@
                     ctx.setLineDash([]);
                 }
                 
-                // Ball
-                const ballGradient = ctx.createRadialGradient(
-                    this.ball.x - 5, this.ball.y - 5, 0,
-                    this.ball.x, this.ball.y, this.ball.radius
-                );
-                
-                if (this.powerups.fireball.active) {
-                    ballGradient.addColorStop(0, '#ff9999');
-                    ballGradient.addColorStop(1, '#c0392b');
-                    ctx.shadowColor = '#e74c3c';
-                    ctx.shadowBlur = 20;
-                } else {
-                    ballGradient.addColorStop(0, '#ffad33');
-                    ballGradient.addColorStop(1, '#d35400');
+                // Ball (when flying)
+                if (this.ball.isFlying) {
+                    const ballGradient = ctx.createRadialGradient(
+                        this.ball.x - 5, this.ball.y - 5, 0,
+                        this.ball.x, this.ball.y, this.ball.radius
+                    );
+                    
+                    if (this.powerups.fireball.active) {
+                        ballGradient.addColorStop(0, '#ff9999');
+                        ballGradient.addColorStop(1, '#c0392b');
+                        ctx.shadowColor = '#e74c3c';
+                        ctx.shadowBlur = 20;
+                    } else {
+                        ballGradient.addColorStop(0, '#ffad33');
+                        ballGradient.addColorStop(1, '#d35400');
+                        ctx.shadowBlur = 0;
+                    }
+                    
+                    ctx.fillStyle = ballGradient;
+                    ctx.beginPath();
+                    ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
+                    ctx.fill();
                     ctx.shadowBlur = 0;
+                    
+                    // Ball Linien
+                    ctx.strokeStyle = '#2c3e50';
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(this.ball.x, this.ball.y, this.ball.radius - 3, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(this.ball.x - this.ball.radius + 5, this.ball.y);
+                    ctx.lineTo(this.ball.x + this.ball.radius - 5, this.ball.y);
+                    ctx.stroke();
+                    ctx.beginPath();
+                    ctx.moveTo(this.ball.x, this.ball.y - this.ball.radius + 5);
+                    ctx.lineTo(this.ball.x, this.ball.y + this.ball.radius - 5);
+                    ctx.stroke();
                 }
                 
-                ctx.fillStyle = ballGradient;
-                ctx.beginPath();
-                ctx.arc(this.ball.x, this.ball.y, this.ball.radius, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-                
-                // Ball Linien
-                ctx.strokeStyle = '#2c3e50';
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.arc(this.ball.x, this.ball.y, this.ball.radius - 3, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(this.ball.x - this.ball.radius + 5, this.ball.y);
-                ctx.lineTo(this.ball.x + this.ball.radius - 5, this.ball.y);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(this.ball.x, this.ball.y - this.ball.radius + 5);
-                ctx.lineTo(this.ball.x, this.ball.y + this.ball.radius - 5);
-                ctx.stroke();
+                // Player figure
+                if (this.state === 'playing') {
+                    this.drawPlayer();
+                }
                 
                 // Partikel
                 this.particles.forEach(p => {
@@ -885,6 +1267,30 @@
                 document.getElementById('finalScore').textContent = this.score;
                 document.getElementById('bestStreak').textContent = this.maxCombo;
                 document.getElementById('gameOverScreen').classList.remove('hidden');
+                document.getElementById('playerName').value = '';
+                document.getElementById('playerName').focus();
+            }
+            
+            saveScore() {
+                const name = document.getElementById('playerName').value.trim() || 'Unbekannt';
+                saveToLeaderboard(name, this.score);
+                this.start();
+            }
+            
+            showLeaderboard() {
+                document.getElementById('startScreen').classList.add('hidden');
+                document.getElementById('gameOverScreen').classList.add('hidden');
+                document.getElementById('leaderboardScreen').classList.remove('hidden');
+                renderLeaderboard();
+            }
+            
+            hideLeaderboard() {
+                document.getElementById('leaderboardScreen').classList.add('hidden');
+                if (this.state === 'menu') {
+                    document.getElementById('startScreen').classList.remove('hidden');
+                } else if (this.state === 'gameover') {
+                    document.getElementById('gameOverScreen').classList.remove('hidden');
+                }
             }
             
             loop() {
