@@ -1,0 +1,63 @@
+/* NBC Baskets - DSGVO Cookie Consent Banner */
+#nbc-cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+  background: #1a1a2e;
+  color: #e0e0e5;
+  padding: 1rem 1.5rem;
+  display: none;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+}
+#nbc-cookie-banner.visible {
+  display: block;
+}
+#nbc-cookie-banner .cc-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+#nbc-cookie-banner .cc-text {
+  flex: 1 1 300px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+#nbc-cookie-banner .cc-text a {
+  color: #F2722C;
+  text-decoration: underline;
+}
+#nbc-cookie-banner .cc-buttons {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+#nbc-cookie-banner .cc-btn {
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s;
+  font-family: 'Oswald', sans-serif;
+}
+#nbc-cookie-banner .cc-btn:hover {
+  opacity: 0.85;
+}
+#nbc-cookie-banner .cc-btn-accept {
+  background: linear-gradient(to right, #F2722C, #7457A3);
+  color: #fff;
+}
+#nbc-cookie-banner .cc-btn-decline {
+  background: transparent;
+  color: #e0e0e5;
+  border: 1px solid #4a4a5a;
+}
