@@ -3,9 +3,9 @@
   <channel>
     <title>NBC Baskets Nordhorn – News</title>
     <link>https://nbc-nordhorn.de/news.html</link>
-    <description>Aktuelle News der NBC Baskets Nordhorn zu Basketball in Nordhorn, Teams, Probetraining und Vereinsentwicklung.</description>
+    <description>Aktuelle News der NBC Baskets Nordhorn zu Basketball in Nordhorn, Teams, Jugendförderung und Vereinsentwicklung.</description>
     <language>de-DE</language>
-    <lastBuildDate>Fri, 01 May 2026 20:45:00 GMT</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jun 2026 20:00:00 GMT</lastBuildDate>
     <atom:link href="https://nbc-nordhorn.de/feed.xml" rel="self" type="application/rss+xml" />
     <managingEditor>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</managingEditor>
     <webMaster>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</webMaster>
@@ -15,12 +15,20 @@
       <link>https://nbc-nordhorn.de/news.html</link>
     </image>
     <item>
-      <title>Probetraining Basketball in Nordhorn: So läuft der Einstieg bei den NBC Baskets ab</title>
-      <link>https://nbc-nordhorn.de/news/probetraining-basketball-nordhorn.html</link>
-      <guid isPermaLink="true">https://nbc-nordhorn.de/news/probetraining-basketball-nordhorn.html</guid>
-      <pubDate>Fri, 01 May 2026 08:00:00 GMT</pubDate>
-      <description><![CDATA[Probetraining Basketball in Nordhorn: Musterartikel für eine saubere NBC-News-Struktur mit lokalem Bezug, strukturierten Daten und suchmaschinenfreundlichem Aufbau.]]></description>
-      <category>Probetraining</category>
+      <title>Media Day am 13.06.: Fotoshooting für unsere Spieler</title>
+      <link>https://nbc-nordhorn.de/news/media-day-fotoshooting-13-06.html</link>
+      <guid isPermaLink="true">https://nbc-nordhorn.de/news/media-day-fotoshooting-13-06.html</guid>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 GMT</pubDate>
+      <description><![CDATA[Am 13. Juni findet bei den NBC Baskets ein Media Day mit Fotoshooting für die einzelnen Spieler statt. Weitere Informationen folgen direkt von den Coaches.]]></description>
+      <category>Vereinsnews</category>
+    </item>
+    <item>
+      <title>Jegor Cymbal übernimmt die U14 und bringt Basketball in den Ganztag</title>
+      <link>https://nbc-nordhorn.de/news/jegor-cymbal-u14-ganztag-schulen.html</link>
+      <guid isPermaLink="true">https://nbc-nordhorn.de/news/jegor-cymbal-u14-ganztag-schulen.html</guid>
+      <pubDate>Wed, 03 Jun 2026 12:00:00 GMT</pubDate>
+      <description><![CDATA[Die NBC Baskets gewinnen mit Jegor Cymbal einen amtierenden 2. Bundesliga Meister für Trainerarbeit und Schulbasketball in Nordhorn.]]></description>
+      <category>Trainer &amp; Schule</category>
     </item>
   </channel>
 </rss>
