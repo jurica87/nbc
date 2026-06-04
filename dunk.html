@@ -1,109 +1,87 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-<title>Dunk Contest – NBC Baskets Nordhorn</title>
-<link rel="icon" href="./favicon.ico" sizes="any">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&display=swap" rel="stylesheet">
+<!DOCTYPE html><html lang="de"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>NBC Basketball Challenge</title><link rel="icon" href="./favicon.ico">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;touch-action:manipulation}
-body{overflow:hidden;background:#0a0a1a;user-select:none;font-family:'Oswald',sans-serif}
+body{background:#0a0a1a;overflow:hidden;font-family:system-ui,sans-serif;user-select:none}
 canvas{display:block}
-.hidden{display:none!important}
-.overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10;background:rgba(10,10,20,.95)}
-.title{font-size:clamp(32px,8vw,60px);font-weight:700;text-transform:uppercase;letter-spacing:3px;background:linear-gradient(135deg,#F2722C,#ff9a56);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-align:center;line-height:1.1;margin-bottom:4px}
-.sub{font-size:clamp(11px,2.5vw,16px);color:#7457A3;text-transform:uppercase;letter-spacing:6px;margin-bottom:20px}
-.btn{padding:12px 36px;font-size:15px;font-weight:700;background:linear-gradient(135deg,#F2722C,#e06010);color:#fff;border:none;border-radius:50px;cursor:pointer;text-transform:uppercase;letter-spacing:2px;margin:5px;box-shadow:0 0 20px rgba(242,114,44,.3)}
-.btn:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(242,114,44,.5)}
-.btn-sec{background:linear-gradient(135deg,#7457A3,#5a3d8a);box-shadow:0 0 20px rgba(116,87,163,.3)}
-.btn-sec:hover{box-shadow:0 0 30px rgba(116,87,163,.5)}
-.btn-otl{background:transparent;border:2px solid #F2722C;color:#F2722C;box-shadow:none}
-.btn-otl:hover{background:rgba(242,114,44,.1)}
-.hint{color:#64748b;margin-top:16px;text-align:center;line-height:1.7;font-size:12px;max-width:380px;padding:0 16px}
+.overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(10,10,20,.96);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10}
+.overlay.none{display:none}
+.hud{position:absolute;top:0;left:0;width:100%;display:flex;justify-content:space-between;padding:10px 14px;color:#fff;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;pointer-events:none;z-index:5}
+.hud span{color:#F2722C;font-size:18px}
+.title{font-size:clamp(26px,7vw,48px);font-weight:800;text-align:center;background:linear-gradient(135deg,#F2722C,#ff9a56);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;margin-bottom:4px}
+.sub{font-size:clamp(10px,2vw,13px);color:#7457A3;text-transform:uppercase;letter-spacing:4px;margin-bottom:18px}
+.btn{padding:11px 28px;font-size:13px;font-weight:700;background:linear-gradient(135deg,#F2722C,#e06010);color:#fff;border:none;border-radius:40px;cursor:pointer;text-transform:uppercase;letter-spacing:2px;margin:4px;box-shadow:0 4px 15px rgba(242,114,44,.3)}
+.btn:hover{transform:translateY(-2px)}
+.btn2{background:linear-gradient(135deg,#7457A3,#5a3d8a);box-shadow:0 4px 15px rgba(116,87,163,.3)}
+.btn3{background:transparent;border:2px solid #F2722C;color:#F2722C;box-shadow:none}
+.btn3:hover{background:rgba(242,114,44,.1)}
+.hint{color:#64748b;margin-top:12px;text-align:center;line-height:1.6;font-size:11px;max-width:340px;padding:0 14px}
 .hint b{color:#F2722C}
-.hint kbd{background:rgba(242,114,44,.15);border:1px solid rgba(242,114,44,.3);border-radius:3px;padding:1px 5px;font-size:10px;color:#F2722C}
-#hud{position:absolute;top:0;left:0;width:100%;padding:10px 14px;display:flex;justify-content:space-between;pointer-events:none;z-index:5}
-#hud div{font-size:16px;font-weight:700;color:#fff;text-shadow:0 0 10px rgba(242,114,44,.5);text-transform:uppercase;letter-spacing:1px}
-#hud span{color:#F2722C;font-size:22px}
-.fscore{font-size:56px;font-weight:700;background:linear-gradient(135deg,#F2722C,#ff9a56);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:4px 0}
-.stars{display:flex;gap:6px;justify-content:center;margin:6px 0}
-.stars span{font-size:32px;color:#333;transition:all .3s}
-.stars span.lit{color:#F2722C;text-shadow:0 0 15px rgba(242,114,44,.6)}
-.srow{display:flex;gap:20px;margin:12px 0}
-.sbox{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;min-width:80px}
-.sbox .v{font-size:20px;font-weight:700;color:#F2722C}
-.sbox .l{font-size:9px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
-.grade{font-size:56px;font-weight:700}
-.gA{color:#2ecc71;text-shadow:0 0 20px rgba(46,204,113,.5)}
-.gB{color:#3498db;text-shadow:0 0 20px rgba(52,152,219,.5)}
-.gC{color:#F2722C;text-shadow:0 0 20px rgba(242,114,44,.5)}
-.gD{color:#e67e22}
-.gF{color:#e74c3c}
-.nr{color:#fbbf24;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:2px;animation:pg 1s ease-in-out infinite}
+.sb{font-size:42px;font-weight:800;background:linear-gradient(135deg,#F2722C,#ff9a56);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:2px 0}
+.sts{display:flex;gap:4px;justify-content:center;margin:4px 0}
+.sts span{font-size:28px;color:#2a2a3a;transition:all .3s}
+.sts span.on{color:#F2722C;text-shadow:0 0 12px rgba(242,114,44,.5)}
+.sr{display:flex;gap:12px;margin:8px 0}
+.sb2{text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:6px 12px;min-width:65px}
+.sb2 .v{font-size:16px;font-weight:700;color:#F2722C}
+.sb2 .l{font-size:8px;color:#64748b;text-transform:uppercase;letter-spacing:1px}
+.gr{font-size:40px;font-weight:800}
+.gA{color:#2ecc71}.gB{color:#3498db}.gC{color:#F2722C}.gD{color:#e67e22}.gF{color:#e74c3c}
+.nr{color:#fbbf24;font-size:16px;font-weight:700;text-transform:uppercase;letter-spacing:2px;animation:pg 1s ease-in-out infinite}
 @keyframes pg{0%,100%{opacity:1}50%{opacity:.6}}
-.tpop{position:absolute;top:35%;left:50%;transform:translateX(-50%);font-size:24px;font-weight:700;color:#F2722C;text-shadow:0 0 15px rgba(242,114,44,.5);text-transform:uppercase;letter-spacing:2px;opacity:0;pointer-events:none;z-index:6;white-space:nowrap}
-.tpop.show{animation:tp 1s ease-out forwards}
-@keyframes tp{0%{opacity:0;transform:translateX(-50%) scale(.5)}20%{opacity:1;transform:translateX(-50%) scale(1.1)}100%{opacity:0;transform:translateX(-50%) translateY(-30px)}}
-.controls{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.2);font-size:10px;text-transform:uppercase;letter-spacing:2px;pointer-events:none;text-align:center;width:100%}
-.mbtn{position:fixed;bottom:20px;left:20px;z-index:1000;background:linear-gradient(135deg,#F2722C,#7457A3);color:#fff;padding:10px 20px;border-radius:50px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;box-shadow:0 4px 15px rgba(242,101,34,.4);animation:mg 2s ease-in-out infinite,mf 3s ease-in-out infinite;border:2px solid rgba(255,255,255,.2)}
-@keyframes mg{0%,100%{box-shadow:0 0 5px #F2722C,0 0 10px #F2722C,0 0 20px #F2722C,0 0 40px #7457A3}50%{box-shadow:0 0 10px #F2722C,0 0 20px #F2722C,0 0 40px #F2722C,0 0 60px #7457A3}}
-@keyframes mf{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
-.share-row{display:flex;gap:8px;justify-content:center;margin-top:10px}
-.sbtn{padding:6px 16px;font-size:11px;font-weight:700;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:#94a3b8;border-radius:20px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;font-family:'Oswald',sans-serif}
-.sbtn:hover{background:rgba(242,114,44,.15);border-color:#F2722C;color:#F2722C}
-</style>
-</head>
-<body>
-<canvas id="gc"></canvas>
-
-<div id="hud" class="hidden">
-  <div>PUNKTE <span id="hs">0</span></div>
-  <div>VERSUCH <span id="ha">1/5</span></div>
+.tp{position:absolute;top:30%;left:50%;transform:translateX(-50%);font-size:22px;font-weight:700;color:#F2722C;text-shadow:0 0 15px rgba(242,114,44,.5);text-transform:uppercase;letter-spacing:2px;opacity:0;pointer-events:none;z-index:6;white-space:nowrap}
+.tp.show{animation:tp1 1s ease-out forwards}
+@keyframes tp1{0%{opacity:0;transform:translateX(-50%) scale(.5)}20%{opacity:1;transform:translateX(-50%) scale(1.1)}100%{opacity:0;transform:translateX(-50%) translateY(-25px)}}
+.ctrl{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.15);font-size:9px;text-transform:uppercase;letter-spacing:2px;pointer-events:none;text-align:center;width:100%}
+.fbtn{position:fixed;bottom:16px;left:16px;z-index:100;background:linear-gradient(135deg,#F2722C,#7457A3);color:#fff;padding:8px 18px;border-radius:40px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;text-decoration:none;box-shadow:0 4px 12px rgba(242,101,34,.4)}
+.fbtn:hover{transform:scale(1.04)}
+</style></head><body>
+<canvas id="c"></canvas>
+<div class="hud" id="hud" style="display:none">
+<div>PUNKTE <span id="sc">0</span></div>
+<div>VERSUCH <span id="at">1/5</span></div>
 </div>
-<div class="tpop" id="tp"></div>
-<div class="controls" id="ch">&#x1F4F1; HALTE + LOSLASSEN &nbsp;|&nbsp; &#x2190;&#x2192; TRICKS</div>
+<div class="tp" id="tp"></div>
+<div class="ctrl" id="ctrl">&#x1F4F1; ZIEHEN &amp; LOSLASSEN = WERFEN</div>
 
-<div id="startScreen" class="overlay">
-  <div class="title">&#x1F3C0; DUNK<br>CONTEST</div>
-  <div class="sub">NBC Baskets Nordhorn</div>
-  <button class="btn" id="sb">CONTEST STARTEN</button>
-  <button class="btn btn-sec" id="lbb">&#x1F3C6; BESTENLISTE</button>
-  <div class="hint"><b>5 Versuche</b> &ndash; Je kreativer, desto mehr Punkte!<br><b>Halte</b> zum Aufladen &nbsp;|&nbsp; <b>Loslassen</b> zum Springen<br><kbd>&larr;</kbd> <kbd>&rarr;</kbd> in der Luft f&uuml;r Tricks &nbsp;|&nbsp; Saubere Landung = Bonus</div>
+<div class="overlay" id="start">
+<div class="title">&#x1F3C0; DUNK<br>CONTEST</div>
+<div class="sub">NBC Baskets Nordhorn</div>
+<button class="btn" id="bs">START</button>
+<button class="btn btn2" id="bl">&#x1F3C6; BESTENLISTE</button>
+<div class="hint"><b>5 Versuche</b> &ndash; Ziehe zur&uuml;ck um zu zielen, loslassen zum Werfen!<br>Je n&auml;her am Korb, desto mehr Punkte.</div>
 </div>
 
-<div id="resultScreen" class="overlay hidden">
-  <div class="title" style="font-size:clamp(24px,6vw,40px)">VERSUCH <span id="ra">1</span></div>
-  <div class="stars" id="stars"><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span></div>
-  <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:2px">ERGEBNIS</div>
-  <div class="fscore" id="ascore">0</div>
-  <div id="atrick" style="font-size:14px;color:#7457A3;text-transform:uppercase;letter-spacing:2px"></div>
-  <button class="btn" id="nb" style="margin-top:16px">N&Auml;CHSTER VERSUCH</button>
+<div class="overlay none" id="result">
+<div class="title">VERSUCH <span id="ra">1</span></div>
+<div class="sts" id="stars"><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span></div>
+<div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:2px">ERGEBNIS</div>
+<div class="sb" id="asc">0</div>
+<button class="btn" id="bn" style="margin-top:14px">WEITER</button>
 </div>
 
-<div id="gameOverScreen" class="overlay hidden">
-  <div class="title" style="font-size:clamp(24px,6vw,40px)">CONTEST BEENDET</div>
-  <div id="nrl" class="nr hidden">&#x1F3C6; NEUER REKORD!</div>
-  <div class="stars" id="fstars"><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span></div>
-  <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:2px">GESAMTPUNKTE</div>
-  <div class="fscore" id="fsc">0</div>
-  <div id="fg" class="grade gA">A</div>
-  <div class="srow">
-    <div class="sbox"><div class="v" id="st0">0</div><div class="l">Tricks</div></div>
-    <div class="sbox"><div class="v" id="st1">0</div><div class="l">Bester</div></div>
-    <div class="sbox"><div class="v" id="st2">0</div><div class="l">Sauber</div></div>
-  </div>
-  <div class="share-row"><button class="sbtn" id="shb">&#x1F4CB; TEILEN</button><button class="sbtn" id="lbb2">&#x1F3C6; BESTENLISTE</button></div>
-  <div style="display:flex;gap:8px;margin-top:10px"><button class="btn" id="rb">NOCHMAL</button><button class="btn btn-otl" id="mb">MEN&Uuml;</button></div>
+<div class="overlay none" id="over">
+<div class="title">CONTEST ENDE</div>
+<div id="nr" class="nr none">&#x1F3C6; NEUER REKORD!</div>
+<div class="sts" id="fss"><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span><span>&#x2605;</span></div>
+<div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:2px">GESAMT</div>
+<div class="sb" id="fsc">0</div>
+<div id="gr" class="gr gA">A</div>
+<div class="sr">
+<div class="sb2"><div class="v" id="s0">0</div><div class="l">Treffer</div></div>
+<div class="sb2"><div class="v" id="s1">0</div><div class="l">Best</div></div>
+<div class="sb2"><div class="v" id="s2">0%</div><div class="l">Quote</div></div>
+</div>
+<div style="display:flex;gap:6px;margin-top:8px"><button class="btn" id="br">NOCHMAL</button><button class="btn btn3" id="bm">MEN&Uuml;</button></div>
 </div>
 
-<div id="lbScreen" class="overlay hidden">
-  <div class="title" style="font-size:clamp(24px,6vw,40px)">&#x1F3C6; BESTENLISTE</div>
-  <div id="lbl" style="width:100%;max-width:380px;padding:0 16px;max-height:45vh;overflow-y:auto"></div>
-  <button class="btn btn-otl" id="bb" style="margin-top:16px">&larr; ZUR&Uuml;CK</button>
+<div class="overlay none" id="lb">
+<div class="title">&#x1F3C6; BESTENLISTE</div>
+<div id="lbl" style="width:100%;max-width:360px;padding:0 14px;max-height:45vh;overflow-y:auto"></div>
+<button class="btn btn3" id="bb" style="margin-top:14px">&larr; ZUR&Uuml;CK</button>
 </div>
 
 <script src="dunk.js"></script>
-<a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="mbtn">Mitglied Werden</a>
-</body>
-</html>
+<a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="fbtn">Mitglied Werden</a>
+</body></html>
