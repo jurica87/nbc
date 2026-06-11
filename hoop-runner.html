@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoop Runner | NBC Baskets Nordhorn</title>
+<link rel="icon" href="./favicon.ico">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+@font-face{font-family:game;src:local('Arial Black'),local('Impact')}
+body{background:#1a1a2e;display:flex;justify-content:center;align-items:center;min-height:100vh;font-family:Arial Black,Impact,sans-serif;overflow:hidden;user-select:none;-webkit-user-select:none}
+canvas{display:block;max-width:100%;max-height:100vh;image-rendering:auto}
+.home-link{position:fixed;left:16px;bottom:16px;z-index:20;padding:9px 16px;border-radius:999px;background:rgba(15,23,42,.82);border:1px solid rgba(249,115,22,.65);color:#fff;text-decoration:none;font:700 12px Arial,sans-serif;letter-spacing:.04em}
+.home-link:hover{background:#f97316;color:#111827}
+#ui{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;font-family:Arial Black,Impact,sans-serif}
+#ui>*{pointer-events:auto}
+.screen{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:30px;background:rgba(0,0,0,0.85);border-radius:18px;border:2px solid #f97316;box-shadow:0 0 40px rgba(249,115,22,0.3);min-width:320px;max-width:90vw}
+.screen h1{font-size:2em;color:#f97316;text-shadow:0 0 20px rgba(249,115,22,0.5);line-height:1.2}
+.screen h2{font-size:1.3em;color:#fb923c}
+.screen p{font-size:0.85em;color:#ccc;line-height:1.5;font-family:Arial,sans-serif}
+.btn{background:#f97316;color:#000;border:none;padding:14px 36px;font-size:1.1em;font-family:Arial Black,Impact,sans-serif;border-radius:12px;cursor:pointer;transition:all 0.2s;text-transform:uppercase;letter-spacing:1px}
+.btn:hover{background:#fb923c;transform:scale(1.05);box-shadow:0 0 20px rgba(249,115,22,0.5)}
+.btn:active{transform:scale(0.95)}
+.btn-sec{background:rgba(249,115,22,0.15);color:#f97316;border:2px solid #f97316;padding:10px 28px;font-size:0.9em;font-family:Arial Black,Impact,sans-serif;border-radius:10px;cursor:pointer}
+.btn-sec:hover{background:rgba(249,115,22,0.25)}
+input[type=text]{padding:12px 18px;border-radius:10px;border:2px solid #f97316;background:rgba(0,0,0,0.6);color:#fff;font-size:1em;font-family:Arial Black,Impact,sans-serif;text-align:center;outline:none;width:220px}
+input[type=text]:focus{border-color:#fb923c;box-shadow:0 0 12px rgba(249,115,22,0.4)}
+#leaderboard{display:flex;flex-direction:column;gap:6px;width:100%}
+.lb-row{display:flex;justify-content:space-between;padding:6px 12px;border-radius:8px;font-size:0.9em}
+.lb-row:nth-child(1){background:linear-gradient(90deg,rgba(255,215,0,0.2),transparent);color:#ffd700}
+.lb-row:nth-child(2){background:linear-gradient(90deg,rgba(192,192,192,0.15),transparent);color:#c0c0c0}
+.lb-row:nth-child(3){background:linear-gradient(90deg,rgba(205,127,50,0.15),transparent);color:#cd7f32}
+.lb-row:nth-child(n+4){background:rgba(255,255,255,0.05);color:#aaa}
+.hud{position:fixed;top:0;left:0;width:100%;padding:12px 18px;display:none;justify-content:space-between;align-items:flex-start;font-family:Arial Black,Impact,sans-serif;pointer-events:none;z-index:10}
+.hud-left,.hud-right{display:flex;flex-direction:column;gap:4px}
+.hud .score{font-size:1.4em;color:#ffd700;text-shadow:0 0 10px rgba(255,215,0,0.5)}
+.hud .dist{font-size:1.1em;color:#fb923c}
+.hud .combo{font-size:1.3em;color:#22d3ee;text-shadow:0 0 10px rgba(34,211,238,0.5);animation:pulse 0.4s ease infinite alternate}
+@keyframes pulse{from{opacity:0.7;transform:scale(0.98)}to{opacity:1;transform:scale(1.04)}}
+.hidden{display:none!important}
+.controls{font-size:0.75em;color:#888;margin-top:4px}
+</style>
+</head>
+<body>
+<canvas id="gc"></canvas>
+
+<div id="ui">
+  <div id="menu" class="screen">
+    <div style="font-size:3em">🏀</div>
+    <h1>HOOP RUNNER</h1>
+    <h2>NBC Baskets Nordhorn</h2>
+    <p>Weiche den Gegenspielern aus!<br>Sammle Punkte und zeig dein Können!</p>
+    <input type="text" id="playerName" placeholder="Dein Name" maxlength="12">
+    <button class="btn" id="playBtn">▶ START</button>
+    <button class="btn-sec" id="lbBtn">🏆 Bestenliste</button>
+    <div class="controls">← → oder A/D zum Weichen<br>↑ oder W zum Springen</div>
+  </div>
+
+  <div id="gameover" class="screen hidden">
+    <h1>RUN VORBEI!</h1>
+    <div id="finalScore" style="font-size:2em;color:#ffd700">0</div>
+    <div id="finalDist" style="color:#fb923c">0 m</div>
+    <div id="finalCombo" style="color:#22d3ee">Bestes Combo: x0</div>
+    <div id="newHigh" style="color:#22c55e;font-size:1.1em;display:none">🎉 NEUER HIGHSCORE!</div>
+    <button class="btn" id="retryBtn">▶ NOCHMAL</button>
+    <button class="btn-sec" id="menuBtn">🏠 MENÜ</button>
+  </div>
+
+  <div id="leaderboardScreen" class="screen hidden">
+    <h2>🏆 BESTENLISTE</h2>
+    <div id="leaderboard"></div>
+    <button class="btn-sec" id="lbBack">← ZURÜCK</button>
+  </div>
+</div>
+<a class="home-link" href="./index.html">← NBC Webseite</a>
+
+<div id="hud" class="hud">
+  <div class="hud-left">
+    <div class="score" id="hScore">0</div>
+    <div class="dist" id="hDist">0 m</div>
+  </div>
+  <div class="hud-right">
+    <div class="combo" id="hCombo" style="display:none">COMBO x2</div>
+  </div>
+</div>
+
+<script>
+const canvas=document.getElementById('gc');
+const ctx=canvas.getContext('2d');
+
+// ===== RESIZE =====
+function resize(){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  canvas.width=window.innerWidth*dpr;
+  canvas.height=window.innerHeight*dpr;
+  canvas.style.width=window.innerWidth+'px';
+  canvas.style.height=window.innerHeight+'px';
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+resize();
+window.addEventListener('resize',resize);
+
+// ===== CONSTANTS =====
+const LANE_COUNT=3;
+const PLAYER_Y_FRAC=0.78;
+const HORIZON_Y_FRAC=0.38;
+const SPAWN_MIN=0.4;
+const SPAWN_MAX=1.2;
+const PLAYER_SPEED=520;
+const BASE_GAME_SPEED=280;
+const MAX_GAME_SPEED=600;
+const JUMP_VEL=-520;
+const GRAVITY=1400;
+const SLIDE_DUR=0.55;
+const INVINCIBLE_DUR=1.5;
+const POINTS=[10,25,50];
+const COMBO_WINDOW=1.8;
+const COMBO_MAX=10;
+
+// ===== STATE =====
+let state='menu';
+let W,H;
+let gameSpeed,dist,score,combo,comboTimer,maxCombo;
+let player,obstacles,collectibles,particles,effects;
+let spawnTimer,spawnInterval;
+let invincibleTimer;
+let lastTime;
+let playerName='Player';
+let touchStart=null;
+
+// ===== HELPERS =====
+function getLaneX(lane){
+  const roadW=W*0.7;
+  const roadX=(W-roadW)/2;
+  const laneW=roadW/LANE_COUNT;
+  return roadX+laneW*lane+laneW/2;
+}
+function laneFromX(x){
+  const roadW=W*0.7;
+  const roadX=(W-roadW)/2;
+  const laneW=roadW/LANE_COUNT;
+  return Math.max(0,Math.min(2,Math.floor((x-roadX)/laneW)));
+}
+function lerp(a,b,t){return a+(b-a)*t}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+function randRange(a,b){return a+Math.random()*(b-a)}
+function dist3d(a,b){return Math.sqrt((a.x-b.x)**2+(a.y-b.y)**2)}
+
+// ===== CLASSES =====
+class Player{
+  constructor(){
+    this.lane=1;
+    this.targetLane=1;
+    this.x=getLaneX(1);
+    this.y=H*PLAYER_Y_FRAC;
+    this.w=36;
+    this.h=56;
+    this.vy=0;
+    this.jumping=false;
+    this.sliding=false;
+    this.slideTimer=0;
+    this.heightScale=1;
+    this.animFrame=0;
+    this.animTimer=0;
+    this.dribbleBall=true;
+    this.ballAngle=0;
+  }
+  update(dt){
+    // lane slide
+    const tx=getLaneX(this.targetLane);
+    const diff=tx-this.x;
+    if(Math.abs(diff)>2){
+      this.x+=diff*8*dt;
+    } else {
+      this.x=tx;
+      this.lane=this.targetLane;
+    }
+    // jump
+    if(this.jumping){
+      this.vy+=GRAVITY*dt;
+      this.y+=this.vy*dt;
+      if(this.y>=H*PLAYER_Y_FRAC){
+        this.y=H*PLAYER_Y_FRAC;
+        this.vy=0;
+        this.jumping=false;
+      }
+    }
+    // slide
+    if(this.sliding){
+      this.slideTimer-=dt;
+      this.heightScale=lerp(this.heightScale,0.45,10*dt);
+      if(this.slideTimer<=0){
+        this.sliding=false;
+        this.heightScale=1;
+      }
+    } else {
+      this.heightScale=lerp(this.heightScale,1,8*dt);
+    }
+    // anim
+    this.animTimer+=dt;
+    if(this.animTimer>0.12){
+      this.animTimer=0;
+      this.animFrame=(this.animFrame+1)%4;
+    }
+    this.ballAngle+=dt*8;
+  }
+  jump(){
+    if(!this.jumping&&!this.sliding){
+      this.jumping=true;
+      this.vy=JUMP_VEL;
+    }
+  }
+  slide(){if(!this.jumping&&!this.sliding){this.sliding=true;this.slideTimer=SLIDE_DUR}}
+  moveLeft(){if(this.targetLane>0)this.targetLane--}
+  moveRight(){if(this.targetLane<2)this.targetLane++}
+  draw(){
+    const s=ctx;
+    const hx=this.x;
+    const hy=this.y;
+    const hw=this.w/2;
+    const hh=this.h*this.heightScale;
+    // shadow
+    s.fillStyle='rgba(0,0,0,0.3)';
+    s.beginPath();
+    s.ellipse(hx,hy+2,hw*0.8,6,0,0,Math.PI*2);
+    s.fill();
+    // body
+    const bodyY=hy-hh;
+    // jersey
+    const jerseyColors=['#f97316','#3b82f6','#22c55e','#ef4444','#a855f7'];
+    const jColor=jerseyColors[Math.floor(Math.abs(hx*7))%jerseyColors.length];
+    s.fillStyle=jColor;
+    s.beginPath();
+    s.roundRect(hx-hw*0.6,bodyY+hh*0.25,hw*1.2,hh*0.45,4);
+    s.fill();
+    // shorts
+    s.fillStyle='#1e293b';
+    s.beginPath();
+    s.roundRect(hx-hw*0.55,bodyY+hh*0.65,hw*1.1,hh*0.25,3);
+    s.fill();
+    // head
+    s.fillStyle='#d4a574';
+    s.beginPath();
+    s.arc(hx,bodyY+hh*0.12,hw*0.45,0,Math.PI*2);
+    s.fill();
+    // hair
+    s.fillStyle='#1a1a1a';
+    s.beginPath();
+    s.arc(hx,bodyY+hh*0.06,hw*0.42,Math.PI,Math.PI*2);
+    s.fill();
+    // legs animation
+    const legOff=Math.sin(this.animFrame*Math.PI/2)*8*this.heightScale;
+    s.fillStyle='#d4a574';
+    s.fillRect(hx-hw*0.35,bodyY+hh*0.88,hw*0.25,hh*0.12+legOff);
+    s.fillRect(hx+hw*0.1,bodyY+hh*0.88,hw*0.25,hh*0.12-legOff);
+    // shoes
+    s.fillStyle='#fff';
+    s.fillRect(hx-hw*0.38,bodyY+hh*0.95+legOff,hw*0.3,hh*0.06);
+    s.fillRect(hx+hw*0.08,bodyY+hh*0.95-legOff,hw*0.3,hh*0.06);
+    // basketball
+    if(this.dribbleBall){
+      const bx=hx+hw*0.7;
+      const by=hy-hh*0.1+Math.sin(this.ballAngle)*10;
+      s.fillStyle='#f97316';
+      s.beginPath();
+      s.arc(bx,by,7,0,Math.PI*2);
+      s.fill();
+      s.strokeStyle='#c2410c';
+      s.lineWidth=1;
+      s.beginPath();
+      s.arc(bx,by,7,0,Math.PI*2);
+      s.stroke();
+      s.beginPath();
+      s.moveTo(bx-7,by);
+      s.lineTo(bx+7,by);
+      s.moveTo(bx,by-7);
+      s.lineTo(bx,by+7);
+      s.stroke();
+    }
+    // invincible glow
+    if(invincibleTimer>0){
+      s.strokeStyle=`rgba(34,211,238,${0.5+0.5*Math.sin(Date.now()*0.01)})`;
+      s.lineWidth=3;
+      s.beginPath();
+      s.arc(hx,bodyY+hh*0.4,hw*1.2,0,Math.PI*2);
+      s.stroke();
+    }
+  }
+  getHitbox(){
+    return {
+      x:this.x-this.w*0.4,
+      y:this.y-this.h*this.heightScale,
+      w:this.w*0.8,
+      h:this.h*this.heightScale*0.9
+    };
+  }
+}
+
+class Obstacle{
+  constructor(lane,z,type){
+    this.lane=lane;
+    this.type=type; // 0=defender low, 1=defender high, 2=cone
+    this.z=z;
+    this.passed=false;
+    this.w=40;
+    this.h=type===2?30:55;
+  }
+  getScale(){
+    const t=clamp(this.z,0,1);
+    return lerp(0.15,1,t);
+  }
+  getScreenPos(){
+    const t=clamp(this.z,0,1);
+    const sy=lerp(HORIZON_Y_FRAC*H,H*PLAYER_Y_FRAC,t);
+    const sx=getLaneX(this.lane);
+    const s=this.getScale();
+    return {x:sx,y:sy,scale:s};
+  }
+  update(dt){
+    this.z-=gameSpeed*dt*0.0008;
+  }
+  draw(){
+    const p=this.getScreenPos();
+    const s=p.scale;
+    const w=this.w*s;
+    const h=this.h*s;
+    if(this.type===2){
+      // cone
+      ctx.fillStyle='#f97316';
+      ctx.beginPath();
+      ctx.moveTo(p.x,p.y);
+      ctx.lineTo(p.x-w*0.3,p.y-h);
+      ctx.lineTo(p.x+w*0.3,p.y-h);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle='#fff';
+      ctx.fillRect(p.x-w*0.2,p.y-h*0.6,w*0.4,h*0.15);
+    } else {
+      // defender body
+      const colors=['#dc2626','#2563eb','#16a34a','#9333ea'];
+      ctx.fillStyle=colors[this.lane%colors.length];
+      ctx.beginPath();
+      ctx.roundRect(p.x-w*0.4,p.y-h*0.5,w*0.8,h*0.55,3*s);
+      ctx.fill();
+      // head
+      ctx.fillStyle='#d4a574';
+      ctx.beginPath();
+      ctx.arc(p.x,p.y-h*0.65,w*0.25,0,Math.PI*2);
+      ctx.fill();
+      // arms spread
+      ctx.strokeStyle='#d4a574';
+      ctx.lineWidth=3*s;
+      ctx.beginPath();
+      ctx.moveTo(p.x-w*0.6,p.y-h*0.35);
+      ctx.lineTo(p.x+w*0.6,p.y-h*0.35);
+      ctx.stroke();
+      // number
+      ctx.fillStyle='#fff';
+      ctx.font=`bold ${Math.round(12*s)}px Arial`;
+      ctx.textAlign='center';
+      ctx.fillText(this.lane+21,p.x,p.y-h*0.2);
+      // low/high indicator
+      if(this.type===0){
+        ctx.fillStyle='rgba(255,255,0,0.3)';
+        ctx.fillRect(p.x-w*0.5,p.y-h*0.15,w,h*0.15);
+      }
+    }
+  }
+  getHitbox(){
+    const p=this.getScreenPos();
+    const s=p.scale;
+    return {
+      x:p.x-this.w*s*0.4,
+      y:p.y-this.h*s,
+      w:this.w*s*0.8,
+      h:this.h*s*0.9
+    };
+  }
+  isAlive(){return this.z>-0.05}
+}
+
+class Collectible{
+  constructor(lane,z,type){
+    this.lane=lane;
+    this.z=z;
+    this.type=type; // 0=2pt, 1=3pt, 2=dunk
+    this.collected=false;
+    this.bobTimer=Math.random()*Math.PI*2;
+  }
+  getScale(){
+    const t=clamp(this.z,0,1);
+    return lerp(0.15,1,t);
+  }
+  getScreenPos(){
+    const t=clamp(this.z,0,1);
+    const sy=lerp(HORIZON_Y_FRAC*H,H*PLAYER_Y_FRAC-20,t);
+    const sx=getLaneX(this.lane);
+    return {x:sx,y:sy,scale:this.getScale()};
+  }
+  update(dt){
+    this.z-=gameSpeed*dt*0.0008;
+    this.bobTimer+=dt*3;
+  }
+  draw(){
+    if(this.collected)return;
+    const p=this.getScreenPos();
+    const s=p.scale;
+    const bob=Math.sin(this.bobTimer)*4*s;
+    const r=12*s;
+    const y=p.y-r+bob;
+    if(this.type===0){
+      // 2pt - orange orb
+      ctx.fillStyle='#f97316';
+      ctx.beginPath();
+      ctx.arc(p.x,y,r,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle='#fff';
+      ctx.font=`bold ${Math.round(10*s)}px Arial`;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText('2',p.x,y);
+    } else if(this.type===1){
+      // 3pt - blue orb
+      ctx.fillStyle='#3b82f6';
+      ctx.beginPath();
+      ctx.arc(p.x,y,r,0,Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle='#fff';
+      ctx.font=`bold ${Math.round(10*s)}px Arial`;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText('3',p.x,y);
+    } else {
+      // dunk - gold star
+      ctx.fillStyle='#ffd700';
+      drawStar(p.x,y,5,s*10,s*5);
+      ctx.fill();
+      ctx.fillStyle='#000';
+      ctx.font=`bold ${Math.round(8*s)}px Arial`;
+      ctx.textAlign='center';
+      ctx.textBaseline='middle';
+      ctx.fillText('★',p.x,y);
+    }
+    // glow
+    ctx.fillStyle=`rgba(255,215,0,${0.15+0.1*Math.sin(this.bobTimer*2)})`;
+    ctx.beginPath();
+    ctx.arc(p.x,y,r*2,0,Math.PI*2);
+    ctx.fill();
+  }
+  isAlive(){return this.z>-0.05&&!this.collected}
+}
+
+function drawStar(cx,cy,points,outerR,innerR){
+  ctx.beginPath();
+  for(let i=0;i<points*2;i++){
+    const r=i%2===0?outerR:innerR;
+    const angle=(i*Math.PI)/points-Math.PI/2;
+    const x=cx+Math.cos(angle)*r;
+    const y=cy+Math.sin(angle)*r;
+    if(i===0)ctx.moveTo(x,y);
+    else ctx.lineTo(x,y);
+  }
+  ctx.closePath();
+}
+
+class Particle{
+  constructor(x,y,color){
+    this.x=x;this.y=y;
+    this.vx=randRange(-120,120);
+    this.vy=randRange(-200,-60);
+    this.life=1;
+    this.color=color;
+    this.size=randRange(3,8);
+  }
+  update(dt){
+    this.x+=this.vx*dt;
+    this.y+=this.vy*dt;
+    this.vy+=300*dt;
+    this.life-=dt*2;
+  }
+  draw(){
+    ctx.globalAlpha=Math.max(0,this.life);
+    ctx.fillStyle=this.color;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.size*this.life,0,Math.PI*2);
+    ctx.fill();
+    ctx.globalAlpha=1;
+  }
+}
+
+class FloatingText{
+  constructor(x,y,text,color){
+    this.x=x;this.y=y;
+    this.text=text;
+    this.color=color;
+    this.life=1;
+    this.vy=-60;
+  }
+  update(dt){
+    this.y+=this.vy*dt;
+    this.life-=dt*1.5;
+  }
+  draw(){
+    ctx.globalAlpha=Math.max(0,this.life);
+    ctx.fillStyle=this.color;
+    ctx.font='bold 18px Arial';
+    ctx.textAlign='center';
+    ctx.fillText(this.text,this.x,this.y);
+    ctx.globalAlpha=1;
+  }
+}
+
+// ===== GAME FUNCTIONS =====
+function initGame(){
+  W=window.innerWidth;
+  H=window.innerHeight;
+  gameSpeed=BASE_GAME_SPEED;
+  dist=0;
+  score=0;
+  combo=0;
+  comboTimer=0;
+  maxCombo=0;
+  invincibleTimer=0;
+  spawnTimer=0;
+  spawnInterval=SPAWN_MAX;
+  obstacles=[];
+  collectibles=[];
+  particles=[];
+  effects=[];
+  player=new Player();
+  lastTime=performance.now();
+}
+
+function spawnObstacle(){
+  const lane=Math.floor(Math.random()*LANE_COUNT);
+  const type=Math.random()<0.2?2:Math.random()<0.5?0:1;
+  obstacles.push(new Obstacle(lane,1,type));
+}
+
+function spawnCollectible(){
+  const lane=Math.floor(Math.random()*LANE_COUNT);
+  const r=Math.random();
+  const type=r<0.6?0:r<0.9?1:2;
+  collectibles.push(new Collectible(lane,1,type));
+}
+
+function addCombo(){
+  combo++;
+  comboTimer=COMBO_WINDOW;
+  if(combo>maxCombo)maxCombo=combo;
+}
+
+function breakCombo(){
+  combo=0;
+  comboTimer=0;
+}
+
+function addScore(base){
+  const pts=base*(1+combo*0.5);
+  score+=Math.round(pts);
+  addCombo();
+  return Math.round(pts);
+}
+
+function checkCollision(a,b){
+  return a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+}
+
+function spawnParticles(x,y,color,count){
+  for(let i=0;i<count;i++)particles.push(new Particle(x,y,color));
+}
+
+function addFloatingText(x,y,text,color){
+  effects.push(new FloatingText(x,y,text,color));
+}
+
+function update(dt){
+  if(state!=='game')return;
+  // speed increase
+  gameSpeed=lerp(gameSpeed,Math.min(MAX_GAME_SPEED,BASE_GAME_SPEED+dist*0.3),dt*0.5);
+  dist+=gameSpeed*dt*0.01;
+  // invincibility
+  if(invincibleTimer>0)invincibleTimer-=dt;
+  // combo timer
+  if(combo>0){
+    comboTimer-=dt;
+    if(comboTimer<=0)breakCombo();
+  }
+  // spawn
+  spawnTimer-=dt;
+  if(spawnTimer<=0){
+    spawnTimer=randRange(SPAWN_MIN,spawnInterval);
+    spawnInterval=Math.max(0.5,spawnInterval-dt*0.01);
+    if(Math.random()<0.65)spawnObstacle();
+    if(Math.random()<0.5)spawnCollectible();
+  }
+  // update player
+  player.update(dt);
+  // update obstacles
+  for(const o of obstacles){
+    o.update(dt);
+    if(!o.passed&&o.z<0.15){
+      o.passed=true;
+      const hb=player.getHitbox();
+      const oh=o.getHitbox();
+      if(checkCollision(hb,oh)){
+        if(invincibleTimer<=0){
+          breakCombo();
+          spawnParticles(player.x,player.y-hb.h/2,'#ef4444',12);
+          shakeTimer=0.3;
+          gameOver();
+          return;
+        }
+      }
+    }
+  }
+  // update collectibles
+  for(const c of collectibles){
+    c.update(dt);
+    if(!c.collected&&c.z<0.2&&c.z>0){
+      const hb=player.getHitbox();
+      const cp=c.getScreenPos();
+      const cs=cp.scale;
+      const cr=12*cs;
+      const dx=player.x-cp.x;
+      const dy=player.y-hb.h/2-(cp.y-cr);
+      if(Math.sqrt(dx*dx+dy*dy)<cr+20){
+        c.collected=true;
+        const pts=c.type===0?POINTS[0]:c.type===1?POINTS[1]:POINTS[2];
+        const earned=addScore(pts);
+        spawnParticles(cp.x,cp.y-10,'#ffd700',8);
+        addFloatingText(cp.x,cp.y-20,'+'+earned,'#ffd700');
+      }
+    }
+  }
+  // cleanup
+  obstacles=obstacles.filter(o=>o.isAlive());
+  collectibles=collectibles.filter(c=>c.isAlive());
+  particles=particles.filter(p=>{p.update(dt);return p.life>0});
+  effects=effects.filter(e=>{e.update(dt);return e.life>0});
+  // update HUD
+  document.getElementById('hScore').textContent=score;
+  document.getElementById('hDist').textContent=Math.round(dist)+' m';
+  const comboEl=document.getElementById('hCombo');
+  if(combo>1){
+    comboEl.style.display='block';
+    comboEl.textContent='COMBO x'+combo;
+  } else {
+    comboEl.style.display='none';
+  }
+}
+
+let shakeTimer=0;
+
+function drawCourt(){
+  const s=ctx;
+  // sky gradient
+  const skyGrad=s.createLinearGradient(0,0,0,H*0.5);
+  skyGrad.addColorStop(0,'#0f172a');
+  skyGrad.addColorStop(1,'#1e293b');
+  s.fillStyle=skyGrad;
+  s.fillRect(0,0,W,H*0.5);
+  // court floor perspective
+  const roadW=W*0.7;
+  const roadX=(W-roadW)/2;
+  const horizonY=H*HORIZON_Y_FRAC;
+  // floor
+  const floorGrad=s.createLinearGradient(0,horizonY,0,H);
+  floorGrad.addColorStop(0,'#92400e');
+  floorGrad.addColorStop(0.3,'#b45309');
+  floorGrad.addColorStop(1,'#d97706');
+  s.fillStyle=floorGrad;
+  s.beginPath();
+  s.moveTo(roadX-20,horizonY);
+  s.lineTo(roadX+roadW+20,horizonY);
+  s.lineTo(W,H);
+  s.lineTo(0,H);
+  s.closePath();
+  s.fill();
+  // lane lines
+  s.strokeStyle='rgba(255,255,255,0.25)';
+  s.lineWidth=2;
+  const laneW=roadW/LANE_COUNT;
+  for(let i=1;i<LANE_COUNT;i++){
+    const lx=roadX+laneW*i;
+    s.beginPath();
+    s.moveTo(lx,horizonY);
+    // perspective: lines converge at horizon
+    const spread=(lx-W/2)*3;
+    s.lineTo(W/2+spread*0.15,H);
+    s.stroke();
+  }
+  // side lines
+  s.strokeStyle='rgba(255,255,255,0.4)';
+  s.lineWidth=3;
+  s.beginPath();
+  s.moveTo(roadX,horizonY);
+  s.lineTo(0,H);
+  s.stroke();
+  s.beginPath();
+  s.moveTo(roadX+roadW,horizonY);
+  s.lineTo(W,H);
+  s.stroke();
+  // horizon line
+  s.strokeStyle='rgba(255,255,255,0.15)';
+  s.lineWidth=1;
+  s.beginPath();
+  s.moveTo(0,horizonY);
+  s.lineTo(W,horizonY);
+  s.stroke();
+  // crowd silhouettes
+  s.fillStyle='rgba(0,0,0,0.3)';
+  for(let i=0;i<30;i++){
+    const cx=(i/30)*W;
+    const cy=horizonY-10-Math.sin(i*1.7)*8;
+    s.beginPath();
+    s.arc(cx,cy,8+Math.sin(i*2.3)*3,0,Math.PI*2);
+    s.fill();
+    s.fillRect(cx-5,cy+5,10,12);
+  }
+  // distance markers on floor
+  const markerSpacing=80;
+  const offset=dist%markerSpacing;
+  for(let d=-1;d<15;d++){
+    const mz=1-d*markerSpacing/1000+offset/1000;
+    if(mz<0||mz>1)continue;
+    const mt=clamp(mz,0,1);
+    const my=lerp(horizonY,H,mt);
+    const mx=W/2;
+    const ms=lerp(0.1,1,mt);
+    s.fillStyle=`rgba(255,255,255,${0.15*ms})`;
+    s.fillRect(mx-20*ms,my,40*ms,3*ms);
+  }
+}
+
+function draw(){
+  W=window.innerWidth;
+  H=window.innerHeight;
+  ctx.clearRect(0,0,W,H);
+  // shake
+  ctx.save();
+  if(shakeTimer>0){
+    shakeTimer-=0.016;
+    ctx.translate(randRange(-6,6),randRange(-6,6));
+  }
+  drawCourt();
+  // draw game objects sorted by z (far first)
+  const all=[...obstacles.map(o=>({z:o.z,draw:o.draw.bind(o)})),
+             ...collectibles.map(c=>({z:c.z,draw:c.draw.bind(c)}))];
+  all.sort((a,b)=>b.z-a.z);
+  for(const o of all)o.draw();
+  // player
+  player.draw();
+  // particles
+  for(const p of particles)p.draw();
+  // effects
+  for(const e of effects)e.draw();
+  ctx.restore();
+}
+
+function gameLoop(time){
+  const dt=Math.min((time-lastTime)/1000,0.05);
+  lastTime=time;
+  update(dt);
+  draw();
+  requestAnimationFrame(gameLoop);
+}
+
+// ===== LEADERBOARD =====
+function getLB(){
+  try{
+    const value=JSON.parse(localStorage.getItem('hooprunner_lb')||'[]');
+    return Array.isArray(value)?value:[];
+  }catch(e){
+    return [];
+  }
+}
+function saveLB(lb){
+  try{localStorage.setItem('hooprunner_lb',JSON.stringify(lb))}catch(e){}
+}
+function escapeHTML(value){
+  const el=document.createElement('span');
+  el.textContent=String(value);
+  return el.innerHTML;
+}
+function addToLB(name,sc){
+  const lb=getLB();
+  lb.push({name:(name||'Player').slice(0,12),score:sc,date:Date.now()});
+  lb.sort((a,b)=>b.score-a.score);
+  lb.splice(10);
+  saveLB(lb);
+  return lb;
+}
+function isHighScore(sc){
+  const lb=getLB();
+  return lb.length<10||sc>lb[lb.length-1].score;
+}
+function showLB(){
+  const lb=getLB();
+  const el=document.getElementById('leaderboard');
+  if(lb.length===0){
+    el.innerHTML='<p style="color:#888">Noch keine Einträge!</p>';
+  } else {
+    el.innerHTML=lb.map((e,i)=>`<div class="lb-row"><span>${i+1}. ${escapeHTML(e.name)}</span><span>${Number(e.score)||0}</span></div>`).join('');
+  }
+  document.getElementById('menu').classList.add('hidden');
+  document.getElementById('leaderboardScreen').classList.remove('hidden');
+}
+
+// ===== GAME OVER =====
+function gameOver(){
+  state='gameover';
+  document.getElementById('hud').style.display='none';
+  document.getElementById('finalScore').textContent=score;
+  document.getElementById('finalDist').textContent=Math.round(dist)+' m';
+  document.getElementById('finalCombo').textContent='Bestes Combo: x'+maxCombo;
+  const hs=isHighScore(score);
+  document.getElementById('newHigh').style.display=hs?'block':'none';
+  addToLB(playerName,score);
+  document.getElementById('gameover').classList.remove('hidden');
+}
+
+// ===== INPUT =====
+document.addEventListener('keydown',e=>{
+  if(state!=='game')return;
+  if(e.key==='ArrowLeft'||e.key==='a'||e.key==='A')player.moveLeft();
+  if(e.key==='ArrowRight'||e.key==='d'||e.key==='D')player.moveRight();
+  if(e.key==='ArrowUp'||e.key==='w'||e.key==='W'||e.key===' ')player.jump();
+  if(e.key==='ArrowDown'||e.key==='s'||e.key==='S')player.slide();
+});
+document.addEventListener('touchstart',e=>{
+  if(state!=='game')return;
+  touchStart={x:e.touches[0].clientX,y:e.touches[0].clientY};
+},{passive:true});
+document.addEventListener('touchmove',e=>{
+  if(state==='game')e.preventDefault();
+},{passive:false});
+document.addEventListener('touchend',e=>{
+  if(state!=='game'||!touchStart)return;
+  const dx=e.changedTouches[0].clientX-touchStart.x;
+  const dy=e.changedTouches[0].clientY-touchStart.y;
+  if(Math.abs(dx)>Math.abs(dy)){
+    if(dx>30)player.moveRight();
+    else if(dx<-30)player.moveLeft();
+  } else {
+    if(dy<-30)player.jump();
+    else if(dy>30)player.slide();
+  }
+  touchStart=null;
+});
+
+// ===== UI BINDINGS =====
+document.getElementById('playBtn').addEventListener('click',()=>{
+  playerName=document.getElementById('playerName').value.trim()||'Player';
+  try{localStorage.setItem('hooprunner_name',playerName)}catch(e){}
+  initGame();
+  state='game';
+  document.getElementById('menu').classList.add('hidden');
+  document.getElementById('hud').style.display='flex';
+});
+document.getElementById('retryBtn').addEventListener('click',()=>{
+  initGame();
+  state='game';
+  document.getElementById('gameover').classList.add('hidden');
+  document.getElementById('hud').style.display='flex';
+});
+document.getElementById('menuBtn').addEventListener('click',()=>{
+  state='menu';
+  document.getElementById('gameover').classList.add('hidden');
+  document.getElementById('menu').classList.remove('hidden');
+});
+document.getElementById('lbBtn').addEventListener('click',showLB);
+document.getElementById('lbBack').addEventListener('click',()=>{
+  document.getElementById('leaderboardScreen').classList.add('hidden');
+  document.getElementById('menu').classList.remove('hidden');
+});
+
+// ===== START =====
+try{
+  document.getElementById('playerName').value=localStorage.getItem('hooprunner_name')||'';
+}catch(e){}
+document.getElementById('playerName').addEventListener('keydown',e=>{
+  if(e.key==='Enter')document.getElementById('playBtn').click();
+});
+initGame();
+requestAnimationFrame(gameLoop);
+</script>
+</body>
+</html>
