@@ -3,498 +3,638 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Athletik Training mit Jegor Cymbal | NBC Baskets Nordhorn</title>
+    <title>Athletik Programm Nordhorn | NBC Baskets – Mit Jegor Cymbal</title>
+    <meta name="description" content="NBC Athletikprogramm: Sportartübergreifendes Athletiktraining für Kinder & Jugendliche 8–18 Jahre. Trainiert von Jegor Cymbal, 2. Bundesliga-Meister. Jetzt anmelden!">
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
     <link rel="icon" href="./favicon.ico" sizes="any">
     <link rel="manifest" href="./site.webmanifest">
+    <meta property="og:title" content="Athletik Programm Nordhorn | NBC Baskets">
+    <meta property="og:description" content="Sportartübergreifendes Athletiktraining mit Jegor Cymbal. Mehr Schnelligkeit, Sprungkraft, Koordination.">
+    <meta property="og:image" content="https://nbc-nordhorn.de/athletik_poster_thumb.jpg">
+    <meta property="og:url" content="https://nbc-nordhorn.de/Athletik.html">
+    <meta property="og:type" content="website">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7' }
+                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#0a0a0a', gray: '#1a1a1a' }
                     },
-                    fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #f8f9fa; color: #f4f4f4; }
+        * { -webkit-font-smoothing: antialiased; }
+        body { background: #0a0a0a; color: #f4f4f4; }
+
+        /* Animations */
         @keyframes glow-pulse {
-            0%, 100% {
-                box-shadow: 0 0 5px #F2722C, 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #7457A3;
-                transform: scale(1);
-            }
-            50% {
-                box-shadow: 0 0 10px #F2722C, 0 0 20px #F2722C, 0 0 40px #F2722C, 0 0 60px #7457A3;
-                transform: scale(1.02);
-            }
+            0%, 100% { box-shadow: 0 0 20px rgba(242,114,44,0.4), 0 0 40px rgba(116,87,163,0.2); }
+            50% { box-shadow: 0 0 30px rgba(242,114,44,0.6), 0 0 60px rgba(116,87,163,0.3); }
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+        @keyframes scaleIn { from { opacity:0; transform: scale(0.9); } to { opacity:1; transform: scale(1); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes borderGlow { 0%,100% { border-color: rgba(242,114,44,0.3); } 50% { border-color: rgba(242,114,44,0.7); } }
+
+        .animate-slideUp { animation: slideUp 0.8s ease-out forwards; }
+        .animate-fadeIn { animation: fadeIn 0.6s ease-out forwards; }
+        .animate-scaleIn { animation: scaleIn 0.5s ease-out forwards; }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        /* Hero */
         .hero-bg {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            background: radial-gradient(ellipse at 30% 20%, rgba(242,114,44,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(116,87,163,0.08) 0%, transparent 50%),
+                        linear-gradient(180deg, #0a0a0a 0%, #111 100%);
             position: relative;
             overflow: hidden;
         }
         .hero-bg::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60%;
-            height: 200%;
-            background: radial-gradient(ellipse, rgba(242,114,44,0.15) 0%, transparent 70%);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
         }
-        .hero-bg::after {
+
+        /* Video card */
+        .video-card {
+            position: relative;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(242,114,44,0.1), rgba(116,87,163,0.1));
+            border: 1px solid rgba(242,114,44,0.2);
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+        .video-card::before {
             content: '';
             position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 50%;
-            height: 150%;
-            background: radial-gradient(ellipse, rgba(116,87,163,0.15) 0%, transparent 70%);
+            inset: -2px;
+            background: linear-gradient(135deg, #F2722C, #7457A3, #F2722C);
+            border-radius: 1.5rem;
+            z-index: -1;
+            opacity: 0.3;
+            animation: shimmer 4s linear infinite;
+            background-size: 200% 100%;
         }
-        .diagonal-stripe {
+        .play-overlay {
             position: absolute;
-            width: 200%;
-            height: 100px;
-            background: linear-gradient(90deg, transparent, rgba(242,114,44,0.1), transparent);
-            transform: rotate(-5deg);
-        }
-        .sport-icon {
-            width: 48px;
-            height: 48px;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, rgba(242,114,44,0.15), rgba(116,87,163,0.15));
+            background: rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .play-overlay:hover { background: rgba(0,0,0,0.15); }
+        .play-btn {
+            width: 80px; height: 80px;
+            background: rgba(255,255,255,0.95);
             border-radius: 50%;
-            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 0 30px rgba(242,114,44,0.4);
         }
-        .check-item::before {
-            content: '✓';
-            color: #F2722C;
-            font-weight: bold;
-            margin-right: 8px;
+        .play-overlay:hover .play-btn {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(242,114,44,0.6);
         }
-        .athlete-card {
-            background: linear-gradient(135deg, rgba(242,114,44,0.1), rgba(116,87,163,0.1));
-            border: 1px solid rgba(242,114,44,0.3);
+
+        /* Cards */
+        .glass-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
+        .glass-card:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(242,114,44,0.3);
+            transform: translateY(-2px);
+        }
+
+        .pricing-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .pricing-card:hover {
+            border-color: rgba(242,114,44,0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .pricing-card.featured {
+            border-color: rgba(242,114,44,0.4);
+            background: rgba(242,114,44,0.03);
+        }
+        .pricing-card.featured::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #F2722C, #7457A3);
+        }
+
+        /* CTA button */
         .register-btn {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 24px;
+            right: 24px;
             z-index: 1000;
-            background: linear-gradient(135deg, #F2722C 0%, #7457A3 100%);
+            background: linear-gradient(135deg, #F2722C 0%, #e06020 100%);
             color: white;
             padding: 14px 28px;
             border-radius: 50px;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
-            font-size: 15px;
+            font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(242, 101, 34, 0.4);
-            animation: glow-pulse 2s ease-in-out infinite, float 3s ease-in-out infinite;
+            animation: glow-pulse 2.5s ease-in-out infinite, float 4s ease-in-out infinite;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            border: none;
+            cursor: pointer;
         }
         .register-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #F2722C, 0 0 60px #7457A3;
+            transform: scale(1.08);
+            box-shadow: 0 0 40px rgba(242,114,44,0.6), 0 0 80px rgba(116,87,163,0.3);
+        }
+
+        /* Section reveal */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Sport icons */
+        .sport-icon {
+            width: 56px; height: 56px;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            font-size: 26px;
+            transition: all 0.3s ease;
+        }
+        .sport-icon:hover {
+            background: rgba(242,114,44,0.15);
+            border-color: rgba(242,114,44,0.4);
+            transform: scale(1.1);
+        }
+
+        /* Form */
+        input, select, textarea {
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #F2722C !important;
+            box-shadow: 0 0 0 3px rgba(242,114,44,0.15) !important;
+            outline: none;
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #F2722C, #7457A3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Noise texture overlay */
+        .noise::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        /* Responsive video */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        @media (min-width: 768px) {
+            .video-container { max-width: 480px; }
         }
     </style>
     <link rel="stylesheet" href="./css/cookie-consent.css">
 </head>
-<body class="bg-[#f8f9fa] flex flex-col min-h-screen">
+<body class="flex flex-col min-h-screen">
 
-    <nav class="bg-[#f8f9fa]/95 backdrop-blur border-b border-[#e0e0e5] sticky top-0 z-50">
+    <!-- NAV -->
+    <nav class="bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-white/5 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between gap-4 min-h-[80px] py-3">
+            <div class="flex items-center justify-between gap-4 min-h-[72px] py-3">
                 <a href="./index.html" class="flex items-center gap-3 group shrink-0">
-                    <img src="./NBC_Logo.png" alt="NBC Logo" class="h-10 w-auto object-contain" onerror="this.style.display='none'">
+                    <img src="./NBC_Logo.png" alt="NBC Logo" class="h-9 w-auto object-contain" onerror="this.style.display='none'">
                     <div class="leading-tight">
-                        <span class="block font-heading font-bold text-lg md:text-xl uppercase text-[#1a1a2e]">NBC Baskets</span>
-                        <span class="block text-[11px] text-nbc-orange uppercase tracking-[0.2em] font-bold">Nordhorn</span>
+                        <span class="block font-heading font-bold text-base md:text-lg uppercase text-white">NBC Baskets</span>
+                        <span class="block text-[10px] text-nbc-orange uppercase tracking-[0.2em] font-bold">Nordhorn</span>
                     </div>
                 </a>
 
-                <div class="hidden lg:flex items-center gap-6 text-sm font-bold uppercase tracking-wider text-[#4a4a5a]">
-                    <div class="relative group">
-                        <a href="./index.html#about" class="hover:text-nbc-orange transition-colors flex items-center gap-1">
-                            Verein
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                        </a>
-                        <div class="absolute left-0 mt-2 w-52 bg-white border border-[#e0e0e5] rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                            <a href="./Vorstand.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100 border-b border-[#e0e0e5]">Vorstand</a>
-                            <a href="./Trainer.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100 border-b border-[#e0e0e5]">Trainer</a>
-                            <a href="./Schiedsrichter.html" class="block px-4 py-3 hover:text-nbc-orange hover:bg-gray-100">Schiedsrichter</a>
-                        </div>
-                    </div>
-                    <a href="./index.html#teams" class="hover:text-nbc-orange transition-colors">Teams</a>
-                    <a href="./index.html#halle" class="hover:text-nbc-orange transition-colors">Halle</a>
-                    <a href="./Cheerleader.html" class="hover:text-nbc-orange transition-colors">Breitensport</a>
-                    <a href="./Athletik.html" class="hover:text-nbc-orange transition-colors">Athletik</a>
-                    <a href="./news.html" class="hover:text-nbc-orange transition-colors">News</a>
-                    <a href="./index.html#kontakt" class="hover:text-nbc-orange transition-colors">Kontakt</a>
-                    <a href="./Probetraining.html" class="hover:text-nbc-orange transition-colors">Probetraining</a>
-                    <a href="./Mitgliedschaft.html" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-5 py-2 rounded-full font-heading">Mitglied werden</a>
+                <div class="hidden lg:flex items-center gap-5 text-sm font-medium uppercase tracking-wider text-gray-400">
+                    <a href="./index.html#about" class="hover:text-white transition-colors">Verein</a>
+                    <a href="./index.html#teams" class="hover:text-white transition-colors">Teams</a>
+                    <a href="./index.html#halle" class="hover:text-white transition-colors">Halle</a>
+                    <a href="./Cheerleader.html" class="hover:text-white transition-colors">Breitensport</a>
+                    <a href="./Athletik.html" class="text-nbc-orange font-bold transition-colors">Athletik</a>
+                    <a href="./news.html" class="hover:text-white transition-colors">News</a>
+                    <a href="./index.html#kontakt" class="hover:text-white transition-colors">Kontakt</a>
+                    <a href="./Mitgliedschaft.html" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-5 py-2 rounded-full font-heading text-sm font-bold">Mitglied werden</a>
                 </div>
 
-                <button type="button" class="lg:hidden inline-flex items-center justify-center p-2 rounded-md text-[#4a4a5a] hover:text-[#1a1a2e] hover:bg-gray-100" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Menü öffnen">
-                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                <button type="button" class="lg:hidden p-2 text-gray-400 hover:text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Menü">
+                    <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
             </div>
         </div>
-
-        <div class="hidden lg:hidden bg-[#f8f9fa] border-t border-[#e0e0e5]" id="mobile-menu">
-            <div class="px-4 py-4 space-y-2 text-[#1a1a2e]">
-                <a href="./index.html" class="block px-3 py-2 font-heading font-bold uppercase">Startseite</a>
-                <a href="./Vorstand.html" class="block px-3 py-2">Vorstand</a>
-                <a href="./Trainer.html" class="block px-3 py-2">Trainer</a>
-                <a href="./Schiedsrichter.html" class="block px-3 py-2">Schiedsrichter</a>
-                <a href="./index.html#teams" class="block px-3 py-2">Teams</a>
-                <a href="./Cheerleader.html" class="block px-3 py-2">Breitensport</a>
-                <a href="./Athletik.html" class="block px-3 py-2 font-heading font-bold text-nbc-orange uppercase">Athletik</a>
-                <a href="./news.html" class="block px-3 py-2">News</a>
-                <a href="./Probetraining.html" class="block px-3 py-2">Probetraining</a>
-                <a href="./Mitgliedschaft.html" class="block px-3 py-2 font-heading font-bold text-nbc-orange uppercase">Mitglied werden</a>
-                <a href="./index.html#kontakt" class="block px-3 py-2">Kontakt</a>
+        <div class="hidden lg:hidden bg-[#0a0a0a] border-t border-white/5" id="mobile-menu">
+            <div class="px-4 py-4 space-y-1">
+                <a href="./index.html" class="block px-3 py-2.5 text-gray-300 hover:text-white font-heading font-bold uppercase text-sm">Startseite</a>
+                <a href="./index.html#teams" class="block px-3 py-2.5 text-gray-300 hover:text-white">Teams</a>
+                <a href="./Cheerleader.html" class="block px-3 py-2.5 text-gray-300 hover:text-white">Breitensport</a>
+                <a href="./Athletik.html" class="block px-3 py-2.5 text-nbc-orange font-heading font-bold uppercase text-sm">Athletik</a>
+                <a href="./news.html" class="block px-3 py-2.5 text-gray-300 hover:text-white">News</a>
+                <a href="./Probetraining.html" class="block px-3 py-2.5 text-gray-300 hover:text-white">Probetraining</a>
+                <a href="./Mitgliedschaft.html" class="block px-3 py-2.5 text-nbc-orange font-heading font-bold uppercase text-sm">Mitglied werden</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero-bg py-16 md:py-24 px-4 relative">
-        <div class="diagonal-stripe top-1/3"></div>
-        <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-                <!-- Text Column -->
-                <div>
-                    <div class="inline-flex items-center gap-2 bg-nbc-orange/20 border border-nbc-orange/40 rounded-full px-4 py-1.5 mb-6">
+    <!-- HERO -->
+    <section class="hero-bg py-16 md:py-24 lg:py-32 px-4 relative noise">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text -->
+                <div class="animate-slideUp">
+                    <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
                         <span class="w-2 h-2 bg-nbc-orange rounded-full animate-pulse"></span>
-                        <span class="text-nbc-orange font-heading font-bold text-sm uppercase tracking-wider">NBC Nordhorn Athletikprogramm</span>
+                        <span class="text-gray-400 font-medium text-xs uppercase tracking-widest">NBC Nordhorn · Athletikprogramm 2026</span>
                     </div>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-3 leading-[0.95]">
-                        ATHLETIK<br>
-                        <span class="text-nbc-orange">PROGRAMM</span>r>
-                        <span class="text-nbc-purple">NORDHORN</span>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-4 leading-[0.95] tracking-tight">
+                        MEHR<br>
+                        <span class="gradient-text">LEISTUNG.</span><br>
+                        <span class="gradient-text">MEHR DU.</span>
                     </h1>
-                    <div class="h-1.5 w-28 bg-gradient-to-r from-nbc-orange to-nbc-purple my-6 rounded-full"></div>
-                    <p class="text-2xl md:text-3xl text-white font-heading font-bold mb-3 tracking-wide">
-                        SCHNELLER. SPRUNGKRÄFTIGER.<br>BEWEGLICHER. STÄRKER.
+                    <div class="h-1 w-20 bg-gradient-to-r from-nbc-orange to-nbc-purple my-6 rounded-full"></div>
+                    <p class="text-xl md:text-2xl text-gray-300 font-heading font-semibold mb-2">
+                        SCHNELLER. SPRUNGKRÄFTIGER. BEWEGLICHER.
                     </p>
-                    <p class="text-gray-300 text-lg mt-4 leading-relaxed">
-                        Sportartübergreifendes Athletiktraining für alle Sportarten. Für Kinder und Jugendliche von 8–18 Jahren.
+                    <p class="text-gray-500 text-base mt-4 leading-relaxed max-w-lg">
+                        Sportartübergreifendes Athletiktraining für Kinder und Jugendliche von 8–18 Jahren. Trainiert von Jegor Cymbal – 2. Bundesliga-Meister.
                     </p>
                     <div class="flex flex-wrap gap-3 mt-8">
-                        <a href="#video" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
+                        <a href="#video" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             Video ansehen
                         </a>
-                        <a href="#anmeldung" class="border-2 border-white/30 text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:border-nbc-orange hover:text-nbc-orange transition-colors flex items-center gap-2">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        <a href="#anmeldung" class="border border-white/20 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:border-nbc-orange hover:text-nbc-orange transition-colors">
                             Jetzt anmelden
                         </a>
                     </div>
                 </div>
-                <!-- Video Column - Poster with play button -->
-                <div class="relative group" id="video">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-nbc-orange via-nbc-purple to-nbc-orange rounded-3xl blur-sm opacity-40 group-hover:opacity-60 transition-opacity"></div>
-                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] max-h-[600px] mx-auto border border-white/10">
-                        <img src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm mit Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
-                        <a href="#video-player" onclick="document.getElementById('athletik-video').play();this.closest('.group').classList.add('playing');return false;" class="absolute inset-0 flex items-center justify-center z-10">
-                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
-                            <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white/95 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
-                                <svg class="w-8 h-8 md:w-10 md:h-10 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                        </a>
-                        <video id="athletik-video" class="w-full h-full object-cover opacity-0 group-[.playing]:opacity-100 transition-opacity duration-500" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
-                            <source src="./athletik-video.mp4" type="video/mp4">
-                        </video>
+
+                <!-- Video Card -->
+                <div class="animate-slideUp delay-200" id="video">
+                    <div class="video-container">
+                        <div class="video-card aspect-[9/16] shadow-2xl">
+                            <img src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm – Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover z-0" onerror="this.style.display='none'">
+                            <a href="#video-player" onclick="const v=document.getElementById('athletik-video');v.play();this.style.display='none';return false;" class="play-overlay">
+                                <div class="play-btn">
+                                    <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </a>
+                            <video id="athletik-video" class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls style="position:absolute;inset:0;">
+                                <source src="./athletik-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- VIDEO TRAILER SECTION -->
-    <section class="py-16 px-4 bg-[#0a0a0a]">
-        <div class="max-w-lg mx-auto">
-            <div class="text-center mb-8">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-3">SEHE ES IN AKTION</h2>
-                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
-                <p class="text-gray-400 mt-4">Ein Einblick in das Athletiktraining mit Jegor Cymbal</p>
-            </div>
-            <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] mx-auto border border-white/10">
-                <video class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted controls preload="metadata" id="athletik-video-player">
-                    <source src="./athletik-video.mp4" type="video/mp4">
-                </video>
+    <!-- STATS BAR -->
+    <section class="bg-white/[0.02] border-y border-white/5 py-8">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">8–18</p>
+                    <p class="text-gray-500 text-sm mt-1">Jahre</p>
+                </div>
+                <div>
+                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">90</p>
+                    <p class="text-gray-500 text-sm mt-1">Min. Training</p>
+                </div>
+                <div>
+                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">25</p>
+                    <p class="text-gray-500 text-sm mt-1">Max. Teilnehmer</p>
+                </div>
+                <div>
+                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">1</p>
+                    <p class="text-gray-500 text-sm mt-1">Tag pro Monat</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SPORT ICONS -->
-    <section class="py-8 bg-white border-b border-[#e0e0e5]">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="flex flex-wrap justify-center gap-8">
+    <!-- SPORTS -->
+    <section class="py-12 border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex flex-wrap justify-center gap-6">
                 <div class="sport-icon" title="Fußball">⚽</div>
-                <div class="sport-icon" title="Tennis">🎾</div>
+                <div class="sport-icon" title="Basketball">🏀</div>
                 <div class="sport-icon" title="Handball">🤾</div>
                 <div class="sport-icon" title="Volleyball">🏐</div>
-                <div class="sport-icon" title="Basketball">🏀</div>
+                <div class="sport-icon" title="Tennis">🎾</div>
             </div>
-            <p class="text-center text-[#4a4a5a] mt-4 text-sm font-bold uppercase tracking-wider">Alle Sportarten willkommen!</p>
+            <p class="text-center text-gray-500 mt-5 text-sm font-medium uppercase tracking-widest">Für alle Sportarten</p>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="py-20 md:py-28 px-4 relative noise">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">SEHE ES IN AKTION</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+                <p class="text-gray-500 mt-4 text-lg">Ein Einblick in das Athletiktraining</p>
+            </div>
+            <div class="video-container reveal">
+                <div class="video-card aspect-[9/16] shadow-2xl">
+                    <video class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted controls preload="metadata" id="video-player">
+                        <source src="./athletik-video.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRAINER -->
+    <section class="py-20 md:py-28 px-4 border-t border-white/5">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-14 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">DEIN TRAINER</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+            </div>
+            <div class="glass-card rounded-2xl p-8 md:p-12 max-w-2xl mx-auto reveal">
+                <div class="flex flex-col sm:flex-row items-center gap-6 mb-8">
+                    <img src="./news-jegor-cymbal.jpg" alt="Jegor Cymbal" class="w-28 h-28 rounded-full object-cover border-4 border-nbc-orange shadow-lg shrink-0" onerror="this.style.display='none'">
+                    <div class="text-center sm:text-left">
+                        <h3 class="text-2xl md:text-3xl font-heading font-bold text-white">JEGOR CYMBAL</h3>
+                        <p class="text-nbc-orange font-bold uppercase tracking-wider text-sm mt-1">Dein Athletik-Trainer</p>
+                    </div>
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <span class="text-nbc-orange text-lg">🏆</span>
+                        <span class="text-sm">2. Bundesliga-Meister 2025/26</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <span class="text-nbc-orange text-lg">⭐</span>
+                        <span class="text-sm">Aktiver Leistungssportler</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <span class="text-nbc-orange text-lg">💪</span>
+                        <span class="text-sm">Professionelle Athletik-Expertise</span>
+                    </div>
+                    <div class="flex items-center gap-3 text-gray-300">
+                        <span class="text-nbc-orange text-lg">🎯</span>
+                        <span class="text-sm">Spezialist für Schnelligkeit & Leistungsentwicklung</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- TRAININGSZIELE -->
-    <section class="py-16 px-4">
+    <section class="py-20 md:py-28 px-4 border-t border-white/5">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-heading font-bold text-[#1a1a2e] text-center mb-4">TRAININGSZIELE</h2>
-            <p class="text-center text-[#4a4a5a] mb-12 max-w-2xl mx-auto">
-                Die Athletik ist die Grundlage jeder Sportart. Unser sportartübergreifendes Programm bringt dich weiter – egal welchen Sport du machst.
-            </p>
-
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">⚡</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Schnelligkeit verbessern</h3>
-                        <p class="text-[#4a4a5a] text-sm">Reaktionsfähigkeit und Beschleunigung für deinen Sport.</p>
-                    </div>
+            <div class="text-center mb-14 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">TRAININGSZIELE</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+                <p class="text-gray-500 mt-4 max-w-xl mx-auto">Die Athletik ist die Grundlage jeder Sportart. Unser sportartübergreifendes Programm bringt dich weiter.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">⚡</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Schnelligkeit</h3>
+                    <p class="text-gray-500 text-sm">Reaktionsfähigkeit und Beschleunigung für deinen Sport.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">🦘</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Sprungkraft steigern</h3>
-                        <p class="text-[#4a4a5a] text-sm">Mehr Explosivität und vertikale Reichweite.</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">🦘</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Sprungkraft</h3>
+                    <p class="text-gray-500 text-sm">Mehr Explosivität und vertikale Reichweite.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">🤸</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Beweglichkeit erhöhen</h3>
-                        <p class="text-[#4a4a5a] text-sm">Mehr Flexibilität für bessere Bewegungsabläufe.</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">🤸</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Beweglichkeit</h3>
+                    <p class="text-gray-500 text-sm">Mehr Flexibilität für bessere Bewegungsabläufe.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">🎯</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Koordination verbessern</h3>
-                        <p class="text-[#4a4a5a] text-sm">Bessere Motorik und Körperkontrolle.</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">🎯</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Koordination</h3>
+                    <p class="text-gray-500 text-sm">Bessere Motorik und Körperkontrolle.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">🛡️</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Verletzungen vorbeugen</h3>
-                        <p class="text-[#4a4a5a] text-sm">Stabilisierung und präventives Training.</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">🛡️</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Verletzungsvorbeugung</h3>
+                    <p class="text-gray-500 text-sm">Stabilisierung und präventives Training.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl border border-[#e0e0e5] flex items-start gap-4">
-                    <span class="text-3xl">📈</span>
-                    <div>
-                        <h3 class="text-lg font-bold text-[#1a1a2e] mb-1">Leistungsfähigkeit entwickeln</h3>
-                        <p class="text-[#4a4a5a] text-sm">Nachhaltig mehr Ausdauer und Kraft aufbauen.</p>
-                    </div>
+                <div class="glass-card rounded-xl p-6 reveal">
+                    <span class="text-3xl mb-4 block">📈</span>
+                    <h3 class="text-lg font-bold text-white mb-2">Leistungsentwicklung</h3>
+                    <p class="text-gray-500 text-sm">Nachhaltig mehr Ausdauer und Kraft aufbauen.</p>
                 </div>
             </div>
-
-            <div class="text-center bg-gradient-to-r from-nbc-orange/10 to-nbc-purple/10 border border-nbc-orange/30 rounded-2xl p-8">
-                <p class="text-2xl font-heading font-bold text-[#1a1a2e] italic">
+            <div class="text-center mt-12 reveal">
+                <p class="text-xl md:text-2xl font-heading font-bold text-white italic">
                     "DIE ATHLETIK IST DIE GRUNDLAGE JEDER SPORTART."
                 </p>
-                <p class="text-nbc-orange mt-2 font-bold">— Jegor Cymbal</p>
+                <p class="text-nbc-orange mt-3 font-bold text-sm uppercase tracking-wider">— Jegor Cymbal</p>
             </div>
         </div>
     </section>
 
     <!-- PREISE -->
-    <section class="py-16 px-4 bg-white border-t border-[#e0e0e5]">
+    <section class="py-20 md:py-28 px-4 border-t border-white/5" id="preise">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-heading font-bold text-[#1a1a2e] text-center mb-4">PREISE</h2>
-            <p class="text-center text-[#4a4a5a] mb-10 max-w-2xl mx-auto">
-                Faire Preise für alle. Vereinsmitglieder sparen.
-            </p>
-            <div class="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <div class="bg-gradient-to-br from-nbc-orange/10 to-nbc-orange/5 border-2 border-nbc-orange rounded-2xl p-8 text-center relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-nbc-orange text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                        Mitglieder
-                    </div>
-                    <p class="text-[#4a4a5a] text-sm font-bold uppercase tracking-wider mb-2 mt-2">NBC Vereinsmitglieder</p>
-                    <p class="text-5xl font-heading font-bold text-[#1a1a2e] mb-1">8 €</p>
-                    <p class="text-[#4a4a5a] text-sm">pro Monat</p>
-                    <ul class="mt-6 space-y-2 text-[#4a4a5a] text-sm text-left">
-                        <li class="check-item">Sportartübergreifendes Athletiktraining</li>
-                        <li class="check-item">Trainiert von Jegor Cymbal</li>
-                        <li class="check-item">Für alle Sportarten</li>
-                        <li class="check-item">Kinder & Jugendliche 8–18 Jahre</li>
+            <div class="text-center mb-14 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">PREISE</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+                <p class="text-gray-500 mt-4">Faire Preise. Vereinsmitglieder sparen.</p>
+            </div>
+            <div class="grid md:grid-cols-2 gap-6 max-w-xl mx-auto">
+                <div class="pricing-card featured rounded-2xl p-8 text-center reveal">
+                    <div class="bg-nbc-orange/20 text-nbc-orange text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-4">Mitglieder</div>
+                    <p class="text-gray-500 text-sm uppercase tracking-wider mb-2">NBC Vereinsmitglieder</p>
+                    <p class="text-5xl font-heading font-bold text-white mb-1">8 €</p>
+                    <p class="text-gray-500 text-sm mb-6">pro Monat</p>
+                    <ul class="space-y-3 text-gray-400 text-sm text-left">
+                        <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Athletiktraining</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Trainiert von Jegor</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Für alle Sportarten</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> 8–18 Jahre</li>
                     </ul>
                 </div>
-                <div class="bg-gradient-to-br from-nbc-purple/10 to-nbc-purple/5 border-2 border-nbc-purple rounded-2xl p-8 text-center relative">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-nbc-purple text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                        Externe
-                    </div>
-                    <p class="text-[#4a4a5a] text-sm font-bold uppercase tracking-wider mb-2 mt-2">Externe Teilnehmer</p>
-                    <p class="text-5xl font-heading font-bold text-[#1a1a2e] mb-1">10 €</p>
-                    <p class="text-[#4a4a5a] text-sm">pro Monat</p>
-                    <ul class="mt-6 space-y-2 text-[#4a4a5a] text-sm text-left">
-                        <li class="check-item">Sportartübergreifendes Athletiktraining</li>
-                        <li class="check-item">Trainiert von Jegor Cymbal</li>
-                        <li class="check-item">Für alle Sportarten</li>
-                        <li class="check-item">Kinder & Jugendliche 8–18 Jahre</li>
+                <div class="pricing-card rounded-2xl p-8 text-center reveal">
+                    <div class="bg-nbc-purple/20 text-nbc-purple text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-4">Externe</div>
+                    <p class="text-gray-500 text-sm uppercase tracking-wider mb-2">Externe Teilnehmer</p>
+                    <p class="text-5xl font-heading font-bold text-white mb-1">10 €</p>
+                    <p class="text-gray-500 text-sm mb-6">pro Monat</p>
+                    <ul class="space-y-3 text-gray-400 text-sm text-left">
+                        <li class="flex items-center gap-2"><span class="text-nbc-purple">✓</span> Athletiktraining</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-purple">✓</span> Trainiert von Jegor</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-purple">✓</span> Für alle Sportarten</li>
+                        <li class="flex items-center gap-2"><span class="text-nbc-purple">✓</span> 8–18 Jahre</li>
                     </ul>
                 </div>
             </div>
-            <p class="text-center text-[#6a6a7a] text-sm mt-6">
-                Alle Preise gelten monatlich. Anmeldung ist ausschließlich über das Formular möglich.
-            </p>
+            <p class="text-center text-gray-600 text-sm mt-6">Alle Preise gelten monatlich. Anmeldung ausschließlich über das Formular.</p>
         </div>
     </section>
 
-    <!-- ANMELDEFORMULAR -->
-    <section class="py-16 px-4 bg-white border-t border-[#e0e0e5]" id="anmeldung">
+    <!-- ANMELDUNG -->
+    <section class="py-20 md:py-28 px-4 border-t border-white/5" id="anmeldung">
         <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-10">
-                <h2 class="text-4xl font-heading font-bold text-[#1a1a2e] mb-4">JETZT ANMELDEN!</h2>
-                <p class="text-[#4a4a5a]">
-                    Fülle das Formular aus und wir melden uns bei dir. Die Anmeldung ist ausschließlich über dieses Formular möglich.
-                </p>
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">JETZT ANMELDEN</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+                <p class="text-gray-500 mt-4">Fülle das Formular aus und wir melden uns bei dir.</p>
             </div>
-
-            <div class="bg-[#f8f9fa] p-8 rounded-2xl border border-[#e0e0e5]">
+            <div class="glass-card rounded-2xl p-8 md:p-10 reveal">
                 <form class="space-y-5" onsubmit="event.preventDefault(); alert('Vielen Dank für deine Anmeldung! Wir melden uns bei dir.');">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Vorname *</label>
-                            <input type="text" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname *</label>
+                            <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Nachname *</label>
-                            <input type="text" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachname *</label>
+                            <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
-
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Geburtsdatum *</label>
-                            <input type="date" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Geburtsdatum *</label>
+                            <input type="date" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
                         </div>
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Alter *</label>
-                            <input type="number" min="8" max="18" required placeholder="8-18" class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Alter *</label>
+                            <input type="number" min="8" max="18" required placeholder="8–18" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
-
                     <div>
-                        <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Sportart *</label>
-                        <select required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
-                            <option value="">Bitte wählen...</option>
-                            <option value="basketball">Basketball</option>
-                            <option value="fussball">Fußball</option>
-                            <option value="handball">Handball</option>
-                            <option value="volleyball">Volleyball</option>
-                            <option value="tennis">Tennis</option>
-                            <option value="andere">Andere Sportart</option>
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Sportart *</label>
+                        <select required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
+                            <option value="" class="bg-gray-900">Bitte wählen...</option>
+                            <option value="basketball" class="bg-gray-900">Basketball</option>
+                            <option value="fussball" class="bg-gray-900">Fußball</option>
+                            <option value="handball" class="bg-gray-900">Handball</option>
+                            <option value="volleyball" class="bg-gray-900">Volleyball</option>
+                            <option value="tennis" class="bg-gray-900">Tennis</option>
+                            <option value="andere" class="bg-gray-900">Andere Sportart</option>
                         </select>
                     </div>
-
                     <div>
-                        <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Verein / Team</label>
-                        <input type="text" placeholder="z.B. NBC Baskets, TSV Nordhorn..." class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Verein / Team</label>
+                        <input type="text" placeholder="z.B. NBC Baskets, TSV Nordhorn..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
-
-                    <hr class="border-[#e0e0e5]">
-
+                    <hr class="border-white/10">
                     <div>
-                        <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Vorname Erziehungsberechtigter *</label>
-                        <input type="text" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname Erziehungsberechtigter *</label>
+                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
                     <div>
-                        <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Nachname Erziehungsberechtigter *</label>
-                        <input type="text" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachname Erziehungsberechtigter *</label>
+                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
-
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">E-Mail *</label>
-                            <input type="email" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">E-Mail *</label>
+                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                         <div>
-                            <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Telefon *</label>
-                            <input type="tel" required class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors">
+                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Telefon *</label>
+                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
-
                     <div>
-                        <label class="block text-[#1a1a2e] font-bold text-sm mb-1">Nachricht (optional)</label>
-                        <textarea rows="3" placeholder="Hast du noch Fragen oder Anmerkungen?" class="w-full bg-white border border-[#d0d0d5] rounded-lg px-4 py-3 text-[#1a1a2e] focus:border-nbc-orange focus:outline-none focus:ring-1 focus:ring-nbc-orange transition-colors"></textarea>
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachricht (optional)</label>
+                        <textarea rows="3" placeholder="Hast du noch Fragen oder Anmerkungen?" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600"></textarea>
                     </div>
-
                     <div class="flex items-start gap-3">
                         <input type="checkbox" required id="datenschutz" class="mt-1 w-4 h-4 accent-[#F2722C]">
-                        <label for="datenschutz" class="text-[#4a4a5a] text-sm">
+                        <label for="datenschutz" class="text-gray-500 text-sm">
                             Ich stimme der Verarbeitung meiner Daten gemäß der <a href="./Datenschutz.html" class="text-nbc-orange hover:underline">Datenschutzerklärung</a> zu. *
                         </label>
                     </div>
-
-                    <button type="submit" class="w-full bg-gradient-to-r from-nbc-orange to-nbc-purple hover:from-orange-600 hover:to-purple-600 text-white font-heading font-bold text-lg py-4 rounded-lg transition-all transform hover:scale-[1.02] shadow-lg">
+                    <button type="submit" class="w-full bg-gradient-to-r from-nbc-orange to-nbc-purple text-white font-heading font-bold text-lg py-4 rounded-xl transition-all transform hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(242,114,44,0.3)]">
                         JETZT ANMELDEN
                     </button>
                 </form>
-
-                <p class="text-center mt-6 text-[#6a6a7a] text-sm">
+                <p class="text-center mt-6 text-gray-600 text-sm">
                     Fragen? Schreib uns: <a href="mailto:info@nbc-nordhorn.de" class="text-nbc-orange hover:underline">info@nbc-nordhorn.de</a>
                 </p>
             </div>
         </div>
     </section>
 
-    <!-- ZIELGRUPPE -->
-    <section class="py-12 px-4 bg-gradient-to-r from-nbc-orange/10 to-nbc-purple/10">
+    <!-- FÜR WEN -->
+    <section class="py-16 px-4 border-t border-white/5">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4">FÜR WEN?</h2>
-            <div class="flex flex-wrap justify-center gap-6 mt-6">
-                <div class="bg-white px-6 py-4 rounded-xl border border-[#e0e0e5] shadow-sm">
+            <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-8 reveal">FÜR WEN?</h2>
+            <div class="flex flex-wrap justify-center gap-5 reveal">
+                <div class="glass-card px-6 py-5 rounded-xl">
                     <span class="text-3xl">👦👧</span>
-                    <p class="font-bold text-[#1a1a2e] mt-2">Kinder & Jugendliche</p>
-                    <p class="text-[#4a4a5a] text-sm">8–18 Jahre</p>
+                    <p class="font-bold text-white mt-2">Kinder & Jugendliche</p>
+                    <p class="text-gray-500 text-sm">8–18 Jahre</p>
                 </div>
-                <div class="bg-white px-6 py-4 rounded-xl border border-[#e0e0e5] shadow-sm">
+                <div class="glass-card px-6 py-5 rounded-xl">
                     <span class="text-3xl">🏅</span>
-                    <p class="font-bold text-[#1a1a2e] mt-2">Alle Sportarten</p>
-                    <p class="text-[#4a4a5a] text-sm">Sportartübergreifend</p>
+                    <p class="font-bold text-white mt-2">Alle Sportarten</p>
+                    <p class="text-gray-500 text-sm">Sportartübergreifend</p>
                 </div>
-                <div class="bg-white px-6 py-4 rounded-xl border border-[#e0e0e5] shadow-sm">
+                <div class="glass-card px-6 py-5 rounded-xl">
                     <span class="text-3xl">📍</span>
-                    <p class="font-bold text-[#1a1a2e] mt-2">Nordhorn & Umgebung</p>
-                    <p class="text-[#4a4a5a] text-sm">NBC Baskets</p>
+                    <p class="font-bold text-white mt-2">Nordhorn & Umgebung</p>
+                    <p class="text-gray-500 text-sm">NBC Baskets</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SHARE BAR -->
-    <section class="py-8 px-4 bg-white border-t border-[#e0e0e5]">
-        <div class="max-w-4xl mx-auto">
-            <p class="text-sm font-bold uppercase tracking-wider text-[#8a8a9a] mb-4">Seite teilen</p>
+    <!-- SHARE -->
+    <section class="py-10 px-4 border-t border-white/5">
+        <div class="max-w-3xl mx-auto">
+            <p class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-4">Seite teilen</p>
             <div class="flex flex-wrap gap-3">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://nbc-nordhorn.de/Athletik.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 27 24 18.062 24 12.073z"/></svg>
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     Facebook
                 </a>
-                <a href="https://twitter.com/intent/tweet?url=https://nbc-nordhorn.de/Athletik.html&text=NBC Athletikprogramm mit Jegor Cymbal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                <a href="https://twitter.com/intent/tweet?url=https://nbc-nordhorn.de/Athletik.html&text=NBC Athletikprogramm mit Jegor Cymbal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-black border border-white/10 text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                     X / Twitter
                 </a>
@@ -506,17 +646,33 @@
         </div>
     </section>
 
-    <footer class="bg-[#f8f9fa] py-8 text-center text-[#8a8a9a] text-sm border-t border-[#e0e0e5] mt-auto">
+    <!-- FOOTER -->
+    <footer class="py-8 text-center text-gray-600 text-sm border-t border-white/5 mt-auto">
         <p>© 2026 NBC Baskets Nordhorn e.V. — Athletikprogramm</p>
         <p class="mt-1">
-            <a href="./Impressum.html" class="hover:text-nbc-orange">Impressum</a> |
-            <a href="./Datenschutz.html" class="hover:text-nbc-orange">Datenschutz</a>
+            <a href="./Impressum.html" class="hover:text-gray-400 transition-colors">Impressum</a> ·
+            <a href="./Datenschutz.html" class="hover:text-gray-400 transition-colors ml-1">Datenschutz</a>
         </p>
     </footer>
 
+    <!-- STICKY CTA -->
     <a href="#anmeldung" class="register-btn">
-        Jetzt Anmelden
+        ✦ Jetzt Anmelden
     </a>
+
+    <!-- COOKIE CONSENT -->
     <script src="./js/cookie-consent.js"></script>
+
+    <!-- SCROLL REVEAL -->
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
