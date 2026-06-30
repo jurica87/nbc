@@ -144,6 +144,7 @@
                     <a href="./index.html#teams" class="hover:text-nbc-orange transition-colors">Teams</a>
                     <a href="./index.html#halle" class="hover:text-nbc-orange transition-colors">Halle</a>
                     <a href="./Cheerleader.html" class="hover:text-nbc-orange transition-colors">Breitensport</a>
+                    <a href="./Athletik.html" class="hover:text-nbc-orange transition-colors">Athletik</a>
                     <a href="./news.html" class="hover:text-nbc-orange transition-colors">News</a>
                     <a href="./index.html#kontakt" class="hover:text-nbc-orange transition-colors">Kontakt</a>
                     <a href="./Probetraining.html" class="hover:text-nbc-orange transition-colors">Probetraining</a>
@@ -164,6 +165,7 @@
                 <a href="./Schiedsrichter.html" class="block px-3 py-2">Schiedsrichter</a>
                 <a href="./index.html#teams" class="block px-3 py-2">Teams</a>
                 <a href="./Cheerleader.html" class="block px-3 py-2">Breitensport</a>
+                <a href="./Athletik.html" class="block px-3 py-2 font-heading font-bold text-nbc-orange uppercase">Athletik</a>
                 <a href="./news.html" class="block px-3 py-2">News</a>
                 <a href="./Probetraining.html" class="block px-3 py-2">Probetraining</a>
                 <a href="./Mitgliedschaft.html" class="block px-3 py-2 font-heading font-bold text-nbc-orange uppercase">Mitglied werden</a>
@@ -173,52 +175,71 @@
     </nav>
 
     <!-- HERO SECTION -->
-    <section class="hero-bg py-20 px-4 relative">
+    <section class="hero-bg py-16 md:py-24 px-4 relative">
         <div class="diagonal-stripe top-1/3"></div>
         <div class="max-w-6xl mx-auto relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                <!-- Text Column -->
                 <div>
-                    <div class="inline-block bg-nbc-orange/20 border border-nbc-orange/40 rounded-full px-4 py-1 mb-6">
+                    <div class="inline-flex items-center gap-2 bg-nbc-orange/20 border border-nbc-orange/40 rounded-full px-4 py-1.5 mb-6">
+                        <span class="w-2 h-2 bg-nbc-orange rounded-full animate-pulse"></span>
                         <span class="text-nbc-orange font-heading font-bold text-sm uppercase tracking-wider">NBC Nordhorn Athletikprogramm</span>
                     </div>
-                    <h1 class="text-5xl md:text-6xl font-heading font-bold text-white mb-2 leading-tight">
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-3 leading-[0.95]">
                         ATHLETIK<br>
-                        <span class="text-nbc-orange">PROGRAMM</span><br>
+                        <span class="text-nbc-orange">PROGRAMM</span>r>
                         <span class="text-nbc-purple">NORDHORN</span>
                     </h1>
-                    <div class="h-1 w-24 bg-gradient-to-r from-nbc-orange to-nbc-purple my-6"></div>
-                    <p class="text-2xl text-white font-heading font-bold mb-2">
-                        SCHNELLER. SPRUNGKRÄFTIGER. BEWEGLICHER. STÄRKER.
+                    <div class="h-1.5 w-28 bg-gradient-to-r from-nbc-orange to-nbc-purple my-6 rounded-full"></div>
+                    <p class="text-2xl md:text-3xl text-white font-heading font-bold mb-3 tracking-wide">
+                        SCHNELLER. SPRUNGKRÄFTIGER.<br>BEWEGLICHER. STÄRKER.
                     </p>
-                    <p class="text-gray-300 text-lg mt-4">
+                    <p class="text-gray-300 text-lg mt-4 leading-relaxed">
                         Sportartübergreifendes Athletiktraining für alle Sportarten. Für Kinder und Jugendliche von 8–18 Jahren.
                     </p>
-                </div>
-                <div class="relative">
-                    <div class="athlete-card rounded-2xl p-8">
-                        <div class="flex items-center gap-4 mb-6">
-                            <img src="./news-jegor-cymbal.jpg" alt="Jegor Cymbal" class="w-20 h-20 rounded-full object-cover border-3 border-nbc-orange" onerror="this.style.display='none'">
-                            <div>
-                                <h3 class="text-xl font-heading font-bold text-white">JEGOR CYMBAL</h3>
-                                <p class="text-nbc-orange text-sm font-bold uppercase tracking-wider">Dein Trainer</p>
-                            </div>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3 text-gray-300">
-                                <span class="text-nbc-orange">🏆</span>
-                                <span>Profi-Sportler</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-gray-300">
-                                <span class="text-nbc-orange">🥇</span>
-                                <span>2. Bundesliga-Meister Saison 2025/2026 mit den ETB Miners</span>
-                            </div>
-                            <div class="flex items-center gap-3 text-gray-300">
-                                <span class="text-nbc-orange">💪</span>
-                                <span>Praxiserfahrung aus Leistungs- und Profisport</span>
-                            </div>
-                        </div>
+                    <div class="flex flex-wrap gap-3 mt-8">
+                        <a href="#video" class="bg-gradient-to-r from-nbc-orange to-nbc-purple text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            Video ansehen
+                        </a>
+                        <a href="#anmeldung" class="border-2 border-white/30 text-white px-6 py-3 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:border-nbc-orange hover:text-nbc-orange transition-colors flex items-center gap-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            Jetzt anmelden
+                        </a>
                     </div>
                 </div>
+                <!-- Video Column - Poster with play button -->
+                <div class="relative group" id="video">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-nbc-orange via-nbc-purple to-nbc-orange rounded-3xl blur-sm opacity-40 group-hover:opacity-60 transition-opacity"></div>
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] max-h-[600px] mx-auto border border-white/10">
+                        <img src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm mit Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'">
+                        <a href="#video-player" onclick="document.getElementById('athletik-video').play();this.closest('.group').classList.add('playing');return false;" class="absolute inset-0 flex items-center justify-center z-10">
+                            <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+                            <div class="relative w-20 h-20 md:w-24 md:h-24 bg-white/95 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                                <svg class="w-8 h-8 md:w-10 md:h-10 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                        </a>
+                        <video id="athletik-video" class="w-full h-full object-cover opacity-0 group-[.playing]:opacity-100 transition-opacity duration-500" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
+                            <source src="./athletik-video.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO TRAILER SECTION -->
+    <section class="py-16 px-4 bg-[#0a0a0a]">
+        <div class="max-w-lg mx-auto">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-3">SEHE ES IN AKTION</h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
+                <p class="text-gray-400 mt-4">Ein Einblick in das Athletiktraining mit Jegor Cymbal</p>
+            </div>
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[9/16] mx-auto border border-white/10">
+                <video class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted controls preload="metadata" id="athletik-video-player">
+                    <source src="./athletik-video.mp4" type="video/mp4">
+                </video>
             </div>
         </div>
     </section>
@@ -460,6 +481,27 @@
                     <p class="font-bold text-[#1a1a2e] mt-2">Nordhorn & Umgebung</p>
                     <p class="text-[#4a4a5a] text-sm">NBC Baskets</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHARE BAR -->
+    <section class="py-8 px-4 bg-white border-t border-[#e0e0e5]">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-sm font-bold uppercase tracking-wider text-[#8a8a9a] mb-4">Seite teilen</p>
+            <div class="flex flex-wrap gap-3">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://nbc-nordhorn.de/Athletik.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 27 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </a>
+                <a href="https://twitter.com/intent/tweet?url=https://nbc-nordhorn.de/Athletik.html&text=NBC Athletikprogramm mit Jegor Cymbal" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-black text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    X / Twitter
+                </a>
+                <a href="https://wa.me/?text=NBC%20Athletikprogramm%20mit%20Jegor%20Cymbal%20https%3A%2F%2Fnbc-nordhorn.de%2FAthletik.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#25D366] text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    WhatsApp
+                </a>
             </div>
         </div>
     </section>
