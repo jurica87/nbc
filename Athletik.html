@@ -226,6 +226,17 @@
             pointer-events: none;
         }
 
+        .athletik-video {
+            display: none;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            object-fit: cover;
+        }
+
+        .athletik-video.is-playing {
+            display: block;
+        }
+
 
     </style>
     <link rel="stylesheet" href="./css/cookie-consent.css">
@@ -296,7 +307,7 @@
                         Sportartübergreifendes Athletiktraining für Kinder und Jugendliche von 8–18 Jahren. Trainiert von Jegor Cymbal – 2. Bundesliga-Meister.
                     </p>
                     <div class="flex flex-wrap gap-3 mt-8">
-                        <a href="#video" onclick="document.getElementById('play-overlay').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
+                        <a href="#video" onclick="playAthletikVideo();document.getElementById('video').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             Video ansehen
                         </a>
@@ -313,13 +324,13 @@
                             <!-- Flyer Bild (ganze Sicht) -->
                             <img id="video-poster" src="./athletik-flyer.jpg" alt="NBC Athletik Programm Flyer – Jegor Cymbal" class="w-full h-auto block transition-opacity duration-500 rounded-2xl" onerror="this.style.display='none'">
                             <!-- Play Button Overlay -->
-                            <button id="play-overlay" onclick="const v=document.getElementById('athletik-video');const p=document.getElementById('video-poster');const o=document.getElementById('play-overlay');p.style.opacity='0';o.style.display='none';v.style.opacity='1';v.style.position='relative';v.play();" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl">
+                            <button id="play-overlay" type="button" onclick="playAthletikVideo()" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl" aria-label="Athletik-Video abspielen">
                                 <div class="play-btn">
                                     <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
                             </button>
                             <!-- Video (hidden until play) -->
-                            <video id="athletik-video" class="w-full h-auto block opacity-0 transition-opacity duration-500 rounded-2xl" style="position:absolute;top:0;left:0;" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
+                            <video id="athletik-video" class="athletik-video rounded-2xl" poster="./athletik-video-poster.jpg" playsinline muted preload="metadata" controls>
                                 <source src="./athletik-video.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -643,6 +654,25 @@
 
     <!-- SCROLL REVEAL -->
     <script>
+        function playAthletikVideo() {
+            const video = document.getElementById('athletik-video');
+            const poster = document.getElementById('video-poster');
+            const overlay = document.getElementById('play-overlay');
+
+            if (!video) return;
+
+            if (poster) poster.style.display = 'none';
+            if (overlay) overlay.style.display = 'none';
+
+            video.classList.add('is-playing');
+            video.muted = false;
+
+            video.play().catch(() => {
+                video.muted = true;
+                video.play().catch(() => {});
+            });
+        }
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
