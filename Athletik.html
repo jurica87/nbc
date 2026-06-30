@@ -537,7 +537,7 @@
                 <p class="text-gray-500 mt-4">Fülle das Formular aus und wir melden uns bei dir.</p>
             </div>
             <div class="glass-card rounded-2xl p-8 md:p-10 reveal">
-                <form class="space-y-5" onsubmit="event.preventDefault(); alert('Vielen Dank für deine Anmeldung! Wir melden uns bei dir.');">
+                <form class="space-y-5" onsubmit="handleAthletikSignup(event)">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname *</label>
@@ -548,15 +548,10 @@
                             <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Geburtsdatum *</label>
-                            <input type="date" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
-                        </div>
-                        <div>
-                            <label class="block text-gray-300 font-medium text-sm mb-1.5">Alter *</label>
-                            <input type="number" min="8" max="18" required placeholder="8–18" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
-                        </div>
+                    <div>
+                        <label class="block text-gray-300 font-medium text-sm mb-1.5">Geburtsdatum *</label>
+                        <input type="date" required data-birthdate class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
+                        <p class="mt-2 text-xs text-gray-600">Für Teilnehmer von 8 bis 18 Jahren.</p>
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Sportart *</label>
@@ -606,6 +601,7 @@
                     <button type="submit" class="w-full bg-gradient-to-r from-nbc-orange to-nbc-purple text-white font-heading font-bold text-lg py-4 rounded-xl transition-all transform hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(242,114,44,0.3)]">
                         JETZT ANMELDEN
                     </button>
+                    <p data-form-message class="hidden rounded-xl border border-green-500/30 bg-green-500/10 px-4 py-3 text-sm font-medium text-green-300" role="status"></p>
                 </form>
                 <p class="text-center mt-6 text-gray-600 text-sm">
                     Fragen? Schreib uns: <a href="mailto:info@nbc-nordhorn.de" class="text-nbc-orange hover:underline">info@nbc-nordhorn.de</a>
@@ -695,6 +691,52 @@
                 video.muted = true;
                 video.play().catch(() => {});
             });
+        }
+
+        function getAgeFromBirthdate(birthdateValue) {
+            const birthdate = new Date(birthdateValue);
+            const today = new Date();
+            let age = today.getFullYear() - birthdate.getFullYear();
+            const monthOffset = today.getMonth() - birthdate.getMonth();
+
+            if (monthOffset < 0 || (monthOffset === 0 && today.getDate() < birthdate.getDate())) {
+                age -= 1;
+            }
+
+            return age;
+        }
+
+        function handleAthletikSignup(event) {
+            event.preventDefault();
+
+            const form = event.currentTarget;
+            const birthdateInput = form.querySelector('[data-birthdate]');
+            const message = form.querySelector('[data-form-message]');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const age = getAgeFromBirthdate(birthdateInput.value);
+
+            message.classList.remove('hidden', 'border-green-500/30', 'bg-green-500/10', 'text-green-300', 'border-red-500/30', 'bg-red-500/10', 'text-red-300');
+
+            if (age < 8 || age > 18) {
+                message.textContent = 'Bitte prüfe das Geburtsdatum. Das Athletikprogramm ist für Teilnehmer von 8 bis 18 Jahren.';
+                message.classList.add('border-red-500/30', 'bg-red-500/10', 'text-red-300');
+                birthdateInput.focus();
+                return;
+            }
+
+            form.reset();
+            message.textContent = 'Vielen Dank für deine Anmeldung! Das Formular wurde geleert. Wir melden uns bei dir.';
+            message.classList.add('border-green-500/30', 'bg-green-500/10', 'text-green-300');
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'ANMELDUNG GESENDET';
+            submitButton.classList.add('opacity-70', 'cursor-not-allowed');
+
+            window.setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'JETZT ANMELDEN';
+                submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
+            }, 4000);
         }
 
         const observer = new IntersectionObserver((entries) => {
