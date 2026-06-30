@@ -315,20 +315,20 @@
                     </div>
                 </div>
 
-                <!-- Video Card -->
+                <!-- Flyer + Video -->
                 <div class="animate-slideUp delay-200" id="video">
                     <div class="video-container">
-                        <div class="video-card aspect-[9/16] shadow-2xl relative">
-                            <!-- Poster Thumbnail -->
-                            <img id="video-poster" src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm – Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500" onerror="this.style.display='none'">
+                        <div class="video-card shadow-2xl relative overflow-hidden">
+                            <!-- Flyer Bild -->
+                            <img id="video-poster" src="./athletik-flyer.jpg" alt="NBC Athletik Programm Flyer – Jegor Cymbal" class="w-full h-auto block transition-opacity duration-500" onerror="this.style.display='none'">
                             <!-- Play Button Overlay -->
-                            <button id="play-overlay" onclick="const v=document.getElementById('athletik-video');const p=document.getElementById('video-poster');const o=document.getElementById('play-overlay');p.style.opacity='0';o.style.display='none';v.style.opacity='1';v.play();" class="play-overlay absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer" style="display:flex;">
+                            <button id="play-overlay" onclick="const v=document.getElementById('athletik-video');const p=document.getElementById('video-poster');const o=document.getElementById('play-overlay');p.style.opacity='0';o.style.display='none';v.style.opacity='1';v.style.position='relative';v.play();" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer">
                                 <div class="play-btn">
                                     <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
                             </button>
                             <!-- Video (hidden until play) -->
-                            <video id="athletik-video" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-500" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
+                            <video id="athletik-video" class="w-full h-auto block opacity-0 transition-opacity duration-500" style="position:absolute;top:0;left:0;" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
                                 <source src="./athletik-video.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -476,7 +476,7 @@
                 <div class="pricing-card featured rounded-2xl p-8 text-center reveal">
                     <div class="bg-nbc-orange/20 text-nbc-orange text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-4">Mitglieder</div>
                     <p class="text-gray-500 text-sm uppercase tracking-wider mb-2">NBC Vereinsmitglieder</p>
-                    <p class="text-5xl font-heading font-bold text-white mb-1">8 €</p>
+                    <p class="text-5xl font-heading font-bold text-white mb-1">4 €</p>
                     <p class="text-gray-500 text-sm mb-6">pro Monat</p>
                     <ul class="space-y-3 text-gray-400 text-sm text-left">
                         <li class="flex items-center gap-2"><span class="text-nbc-orange">✓</span> Athletiktraining</li>
@@ -488,7 +488,7 @@
                 <div class="pricing-card rounded-2xl p-8 text-center reveal">
                     <div class="bg-nbc-purple/20 text-nbc-purple text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-4">Externe</div>
                     <p class="text-gray-500 text-sm uppercase tracking-wider mb-2">Externe Teilnehmer</p>
-                    <p class="text-5xl font-heading font-bold text-white mb-1">10 €</p>
+                    <p class="text-5xl font-heading font-bold text-white mb-1">6 €</p>
                     <p class="text-gray-500 text-sm mb-6">pro Monat</p>
                     <ul class="space-y-3 text-gray-400 text-sm text-left">
                         <li class="flex items-center gap-2"><span class="text-nbc-purple">✓</span> Athletiktraining</li>
