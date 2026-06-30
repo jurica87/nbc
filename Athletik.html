@@ -305,7 +305,7 @@
                         Sportartübergreifendes Athletiktraining für Kinder und Jugendliche von 8–18 Jahren. Trainiert von Jegor Cymbal – 2. Bundesliga-Meister.
                     </p>
                     <div class="flex flex-wrap gap-3 mt-8">
-                        <a href="#video" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
+                        <a href="#video" onclick="document.getElementById('play-overlay').scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>document.getElementById('play-overlay').click(),600);return false;" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                             Video ansehen
                         </a>
@@ -318,14 +318,17 @@
                 <!-- Video Card -->
                 <div class="animate-slideUp delay-200" id="video">
                     <div class="video-container">
-                        <div class="video-card aspect-[9/16] shadow-2xl">
-                            <img src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm – Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover z-0" onerror="this.style.display='none'">
-                            <a href="#video-player" onclick="const v=document.getElementById('athletik-video');v.play();this.style.display='none';return false;" class="play-overlay">
+                        <div class="video-card aspect-[9/16] shadow-2xl relative">
+                            <!-- Poster Thumbnail -->
+                            <img id="video-poster" src="./athletik_poster_thumb.jpg" alt="NBC Athletik Programm – Jegor Cymbal" class="absolute inset-0 w-full h-full object-cover z-0 transition-opacity duration-500" onerror="this.style.display='none'">
+                            <!-- Play Button Overlay -->
+                            <button id="play-overlay" onclick="const v=document.getElementById('athletik-video');const p=document.getElementById('video-poster');const o=document.getElementById('play-overlay');p.style.opacity='0';o.style.display='none';v.style.opacity='1';v.play();" class="play-overlay absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer" style="display:flex;">
                                 <div class="play-btn">
                                     <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
-                            </a>
-                            <video id="athletik-video" class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls style="position:absolute;inset:0;">
+                            </button>
+                            <!-- Video (hidden until play) -->
+                            <video id="athletik-video" class="w-full h-full object-cover absolute inset-0 opacity-0 transition-opacity duration-500" poster="./athletik-video-poster.jpg" playsinline muted preload="none" controls>
                                 <source src="./athletik-video.mp4" type="video/mp4">
                             </video>
                         </div>
@@ -373,23 +376,7 @@
         </div>
     </section>
 
-    <!-- VIDEO SECTION -->
-    <section class="py-20 md:py-28 px-4 relative noise">
-        <div class="max-w-3xl mx-auto">
-            <div class="text-center mb-12 reveal">
-                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">SEHE ES IN AKTION</h2>
-                <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
-                <p class="text-gray-500 mt-4 text-lg">Ein Einblick in das Athletiktraining</p>
-            </div>
-            <div class="video-container reveal">
-                <div class="video-card aspect-[9/16] shadow-2xl">
-                    <video class="w-full h-full object-cover" poster="./athletik-video-poster.jpg" playsinline muted controls preload="metadata" id="video-player">
-                        <source src="./athletik-video.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- TRAINER -->
     <section class="py-20 md:py-28 px-4 border-t border-white/5">
