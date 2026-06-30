@@ -534,28 +534,28 @@
             <div class="text-center mb-12 reveal">
                 <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">JETZT ANMELDEN</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
-                <p class="text-gray-500 mt-4">Fülle das Formular aus und wir melden uns bei dir.</p>
+                <p class="text-gray-500 mt-4">Fülle das Formular aus. Es wird eine E-Mail an info@nbc-nordhorn.de vorbereitet.</p>
             </div>
             <div class="glass-card rounded-2xl p-8 md:p-10 reveal">
                 <form class="space-y-5" onsubmit="handleAthletikSignup(event)">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname *</label>
-                            <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                            <input type="text" name="Vorname Teilnehmer" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachname *</label>
-                            <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                            <input type="text" name="Nachname Teilnehmer" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Geburtsdatum *</label>
-                        <input type="date" required data-birthdate class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
+                        <input type="date" name="Geburtsdatum" required data-birthdate class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
                         <p class="mt-2 text-xs text-gray-600">Für Teilnehmer von 8 bis 18 Jahren.</p>
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Sportart *</label>
-                        <select required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
+                        <select name="Sportart" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white">
                             <option value="" class="bg-gray-900">Bitte wählen...</option>
                             <option value="basketball" class="bg-gray-900">Basketball</option>
                             <option value="fussball" class="bg-gray-900">Fußball</option>
@@ -567,30 +567,30 @@
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Verein / Team</label>
-                        <input type="text" placeholder="z.B. NBC Baskets, TSV Nordhorn..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                        <input type="text" name="Verein / Team" placeholder="z.B. NBC Baskets, TSV Nordhorn..." class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
                     <hr class="border-white/10">
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname Erziehungsberechtigter *</label>
-                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                        <input type="text" name="Vorname Erziehungsberechtigter" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachname Erziehungsberechtigter *</label>
-                        <input type="text" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                        <input type="text" name="Nachname Erziehungsberechtigter" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                     </div>
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">E-Mail *</label>
-                            <input type="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                            <input type="email" name="E-Mail" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Telefon *</label>
-                            <input type="tel" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                            <input type="tel" name="Telefon" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                     </div>
                     <div>
                         <label class="block text-gray-300 font-medium text-sm mb-1.5">Nachricht (optional)</label>
-                        <textarea rows="3" placeholder="Hast du noch Fragen oder Anmerkungen?" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600"></textarea>
+                        <textarea rows="3" name="Nachricht" placeholder="Hast du noch Fragen oder Anmerkungen?" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600"></textarea>
                     </div>
                     <div class="flex items-start gap-3">
                         <input type="checkbox" required id="datenschutz" class="mt-1 w-4 h-4 accent-[#F2722C]">
@@ -706,6 +706,18 @@
             return age;
         }
 
+        function getNamedFieldValue(form, fieldName) {
+            const field = form.elements[fieldName];
+
+            if (!field) return '';
+
+            if (field.tagName === 'SELECT') {
+                return field.options[field.selectedIndex]?.text || '';
+            }
+
+            return field.value.trim();
+        }
+
         function handleAthletikSignup(event) {
             event.preventDefault();
 
@@ -714,6 +726,8 @@
             const message = form.querySelector('[data-form-message]');
             const submitButton = form.querySelector('button[type="submit"]');
             const age = getAgeFromBirthdate(birthdateInput.value);
+            const firstName = getNamedFieldValue(form, 'Vorname Teilnehmer');
+            const lastName = getNamedFieldValue(form, 'Nachname Teilnehmer');
 
             message.classList.remove('hidden', 'border-green-500/30', 'bg-green-500/10', 'text-green-300', 'border-red-500/30', 'bg-red-500/10', 'text-red-300');
 
@@ -724,12 +738,35 @@
                 return;
             }
 
+            const mailBody = [
+                'Neue Anmeldung für das NBC Athletikprogramm',
+                '',
+                'Teilnehmer:',
+                `Vorname: ${firstName}`,
+                `Nachname: ${lastName}`,
+                `Geburtsdatum: ${getNamedFieldValue(form, 'Geburtsdatum')}`,
+                `Alter: ${age}`,
+                `Sportart: ${getNamedFieldValue(form, 'Sportart')}`,
+                `Verein / Team: ${getNamedFieldValue(form, 'Verein / Team') || '-'}`,
+                '',
+                'Erziehungsberechtigter:',
+                `Vorname: ${getNamedFieldValue(form, 'Vorname Erziehungsberechtigter')}`,
+                `Nachname: ${getNamedFieldValue(form, 'Nachname Erziehungsberechtigter')}`,
+                `E-Mail: ${getNamedFieldValue(form, 'E-Mail')}`,
+                `Telefon: ${getNamedFieldValue(form, 'Telefon')}`,
+                '',
+                'Nachricht:',
+                getNamedFieldValue(form, 'Nachricht') || '-'
+            ].join('\n');
+            const mailtoUrl = `mailto:info@nbc-nordhorn.de?subject=${encodeURIComponent(`Anmeldung Athletikprogramm: ${firstName} ${lastName}`)}&body=${encodeURIComponent(mailBody)}`;
+
+            window.location.href = mailtoUrl;
             form.reset();
-            message.textContent = 'Vielen Dank für deine Anmeldung! Das Formular wurde geleert. Wir melden uns bei dir.';
+            message.textContent = 'Vielen Dank! Dein E-Mail-Programm wurde geöffnet. Bitte die vorbereitete Anmeldung dort noch absenden.';
             message.classList.add('border-green-500/30', 'bg-green-500/10', 'text-green-300');
 
             submitButton.disabled = true;
-            submitButton.textContent = 'ANMELDUNG GESENDET';
+            submitButton.textContent = 'E-MAIL VORBEREITET';
             submitButton.classList.add('opacity-70', 'cursor-not-allowed');
 
             window.setTimeout(() => {
