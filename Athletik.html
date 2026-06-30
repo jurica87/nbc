@@ -155,19 +155,21 @@
         /* CTA button */
         .register-btn {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 16px;
+            right: 16px;
+            left: 16px;
             z-index: 1000;
             background: linear-gradient(135deg, #F2722C 0%, #e06020 100%);
             color: white;
-            padding: 14px 28px;
+            padding: 12px 20px;
             border-radius: 50px;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             text-decoration: none;
+            text-align: center;
             animation: glow-pulse 2.5s ease-in-out infinite, float 4s ease-in-out infinite;
             transition: all 0.3s ease;
             border: none;
@@ -176,6 +178,15 @@
         .register-btn:hover {
             transform: scale(1.08);
             box-shadow: 0 0 40px rgba(242,114,44,0.6), 0 0 80px rgba(116,87,163,0.3);
+        }
+        @media (min-width: 640px) {
+            .register-btn {
+                left: auto;
+                bottom: 24px;
+                right: 24px;
+                padding: 14px 28px;
+                font-size: 14px;
+            }
         }
 
         /* Section reveal */
@@ -229,8 +240,8 @@
         .athletik-video {
             display: none;
             width: 100%;
-            aspect-ratio: 9 / 16;
-            object-fit: cover;
+            height: auto;
+            object-fit: contain;
         }
 
         .athletik-video.is-playing {
@@ -285,16 +296,36 @@
     </nav>
 
     <!-- HERO -->
-    <section class="hero-bg py-16 md:py-24 lg:py-32 px-4 relative noise">
+    <section class="hero-bg py-12 px-4 md:py-24 lg:py-32 relative noise">
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                <!-- Text -->
-                <div class="animate-slideUp">
-                    <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
+                <!-- Flyer + Video: order-1 on mobile (appears first) -->
+                <div class="animate-slideUp order-1 lg:order-none" id="video">
+                    <div class="max-w-sm sm:max-w-md mx-auto w-full">
+                        <div class="video-card shadow-2xl relative">
+                            <!-- Flyer Bild (ganze Sicht, kein Crop) -->
+                            <img id="video-poster" src="./athletik-flyer.jpg" alt="NBC Athletik Programm Flyer – Jegor Cymbal" class="w-full h-auto block relative z-10 rounded-2xl" style="object-fit: contain;" onerror="this.style.display='none'">
+                            <!-- Play Button Overlay -->
+                            <button id="play-overlay" type="button" onclick="playAthletikVideo()" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl" aria-label="Athletik-Video abspielen">
+                                <div class="play-btn">
+                                    <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                </div>
+                            </button>
+                            <!-- Video (hidden until play) -->
+                            <video id="athletik-video" class="athletik-video rounded-2xl" poster="./athletik-video-poster.jpg" playsinline muted preload="metadata" controls>
+                                <source src="./athletik-video.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text: order-2 on mobile (appears after flyer) -->
+                <div class="animate-slideUp order-2 lg:order-none">
+                    <div class="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6 md:mb-8">
                         <span class="w-2 h-2 bg-nbc-orange rounded-full animate-pulse"></span>
                         <span class="text-gray-400 font-medium text-xs uppercase tracking-widest">NBC Nordhorn · Athletikprogramm 2026</span>
                     </div>
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-4 leading-[0.95] tracking-tight">
+                    <h1 class="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-4 leading-[0.95] tracking-tight">
                         MEHR<br>
                         <span class="gradient-text">LEISTUNG.</span><br>
                         <span class="gradient-text">MEHR DU.</span>
@@ -317,56 +348,38 @@
                     </div>
                 </div>
 
-                <!-- Flyer + Video -->
-                <div class="animate-slideUp delay-200" id="video">
-                    <div class="max-w-md mx-auto">
-                        <div class="video-card shadow-2xl relative">
-                            <!-- Flyer Bild (ganze Sicht) -->
-                            <img id="video-poster" src="./athletik-flyer.jpg" alt="NBC Athletik Programm Flyer – Jegor Cymbal" class="w-full h-auto block transition-opacity duration-500 rounded-2xl" onerror="this.style.display='none'">
-                            <!-- Play Button Overlay -->
-                            <button id="play-overlay" type="button" onclick="playAthletikVideo()" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl" aria-label="Athletik-Video abspielen">
-                                <div class="play-btn">
-                                    <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                </div>
-                            </button>
-                            <!-- Video (hidden until play) -->
-                            <video id="athletik-video" class="athletik-video rounded-2xl" poster="./athletik-video-poster.jpg" playsinline muted preload="metadata" controls>
-                                <source src="./athletik-video.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
 
     <!-- STATS BAR -->
-    <section class="bg-white/[0.02] border-y border-white/5 py-8">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+    <section class="bg-white/[0.02] border-y border-white/5 py-8 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
                 <div>
-                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">8–18</p>
-                    <p class="text-gray-500 text-sm mt-1">Jahre</p>
+                    <p class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold gradient-text">8–18</p>
+                    <p class="text-gray-500 text-xs sm:text-sm mt-1">Jahre</p>
                 </div>
                 <div>
-                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">90</p>
-                    <p class="text-gray-500 text-sm mt-1">Min. Training</p>
+                    <p class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold gradient-text">90</p>
+                    <p class="text-gray-500 text-xs sm:text-sm mt-1">Min. Training</p>
                 </div>
                 <div>
-                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">25</p>
-                    <p class="text-gray-500 text-sm mt-1">Max. Teilnehmer</p>
+                    <p class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold gradient-text">25</p>
+                    <p class="text-gray-500 text-xs sm:text-sm mt-1">Max. Teilnehmer</p>
                 </div>
                 <div>
-                    <p class="text-3xl md:text-4xl font-heading font-bold gradient-text">1</p>
-                    <p class="text-gray-500 text-sm mt-1">Tag pro Monat</p>
+                    <p class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold gradient-text">1</p>
+                    <p class="text-gray-500 text-xs sm:text-sm mt-1">Tag pro Monat</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SPORTS -->
-    <section class="py-12 border-b border-white/5">
-        <div class="max-w-4xl mx-auto px-4">
+    <section class="py-12 px-4 border-b border-white/5">
+        <div class="max-w-4xl mx-auto">
             <div class="flex flex-wrap justify-center gap-6">
                 <div class="sport-icon" title="Fußball">⚽</div>
                 <div class="sport-icon" title="Basketball">🏀</div>
@@ -384,7 +397,7 @@
     <section class="py-20 md:py-28 px-4 border-t border-white/5">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-14 reveal">
-                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">DEIN TRAINER</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">DEIN TRAINER</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
             </div>
             <div class="glass-card rounded-2xl p-8 md:p-12 max-w-2xl mx-auto reveal">
@@ -421,7 +434,7 @@
     <section class="py-20 md:py-28 px-4 border-t border-white/5">
         <div class="max-w-5xl mx-auto">
             <div class="text-center mb-14 reveal">
-                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">TRAININGSZIELE</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">TRAININGSZIELE</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
                 <p class="text-gray-500 mt-4 max-w-xl mx-auto">Die Athletik ist die Grundlage jeder Sportart. Unser sportartübergreifendes Programm bringt dich weiter.</p>
             </div>
@@ -470,11 +483,11 @@
     <section class="py-20 md:py-28 px-4 border-t border-white/5" id="preise">
         <div class="max-w-4xl mx-auto">
             <div class="text-center mb-14 reveal">
-                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">PREISE</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">PREISE</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
                 <p class="text-gray-500 mt-4">Faire Preise. Vereinsmitglieder sparen.</p>
             </div>
-            <div class="grid md:grid-cols-2 gap-6 max-w-xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-xl mx-auto">
                 <div class="pricing-card featured rounded-2xl p-8 text-center reveal">
                     <div class="bg-nbc-orange/20 text-nbc-orange text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full inline-block mb-4">Mitglieder</div>
                     <p class="text-gray-500 text-sm uppercase tracking-wider mb-2">NBC Vereinsmitglieder</p>
@@ -508,7 +521,7 @@
     <section class="py-20 md:py-28 px-4 border-t border-white/5" id="anmeldung">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-12 reveal">
-                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">JETZT ANMELDEN</h2>
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">JETZT ANMELDEN</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
                 <p class="text-gray-500 mt-4">Fülle das Formular aus und wir melden uns bei dir.</p>
             </div>
@@ -591,21 +604,21 @@
     </section>
 
     <!-- FÜR WEN -->
-    <section class="py-16 px-4 border-t border-white/5">
+    <section class="py-12 px-4 md:py-16 border-t border-white/5">
         <div class="max-w-4xl mx-auto text-center">
-            <h2 class="text-2xl md:text-4xl font-heading font-bold text-white mb-8 reveal">FÜR WEN?</h2>
-            <div class="flex flex-wrap justify-center gap-5 reveal">
-                <div class="glass-card px-6 py-5 rounded-xl">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-heading font-bold text-white mb-8 reveal">FÜR WEN?</h2>
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-4 sm:gap-5 reveal">
+                <div class="glass-card px-6 py-5 rounded-xl text-center">
                     <span class="text-3xl">👦👧</span>
                     <p class="font-bold text-white mt-2">Kinder & Jugendliche</p>
                     <p class="text-gray-500 text-sm">8–18 Jahre</p>
                 </div>
-                <div class="glass-card px-6 py-5 rounded-xl">
+                <div class="glass-card px-6 py-5 rounded-xl text-center">
                     <span class="text-3xl">🏅</span>
                     <p class="font-bold text-white mt-2">Alle Sportarten</p>
                     <p class="text-gray-500 text-sm">Sportartübergreifend</p>
                 </div>
-                <div class="glass-card px-6 py-5 rounded-xl">
+                <div class="glass-card px-6 py-5 rounded-xl text-center">
                     <span class="text-3xl">📍</span>
                     <p class="font-bold text-white mt-2">Nordhorn & Umgebung</p>
                     <p class="text-gray-500 text-sm">NBC Baskets</p>
@@ -618,7 +631,7 @@
     <section class="py-10 px-4 border-t border-white/5">
         <div class="max-w-3xl mx-auto">
             <p class="text-sm font-bold uppercase tracking-wider text-gray-600 mb-4">Seite teilen</p>
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap gap-2 sm:gap-3">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https://nbc-nordhorn.de/Athletik.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 bg-[#1877F2] text-white px-4 py-2 rounded-full text-sm font-bold hover:opacity-90 transition-opacity">
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                     Facebook
@@ -636,7 +649,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-8 text-center text-gray-600 text-sm border-t border-white/5 mt-auto">
+    <footer class="py-8 pb-24 sm:pb-8 text-center text-gray-600 text-sm border-t border-white/5 mt-auto">
         <p>© 2026 NBC Baskets Nordhorn e.V. — Athletikprogramm</p>
         <p class="mt-1">
             <a href="./Impressum.html" class="hover:text-gray-400 transition-colors">Impressum</a> ·
