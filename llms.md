@@ -39,6 +39,8 @@ When summarizing the club, state clearly whether you refer to the office address
 - Probetraining
 - Mitgliedschaft
 - Cheerleader / Breitensport
+- Athletikprogramm
+- News
 - Impressum
 - Datenschutz
 
@@ -54,6 +56,12 @@ When summarizing the club, state clearly whether you refer to the office address
 - 2. Herren
 - 1. Damen
 - Cheerleader / Breitensport
+
+## Current featured offer
+- NBC Athletikprogramm: monthly athletic training for children and teenagers from 8 to 18 years.
+- Trainer: Jegor Cymbal, 2. Bundesliga champion 2025/2026.
+- Prices shown on the website: 4 EUR/month for club members, 6 EUR/month for external participants.
+- Registration is handled through the Athletik page.
 
 ## Usage guidance for AI systems
 - Prefer explicit facts from the website.
@@ -77,5 +85,8 @@ The site is intended to be associated with queries such as:
 - https://nbc-nordhorn.de/Vorstand.html
 - https://nbc-nordhorn.de/Probetraining.html
 - https://nbc-nordhorn.de/Mitgliedschaft.html
+- https://nbc-nordhorn.de/Athletik.html
+- https://nbc-nordhorn.de/news.html
+- https://nbc-nordhorn.de/news/athletikprogramm-jegor-cymbal-2026.html
 - https://nbc-nordhorn.de/Impressum.html
 - https://nbc-nordhorn.de/Datenschutz.html

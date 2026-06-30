@@ -26,6 +26,9 @@
 - Vorstand: https://nbc-nordhorn.de/Vorstand.html
 - Probetraining: https://nbc-nordhorn.de/Probetraining.html
 - Mitgliedschaft: https://nbc-nordhorn.de/Mitgliedschaft.html
+- Athletikprogramm: https://nbc-nordhorn.de/Athletik.html
+- News: https://nbc-nordhorn.de/news.html
+- Featured news: https://nbc-nordhorn.de/news/athletikprogramm-jegor-cymbal-2026.html
 - Impressum: https://nbc-nordhorn.de/Impressum.html
 - Datenschutz: https://nbc-nordhorn.de/Datenschutz.html
 
