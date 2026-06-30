@@ -534,10 +534,15 @@
             <div class="text-center mb-12 reveal">
                 <h2 class="text-2xl sm:text-3xl md:text-5xl font-heading font-bold text-white mb-4">JETZT ANMELDEN</h2>
                 <div class="h-1 w-16 bg-gradient-to-r from-nbc-orange to-nbc-purple mx-auto rounded-full"></div>
-                <p class="text-gray-500 mt-4">Fülle das Formular aus. Es wird eine E-Mail an info@nbc-nordhorn.de vorbereitet.</p>
+                <p class="text-gray-500 mt-4">Fülle das Formular aus. Die Anmeldung wird direkt per E-Mail an uns gesendet.</p>
             </div>
             <div class="glass-card rounded-2xl p-8 md:p-10 reveal">
-                <form class="space-y-5" onsubmit="handleAthletikSignup(event)">
+                <form id="athletik-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-5" onsubmit="handleAthletikSignup(event)">
+                    <input type="hidden" name="access_key" value="12b361cf-7228-43f4-8f45-841acdf4139e">
+                    <input type="hidden" name="subject" value="Neue Athletikprogramm-Anmeldung">
+                    <input type="hidden" name="from_name" value="NBC Nordhorn Website">
+                    <input type="hidden" name="replyto" value="email">
+                    <input type="checkbox" name="botcheck" style="display:none;">
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Vorname *</label>
@@ -581,7 +586,7 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">E-Mail *</label>
-                            <input type="email" name="E-Mail" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
+                            <input type="email" name="email" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-600">
                         </div>
                         <div>
                             <label class="block text-gray-300 font-medium text-sm mb-1.5">Telefon *</label>
@@ -706,19 +711,7 @@
             return age;
         }
 
-        function getNamedFieldValue(form, fieldName) {
-            const field = form.elements[fieldName];
-
-            if (!field) return '';
-
-            if (field.tagName === 'SELECT') {
-                return field.options[field.selectedIndex]?.text || '';
-            }
-
-            return field.value.trim();
-        }
-
-        function handleAthletikSignup(event) {
+        async function handleAthletikSignup(event) {
             event.preventDefault();
 
             const form = event.currentTarget;
@@ -726,8 +719,6 @@
             const message = form.querySelector('[data-form-message]');
             const submitButton = form.querySelector('button[type="submit"]');
             const age = getAgeFromBirthdate(birthdateInput.value);
-            const firstName = getNamedFieldValue(form, 'Vorname Teilnehmer');
-            const lastName = getNamedFieldValue(form, 'Nachname Teilnehmer');
 
             message.classList.remove('hidden', 'border-green-500/30', 'bg-green-500/10', 'text-green-300', 'border-red-500/30', 'bg-red-500/10', 'text-red-300');
 
@@ -738,42 +729,38 @@
                 return;
             }
 
-            const mailBody = [
-                'Neue Anmeldung für das NBC Athletikprogramm',
-                '',
-                'Teilnehmer:',
-                `Vorname: ${firstName}`,
-                `Nachname: ${lastName}`,
-                `Geburtsdatum: ${getNamedFieldValue(form, 'Geburtsdatum')}`,
-                `Alter: ${age}`,
-                `Sportart: ${getNamedFieldValue(form, 'Sportart')}`,
-                `Verein / Team: ${getNamedFieldValue(form, 'Verein / Team') || '-'}`,
-                '',
-                'Erziehungsberechtigter:',
-                `Vorname: ${getNamedFieldValue(form, 'Vorname Erziehungsberechtigter')}`,
-                `Nachname: ${getNamedFieldValue(form, 'Nachname Erziehungsberechtigter')}`,
-                `E-Mail: ${getNamedFieldValue(form, 'E-Mail')}`,
-                `Telefon: ${getNamedFieldValue(form, 'Telefon')}`,
-                '',
-                'Nachricht:',
-                getNamedFieldValue(form, 'Nachricht') || '-'
-            ].join('\n');
-            const mailtoUrl = `mailto:info@nbc-nordhorn.de?subject=${encodeURIComponent(`Anmeldung Athletikprogramm: ${firstName} ${lastName}`)}&body=${encodeURIComponent(mailBody)}`;
-
-            window.location.href = mailtoUrl;
-            form.reset();
-            message.textContent = 'Vielen Dank! Dein E-Mail-Programm wurde geöffnet. Bitte die vorbereitete Anmeldung dort noch absenden.';
+            message.textContent = 'Wird gesendet...';
             message.classList.add('border-green-500/30', 'bg-green-500/10', 'text-green-300');
-
             submitButton.disabled = true;
-            submitButton.textContent = 'E-MAIL VORBEREITET';
+            submitButton.textContent = 'WIRD GESENDET...';
             submitButton.classList.add('opacity-70', 'cursor-not-allowed');
 
-            window.setTimeout(() => {
+            const data = new FormData(form);
+            data.append('Alter', age);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                const result = await response.json();
+
+                if (response.ok) {
+                    form.reset();
+                    message.textContent = 'Danke. Die Anmeldung wurde erfolgreich gesendet.';
+                    submitButton.textContent = 'ANMELDUNG GESENDET';
+                } else {
+                    throw new Error(result.message || 'Fehler beim Senden.');
+                }
+            } catch (error) {
+                message.classList.remove('border-green-500/30', 'bg-green-500/10', 'text-green-300');
+                message.classList.add('border-red-500/30', 'bg-red-500/10', 'text-red-300');
+                message.textContent = 'Fehler beim Senden. Bitte später erneut versuchen oder direkt an info@nbc-nordhorn.de schreiben.';
                 submitButton.disabled = false;
                 submitButton.textContent = 'JETZT ANMELDEN';
                 submitButton.classList.remove('opacity-70', 'cursor-not-allowed');
-            }, 4000);
+            }
         }
 
         const observer = new IntersectionObserver((entries) => {
