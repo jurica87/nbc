@@ -181,6 +181,43 @@
             transform: scale(1.1) rotate(15deg);
         }
 
+        @keyframes sponsor-slide {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        .sponsor-slider {
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+        }
+        .sponsor-track {
+            animation: sponsor-slide 24s linear infinite;
+        }
+        .sponsor-slider:hover .sponsor-track {
+            animation-play-state: paused;
+        }
+        .sponsor-logo {
+            width: 220px;
+            height: 112px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .sponsor-track {
+                animation: none;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sponsor-track > div {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .sponsor-slider {
+                -webkit-mask-image: none;
+                mask-image: none;
+            }
+            .sponsor-track [aria-hidden="true"] {
+                display: none;
+            }
+        }
+
         section { scroll-margin-top: 100px; }
     
         /* Mitglied Werden Button Animation */
@@ -691,24 +728,43 @@
                 <!-- Weitere Sponsoren -->
                 <div class="border-t border-[#e0e0e5] pt-8">
                     <p class="text-center text-[#8a8a9a] text-xs font-bold uppercase tracking-widest mb-6">Weitere Partner</p>
-                    <div class="flex flex-wrap items-center justify-center gap-10 md:gap-14">
-                        <a href="https://www.grafschafter-volksbank.de" target="_blank" rel="noopener" class="group" title="Grafschafter Volksbank eG">
-                            <img src="./sponsors/grafschafter-volksbank-region.jpg" alt="Grafschafter Volksbank eG - Sport in der Region" class="h-24 md:h-32 w-auto max-w-[280px] md:max-w-[360px] object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300">
-                        </a>
-                        <a href="#" class="group" title="NVB">
-                            <img src="./sponsors/nvb-logo.png" alt="NVB Logo" class="h-11 md:h-13 w-auto object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300">
-                        </a>
-                        <a href="#" class="group" title="Wink">
-                            <img src="./sponsors/wink-logo.png" alt="Wink Logo" class="h-10 md:h-12 w-auto object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300">
-                        </a>
-                        <a href="https://www.sparkasse-nordhorn.de" target="_blank" rel="noopener" class="group" title="Sparkasse Nordhorn">
-                            <img src="./sponsors/sparkasse-nordhorn-logo.png" alt="Sparkasse Nordhorn Logo" class="h-14 md:h-16 w-auto object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300">
-                        </a>
-                    </div>
-                    <div class="flex justify-center mt-8">
-                        <a href="#" class="group" title="Elektro ISS">
-                            <img src="./sponsors/elektro-iss-logo.png" alt="Elektro ISS Logo" class="h-20 md:h-28 w-auto object-contain opacity-60 grayscale group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-300">
-                        </a>
+                    <div class="sponsor-slider overflow-hidden" aria-label="Weitere Partner">
+                        <div class="sponsor-track flex w-max items-center">
+                            <div class="flex items-center gap-10 md:gap-14 pr-10 md:pr-14">
+                                <a href="https://www.grafschafter-volksbank.de" target="_blank" rel="noopener" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Grafschafter Volksbank eG">
+                                    <img src="./sponsors/grafschafter-volksbank-region.jpg" alt="Grafschafter Volksbank eG - Sport in der Region" class="max-h-28 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" class="sponsor-logo group flex shrink-0 items-center justify-center" title="NVB">
+                                    <img src="./sponsors/nvb-logo.png" alt="NVB Logo" class="max-h-16 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Wink">
+                                    <img src="./sponsors/wink-logo.png" alt="Wink Logo" class="max-h-14 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="https://www.sparkasse-nordhorn.de" target="_blank" rel="noopener" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Sparkasse Nordhorn">
+                                    <img src="./sponsors/sparkasse-nordhorn-logo.png" alt="Sparkasse Nordhorn Logo" class="max-h-16 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Elektro ISS">
+                                    <img src="./sponsors/elektro-iss-logo.png" alt="Elektro ISS Logo" class="max-h-24 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                            </div>
+                            <div class="flex items-center gap-10 md:gap-14 pr-10 md:pr-14" aria-hidden="true">
+                                <a href="https://www.grafschafter-volksbank.de" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Grafschafter Volksbank eG">
+                                    <img src="./sponsors/grafschafter-volksbank-region.jpg" alt="" class="max-h-28 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="NVB">
+                                    <img src="./sponsors/nvb-logo.png" alt="" class="max-h-16 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Wink">
+                                    <img src="./sponsors/wink-logo.png" alt="" class="max-h-14 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="https://www.sparkasse-nordhorn.de" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Sparkasse Nordhorn">
+                                    <img src="./sponsors/sparkasse-nordhorn-logo.png" alt="" class="max-h-16 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                                <a href="#" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Elektro ISS">
+                                    <img src="./sponsors/elektro-iss-logo.png" alt="" class="max-h-24 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
