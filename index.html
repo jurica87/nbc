@@ -181,39 +181,50 @@
             transform: scale(1.1) rotate(15deg);
         }
 
-        @keyframes sponsor-slide {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
-        }
         .sponsor-slider {
             -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
             mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            cursor: grab;
+            touch-action: pan-y;
+            user-select: none;
+        }
+        .sponsor-slider.is-dragging {
+            cursor: grabbing;
         }
         .sponsor-track {
-            animation: sponsor-slide 16s linear infinite;
+            --sponsor-gap: 1.25rem;
+            will-change: transform;
         }
-        .sponsor-slider:hover .sponsor-track {
-            animation-play-state: paused;
+        .sponsor-set {
+            gap: var(--sponsor-gap);
+            padding-right: var(--sponsor-gap);
         }
         .sponsor-logo {
             width: 190px;
             height: 112px;
         }
+        @media (min-width: 768px) {
+            .sponsor-track {
+                --sponsor-gap: 2rem;
+            }
+        }
         @media (prefers-reduced-motion: reduce) {
             .sponsor-track {
-                animation: none;
                 flex-wrap: wrap;
                 justify-content: center;
+                transform: none !important;
             }
-            .sponsor-track > div {
+            .sponsor-set {
                 flex-wrap: wrap;
                 justify-content: center;
+                padding-right: 0;
             }
             .sponsor-slider {
                 -webkit-mask-image: none;
                 mask-image: none;
+                cursor: default;
             }
-            .sponsor-track [aria-hidden="true"] {
+            .sponsor-set[aria-hidden="true"] {
                 display: none;
             }
         }
@@ -728,9 +739,9 @@
                 <!-- Weitere Sponsoren -->
                 <div class="border-t border-[#e0e0e5] pt-8">
                     <p class="text-center text-[#8a8a9a] text-xs font-bold uppercase tracking-widest mb-6">Weitere Partner</p>
-                    <div class="sponsor-slider overflow-hidden" aria-label="Weitere Partner">
+                    <div class="sponsor-slider overflow-hidden" aria-label="Weitere Partner" data-sponsor-slider>
                         <div class="sponsor-track flex w-max items-center">
-                            <div class="flex items-center gap-5 md:gap-8 pr-5 md:pr-8">
+                            <div class="sponsor-set flex items-center">
                                 <a href="https://www.grafschafter-volksbank.de" target="_blank" rel="noopener" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Grafschafter Volksbank eG">
                                     <img src="./sponsors/grafschafter-volksbank-region.jpg" alt="Grafschafter Volksbank eG - Sport in der Region" class="max-h-28 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
                                 </a>
@@ -753,7 +764,7 @@
                                     <img src="./sponsors/neuenhauser-maschinenbau-logo.jpg" alt="Neuenhauser Maschinenbau Logo" class="max-h-16 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
                                 </a>
                             </div>
-                            <div class="flex items-center gap-5 md:gap-8 pr-5 md:pr-8" aria-hidden="true">
+                            <div class="sponsor-set flex items-center" aria-hidden="true">
                                 <a href="https://www.grafschafter-volksbank.de" tabindex="-1" class="sponsor-logo group flex shrink-0 items-center justify-center" title="Grafschafter Volksbank eG">
                                     <img src="./sponsors/grafschafter-volksbank-region.jpg" alt="" class="max-h-28 w-auto max-w-full object-contain opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0">
                                 </a>
@@ -917,6 +928,99 @@
         function closeMenu() {
             document.getElementById('mobile-menu').classList.add('hidden');
         }
+
+        function initSponsorSlider() {
+            const slider = document.querySelector('[data-sponsor-slider]');
+            if (!slider || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const track = slider.querySelector('.sponsor-track');
+            const firstSet = slider.querySelector('.sponsor-set');
+            if (!track || !firstSet) return;
+
+            let offset = 0;
+            let loopWidth = firstSet.getBoundingClientRect().width;
+            let lastFrame = performance.now();
+            let isDragging = false;
+            let isHovering = false;
+            let hasDragged = false;
+            let dragStartX = 0;
+            let dragStartOffset = 0;
+            const speed = 95;
+
+            const normalizeOffset = () => {
+                if (!loopWidth) return;
+                offset = ((offset % loopWidth) + loopWidth) % loopWidth;
+            };
+
+            const measure = () => {
+                loopWidth = firstSet.getBoundingClientRect().width;
+                normalizeOffset();
+                track.style.transform = `translateX(${-offset}px)`;
+            };
+
+            const animate = (time) => {
+                const elapsed = time - lastFrame;
+                lastFrame = time;
+
+                if (!isDragging && !isHovering) {
+                    offset += (elapsed / 1000) * speed;
+                    normalizeOffset();
+                    track.style.transform = `translateX(${-offset}px)`;
+                }
+
+                requestAnimationFrame(animate);
+            };
+
+            slider.addEventListener('pointerdown', (event) => {
+                isDragging = true;
+                hasDragged = false;
+                dragStartX = event.clientX;
+                dragStartOffset = offset;
+                slider.classList.add('is-dragging');
+                slider.setPointerCapture(event.pointerId);
+            });
+
+            slider.addEventListener('pointerenter', (event) => {
+                if (event.pointerType === 'mouse') isHovering = true;
+            });
+
+            slider.addEventListener('pointerleave', (event) => {
+                if (event.pointerType === 'mouse') isHovering = false;
+            });
+
+            slider.addEventListener('pointermove', (event) => {
+                if (!isDragging) return;
+                const delta = event.clientX - dragStartX;
+                if (Math.abs(delta) > 4) hasDragged = true;
+                offset = dragStartOffset - delta;
+                normalizeOffset();
+                track.style.transform = `translateX(${-offset}px)`;
+            });
+
+            const stopDragging = (event) => {
+                if (!isDragging) return;
+                isDragging = false;
+                slider.classList.remove('is-dragging');
+                if (slider.hasPointerCapture(event.pointerId)) {
+                    slider.releasePointerCapture(event.pointerId);
+                }
+            };
+
+            slider.addEventListener('pointerup', stopDragging);
+            slider.addEventListener('pointercancel', stopDragging);
+            slider.addEventListener('click', (event) => {
+                if (!hasDragged) return;
+                event.preventDefault();
+                event.stopPropagation();
+                hasDragged = false;
+            }, true);
+            window.addEventListener('resize', measure);
+
+            measure();
+            requestAnimationFrame(animate);
+        }
+
+        initSponsorSlider();
     </script>
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
         Mitglied Werden
