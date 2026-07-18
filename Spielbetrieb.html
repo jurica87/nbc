@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>U12 weiblich | NBC Baskets</title>
+    <title>Spielbetrieb | NBC Baskets</title>
     <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
@@ -12,21 +12,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7', light: '#f4f4f4' }
-                    },
-                    fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] }
-                }
-            }
-        }
+        tailwind.config = { theme: { extend: { colors: { nbc: { orange: '#F2722C', purple: '#7457A3', dark: '#111111', darker: '#f5f5f7' } }, fontFamily: { sans: ['Roboto', 'sans-serif'], heading: ['Oswald', 'sans-serif'] } } } }
     </script>
-    <style>
-        body { background-color: #f8f9fa; color: #f4f4f4; }
-        .glass-nav { background: rgba(255, 255, 255, 0.95); border-bottom: 1px solid rgba(0, 0, 0, 0.1); }
-    
+    <style>body { background-color: #f8f9fa; color: #f4f4f4; }
         /* Mitglied Werden Button Animation */
         @keyframes glow-pulse {
             0%, 100% { 
@@ -69,7 +57,7 @@
     </style>
 <link rel="stylesheet" href="./css/cookie-consent.css">
 </head>
-<body class="font-sans antialiased bg-[#f8f9fa] text-[#1a1a2e] flex flex-col min-h-screen">
+<body class="bg-[#f8f9fa] flex flex-col min-h-screen">
 
         <nav class="bg-[#f8f9fa]/95 backdrop-blur border-b border-[#e0e0e5] sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,115 +116,51 @@
     </nav>
 
 
-    <header class="relative h-[60vh] flex items-end pb-12 overflow-hidden mt-0">
-        <div class="absolute inset-0 z-0">
-            <img src="https://placehold.co/1920x1080/1a1a1a/444?text=U12+WEIBLICH" alt="U12 Team" class="w-full h-full object-cover opacity-50">
-            <div class="absolute inset-0 bg-gradient-to-t from-nbc-darker via-nbc-darker/60 to-transparent"></div>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-4 w-full">
-            <span class="inline-block py-1 px-3 rounded bg-nbc-purple text-[#1a1a2e] text-xs font-bold uppercase tracking-widest mb-4">
-                Mädchen-Basketball
-            </span>
-            <h1 class="text-5xl md:text-7xl font-heading font-bold text-[#1a1a2e] uppercase leading-none">
-                U12 <span class="text-nbc-orange">JUGEND</span>
-            </h1>
-            <p class="text-xl text-[#4a4a5a] mt-4">Weiblich • Jahrgang 2014/2015</p>
-        </div>
+    <header class="py-16 px-4 text-center">
+        <span class="inline-block py-1 px-3 rounded bg-nbc-orange/10 text-nbc-orange text-xs font-bold uppercase tracking-widest mb-4">Verein</span>
+        <h1 class="text-5xl font-heading font-bold text-[#1a1a2e] mb-4">SPIELBETRIEB</h1>
+        <p class="text-xl text-[#4a4a5a] max-w-2xl mx-auto">
+            Zentrale Anlaufstelle für den Basketball-Spielbetrieb der NBC Baskets.
+        </p>
     </header>
 
-    <main class="flex-grow">
-        <div class="max-w-7xl mx-auto px-4 py-16 grid lg:grid-cols-3 gap-12">
-            
-            <div class="lg:col-span-2 space-y-12">
-                
-                <section>
-                    <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-4 border-l-4 border-nbc-purple pl-4">DAS TEAM</h2>
-                    <p class="text-[#4a4a5a] text-lg leading-relaxed">
-                        Unser U12-Mädchen-Team ist eine starke Gruppe junger Basketballerinnen. 
-                        Unter der Leitung von Femke Duarte lernen die Mädchen nicht nur Basketball-Technik, 
-                        sondern auch Teamgeist und Selbstbewusstsein. Wir legen Wert auf eine unterstützende 
-                        Atmosphäre, in der jede Spielerin sich entfalten kann!
-                    </p>
-                </section>
+    <main class="flex-grow max-w-5xl mx-auto px-4 w-full pb-20">
+        <section class="bg-white border border-[#e0e0e5] rounded-xl p-6 md:p-8 mb-8">
+            <p class="text-sm font-bold uppercase tracking-widest text-nbc-orange mb-2">Verantwortlich</p>
+            <h2 class="text-3xl font-heading font-bold text-[#1a1a2e] mb-3">Nadine Pund</h2>
+            <p class="text-[#4a4a5a] text-lg leading-relaxed">
+                Nadine koordiniert den gesamten Basketball-Spielbetrieb. Dazu gehören vor allem Spielverlegungen,
+                Spielberechtigungen, Abstimmungen mit Teams und Staffelleitungen sowie alle organisatorischen Fragen
+                rund um den laufenden Ligabetrieb.
+            </p>
+        </section>
 
-                <section>
-                    <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-6">TRAININGSSCHWERPUNKTE</h3>
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
-                            <span class="text-nbc-purple text-2xl mb-2 block">💪</span>
-                            <h4 class="font-bold text-[#1a1a2e] mb-1">Technik</h4>
-                            <p class="text-[#4a4a5a] text-sm">Grundlagen verfestigen</p>
-                        </div>
-                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
-                            <span class="text-nbc-purple text-2xl mb-2 block">🤝</span>
-                            <h4 class="font-bold text-[#1a1a2e] mb-1">Teamwork</h4>
-                            <p class="text-[#4a4a5a] text-sm">Zusammenhalt stärken</p>
-                        </div>
-                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
-                            <span class="text-nbc-purple text-2xl mb-2 block">🧠</span>
-                            <h4 class="font-bold text-[#1a1a2e] mb-1">Taktik</h4>
-                            <p class="text-[#4a4a5a] text-sm">Erste Spielsysteme</p>
-                        </div>
-                        <div class="bg-[#ffffff] p-4 rounded-lg border border-[#e0e0e5]">
-                            <span class="text-nbc-purple text-2xl mb-2 block">⭐</span>
-                            <h4 class="font-bold text-[#1a1a2e] mb-1">Selbstbewusstsein</h4>
-                            <p class="text-[#4a4a5a] text-sm">Mutig auftreten</p>
-                        </div>
-                    </div>
-                </section>
-
-
+        <section class="grid md:grid-cols-2 gap-4 mb-8">
+            <div class="bg-white border border-[#e0e0e5] rounded-xl p-6">
+                <h3 class="font-bold text-[#1a1a2e] text-lg mb-2">Aufgaben</h3>
+                <ul class="space-y-2 text-[#4a4a5a]">
+                    <li>Spielverlegungen und Terminabstimmungen</li>
+                    <li>Spielberechtigungen und Mannschaftsmeldungen</li>
+                    <li>Kommunikation mit Verband, Staffelleitungen und Teams</li>
+                    <li>Pflege und Abstimmung der aktuellen Spielpläne</li>
+                </ul>
             </div>
 
-            <aside class="space-y-8">
-                
-                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
-                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
-                        <span class="text-nbc-purple mr-2">🕒</span> TRAININGSZEITEN
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="border-b border-[#e0e0e5] pb-2">
-                            <span class="block text-nbc-orange font-bold">Donnerstag</span>
-                            <span class="text-[#1a1a2e]">16:00 - 17:30 Uhr</span>
-                            <span class="block text-xs text-[#6a6a7a] mt-1">Lupo Halle</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="bg-[#ffffff] p-6 rounded-xl border border-[#e0e0e5]">
-                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-4 flex items-center">
-                        <span class="text-nbc-purple mr-2">📋</span> TRAINERIN
-                    </h3>
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl">👤</div>
-                        <div>
-                            <div class="text-[#1a1a2e] font-bold">Femke Duarte</div>
-                            <div class="text-xs text-[#4a4a5a]">Head Coach </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-gradient-to-br from-nbc-purple to-nbc-orange p-6 rounded-xl text-center shadow-lg">
-                    <h3 class="font-heading font-bold text-xl text-[#1a1a2e] mb-2">MÄDCHEN POWER!</h3>
-                    <p class="text-[#1a1a2e]/90 text-sm mb-6">Komm vorbei und probier's aus!</p>
-                    <a href="./Probetraining.html" class="inline-block bg-white text-nbc-dark font-bold py-3 px-6 rounded-full hover:bg-gray-100 transition-colors w-full">
-                        ANMELDEN
-                    </a>
-                </div>
-
-            </aside>
-        </div>
+            <div class="bg-white border border-[#e0e0e5] rounded-xl p-6">
+                <h3 class="font-bold text-[#1a1a2e] text-lg mb-2">Gesamtplan</h3>
+                <p class="text-[#4a4a5a] mb-5">
+                    Sobald der Plan final ist, kann hier der aktuellste Gesamtplan für den Spielbetrieb heruntergeladen werden.
+                </p>
+                <span class="inline-flex items-center bg-gray-200 text-[#4a4a5a] px-5 py-3 rounded-full font-heading font-bold text-sm uppercase cursor-not-allowed">
+                    Gesamtplan folgt
+                </span>
+            </div>
+        </section>
     </main>
 
-    <footer class="bg-[#f8f9fa] py-8 border-t border-[#e0e0e5] text-center text-sm text-[#8a8a9a]">
-        <p>© 2026 NBC Baskets Nordhorn</p>
-        <p class="mt-2">
-            <a href="./Impressum.html" class="hover:text-[#1a1a2e] mx-2">Impressum</a>
-            <a href="./Datenschutz.html" class="hover:text-[#1a1a2e] mx-2">Datenschutz</a>
-        </p>
+    <footer class="bg-[#f8f9fa] py-8 text-center text-[#8a8a9a] text-sm border-t border-[#e0e0e5] mt-auto">
+        <p>© 2026 NBC Baskets Nordhorn e.V.</p>
     </footer>
-
     <a href="https://jurica87.github.io/nbc/Mitgliedschaft.html" class="member-btn">
         Mitglied Werden
     </a>
