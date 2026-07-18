@@ -44,7 +44,7 @@
   </url>
   <url>
     <loc>https://nbc-nordhorn.de/index.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -56,9 +56,15 @@
   </url>
   <url>
     <loc>https://nbc-nordhorn.de/news.html</loc>
-    <lastmod>2026-06-30</lastmod>
+    <lastmod>2026-07-18</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nbc-nordhorn.de/news/william-tuso-koro-mafi-rueckkehr.html</loc>
+    <lastmod>2026-07-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://nbc-nordhorn.de/news/athletikprogramm-jegor-cymbal-2026.html</loc>
