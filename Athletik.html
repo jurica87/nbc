@@ -89,17 +89,6 @@
             animation: shimmer 4s linear infinite;
             background-size: 200% 100%;
         }
-        .play-overlay {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-            z-index: 10;
-        }
-        .play-overlay:hover { background: rgba(0,0,0,0.15); }
         .play-btn {
             width: 80px; height: 80px;
             background: rgba(255,255,255,0.95);
@@ -110,11 +99,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 0 30px rgba(242,114,44,0.4);
         }
-        .play-overlay:hover .play-btn {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px rgba(242,114,44,0.6);
-        }
-
         /* Cards */
         .glass-card {
             background: rgba(255,255,255,0.03);
@@ -237,18 +221,6 @@
             pointer-events: none;
         }
 
-        .athletik-video {
-            display: none;
-            width: 100%;
-            height: auto;
-            object-fit: contain;
-        }
-
-        .athletik-video.is-playing {
-            display: block;
-        }
-
-
     </style>
     <link rel="stylesheet" href="./css/cookie-consent.css">
 </head>
@@ -305,16 +277,12 @@
                         <div class="video-card shadow-2xl relative">
                             <!-- Flyer Bild (ganze Sicht, kein Crop) -->
                             <img id="video-poster" src="./athletik-flyer.jpg" alt="NBC Athletik Programm Flyer – Jegor Cymbal" class="w-full h-auto block relative z-10 rounded-2xl" style="object-fit: contain;" onerror="this.style.display='none'">
-                            <!-- Play Button Overlay -->
-                            <button id="play-overlay" type="button" onclick="playAthletikVideo()" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl" aria-label="Athletik-Video abspielen">
+                            <!-- Reel Link Overlay -->
+                            <a href="https://www.instagram.com/reel/DcJasi0OusK/?igsh=bDdtamI1emZodnRz" target="_blank" rel="noopener noreferrer" class="absolute inset-0 z-20 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer rounded-2xl" aria-label="Athletik-Reel auf Instagram ansehen">
                                 <div class="play-btn">
                                     <svg class="w-8 h-8 text-nbc-orange ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                                 </div>
-                            </button>
-                            <!-- Video (hidden until play) -->
-                            <video id="athletik-video" class="athletik-video rounded-2xl" poster="./athletik-video-poster.jpg" playsinline muted preload="metadata" controls>
-                                <source src="./athletik-video.mp4" type="video/mp4">
-                            </video>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -338,9 +306,9 @@
                         Sportartübergreifendes Athletiktraining für Kinder und Jugendliche von 8–18 Jahren. Trainiert von Jegor Cymbal – 2. Bundesliga-Meister.
                     </p>
                     <div class="flex flex-wrap gap-3 mt-8">
-                        <a href="#video" onclick="playAthletikVideo();document.getElementById('video').scrollIntoView({behavior:'smooth',block:'center'});return false;" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
+                        <a href="https://www.instagram.com/reel/DcJasi0OusK/?igsh=bDdtamI1emZodnRz" target="_blank" rel="noopener noreferrer" class="bg-gradient-to-r from-nbc-orange to-orange-600 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:scale-105 transition-transform flex items-center gap-2">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            Video ansehen
+                            Reel ansehen
                         </a>
                         <a href="#anmeldung" class="border border-white/20 text-white px-7 py-3.5 rounded-full font-heading font-bold text-sm uppercase tracking-wider hover:border-nbc-orange hover:text-nbc-orange transition-colors">
                             Jetzt anmelden
@@ -681,25 +649,6 @@
 
     <!-- SCROLL REVEAL -->
     <script>
-        function playAthletikVideo() {
-            const video = document.getElementById('athletik-video');
-            const poster = document.getElementById('video-poster');
-            const overlay = document.getElementById('play-overlay');
-
-            if (!video) return;
-
-            if (poster) poster.style.display = 'none';
-            if (overlay) overlay.style.display = 'none';
-
-            video.classList.add('is-playing');
-            video.muted = false;
-
-            video.play().catch(() => {
-                video.muted = true;
-                video.play().catch(() => {});
-            });
-        }
-
         function getAgeFromBirthdate(birthdateValue) {
             const birthdate = new Date(birthdateValue);
             const today = new Date();
