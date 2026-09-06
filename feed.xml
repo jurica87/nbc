@@ -5,7 +5,7 @@
     <link>https://nbc-nordhorn.de/news.html</link>
     <description>Aktuelle News der NBC Baskets Nordhorn zu Basketball in Nordhorn, Teams, Jugendförderung und Vereinsentwicklung.</description>
     <language>de-DE</language>
-    <lastBuildDate>Wed, 02 Sep 2026 12:38:00 GMT</lastBuildDate>
+    <lastBuildDate>Sun, 06 Sep 2026 14:30:00 GMT</lastBuildDate>
     <atom:link href="https://nbc-nordhorn.de/feed.xml" rel="self" type="application/rss+xml" />
     <managingEditor>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</managingEditor>
     <webMaster>info@nbc-nordhorn.de (NBC Baskets Nordhorn e.V.)</webMaster>
@@ -14,6 +14,14 @@
       <title>NBC Baskets Nordhorn – News</title>
       <link>https://nbc-nordhorn.de/news.html</link>
     </image>
+    <item>
+      <title>Turniersieg in Spelle: 1. Herren gewinnt Vorbereitungsturnier</title>
+      <link>https://nbc-nordhorn.de/news/turniersieg-spelle-2026.html</link>
+      <guid isPermaLink="true">https://nbc-nordhorn.de/news/turniersieg-spelle-2026.html</guid>
+      <pubDate>Sun, 06 Sep 2026 14:30:00 GMT</pubDate>
+      <description><![CDATA[Die 1. Herren der NBC Baskets gewinnt das Vorbereitungsturnier bei den Spelle Dragonflys. Trotz vieler Rotationen und Teststellungen blieben die Siege überzeugend.]]></description>
+      <category>Herren</category>
+    </item>
     <item>
       <title>3. Platz bei den Sternen des Sports</title>
       <link>https://nbc-nordhorn.de/news/sterne-des-sports-2026.html</link>
