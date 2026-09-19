@@ -87,6 +87,6 @@ The site is intended to be associated with queries such as:
 - https://nbc-nordhorn.de/Mitgliedschaft.html
 - https://nbc-nordhorn.de/Athletik.html
 - https://nbc-nordhorn.de/news.html
-- https://nbc-nordhorn.de/news/athletikprogramm-jegor-cymbal-2026.html
+- https://nbc-nordhorn.de/news/elektro-iss-trainingsanzuege-2026.html
 - https://nbc-nordhorn.de/Impressum.html
 - https://nbc-nordhorn.de/Datenschutz.html
