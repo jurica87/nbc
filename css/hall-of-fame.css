@@ -1,0 +1,155 @@
+/* A shared, illuminated trophy cabinet. All effects are decorative CSS. */
+#erfolge .display-case {
+    --case-gold: #e8c891;
+    position: relative;
+    isolation: isolate;
+    margin-bottom: 18px;
+    border: 10px solid #343536;
+    border-radius: 8px;
+    color: #eeeae3;
+    background: #171a1b;
+    box-shadow: 0 2px 0 #777773 inset, 0 0 0 1px #191c1d,
+                0 18px 36px -16px #15191a80;
+}
+#erfolge .display-case::after {
+    content: "";
+    position: absolute;
+    z-index: 3;
+    inset: 0;
+    pointer-events: none;
+    border: 1px solid #dce6e62e;
+    background: linear-gradient(115deg, transparent 18%, #ffffff05 18.2%,
+                #ffffff05 32%, transparent 32.2%, transparent 72%,
+                #ffffff04 72.2%, #ffffff04 78%, transparent 78.2%);
+}
+#erfolge .display-case__header {
+    position: relative;
+    padding: 18px 24px;
+    border-bottom: 1px solid #a58b5c66;
+    background: linear-gradient(#343635, #202323);
+    text-align: center;
+    color: var(--case-gold);
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+}
+#erfolge .display-case__exhibits { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#erfolge .display-case__exhibit {
+    position: relative;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(ellipse at 50% 0, #d7bb7940, transparent 53%),
+                repeating-linear-gradient(90deg, #ffffff01 0 1px, transparent 1px 5px), #171a1b;
+}
+#erfolge .display-case__exhibit + .display-case__exhibit { border-left: 2px solid #737d7b66; }
+#erfolge .display-case__stage {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 370px;
+    margin: 0;
+    padding: 48px 22px 0;
+}
+#erfolge .display-case__stage::before {
+    content: "";
+    position: absolute;
+    top: 17px;
+    left: calc(50% - 29px);
+    width: 58px;
+    height: 5px;
+    border-radius: 50%;
+    background: #fff1cc;
+    box-shadow: 0 0 10px 3px #ffdc8c88, 0 16px 42px 18px #eaca8138;
+}
+#erfolge .display-case__photo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 1;
+    min-height: 0;
+    padding: 0 0 9px;
+    text-decoration: none;
+}
+#erfolge .display-case__image {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 267px;
+    object-fit: contain;
+    border: 5px solid #8e7a55;
+    outline: 1px solid #d2c29999;
+    box-shadow: 0 8px 20px #0009;
+    background: #101313;
+}
+#erfolge .display-case__shelf {
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 44px;
+    height: 10px;
+    border-top: 2px solid #e5f2d8b3;
+    border-bottom: 2px solid #647e72;
+    background: linear-gradient(#b9c8b88c, #556b6299);
+    box-shadow: 0 8px 14px #0008, 0 -2px 12px #d4e5bc33;
+    pointer-events: none;
+}
+#erfolge .display-case__credit {
+    min-height: 44px;
+    margin: 0;
+    padding: 11px 0 0;
+    color: #b8bcb7;
+    font-size: 11px;
+    line-height: 1.45;
+    text-align: center;
+}
+#erfolge .display-case__details { display: flex; flex: 1; flex-direction: column; padding: 22px 24px 20px; }
+#erfolge .display-case__plaque {
+    position: relative;
+    margin-bottom: 18px;
+    padding: 14px 20px;
+    border: 1px solid #f5dda5;
+    border-radius: 2px;
+    background: linear-gradient(110deg, #b99a61, #e9d19b 35%, #d1b278 72%, #e3c78e);
+    box-shadow: 0 2px 4px #0008, inset 0 0 0 3px #6e522d2e;
+    text-align: center;
+    color: #2c251a;
+}
+#erfolge .display-case__plaque::before, #erfolge .display-case__plaque::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #6b542e;
+    box-shadow: 0 1px 0 #fff5;
+}
+#erfolge .display-case__plaque::before { left: 7px; }
+#erfolge .display-case__plaque::after { right: 7px; }
+#erfolge .display-case__plaque p { margin: 0 0 5px; color: #493b25; font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; }
+#erfolge .display-case__plaque h3 { margin: 0; font-family: 'Oswald', sans-serif; font-size: 25px; font-weight: 500; line-height: 1.25; color: #2c251a; }
+#erfolge .display-case__description { margin: 0 0 12px; color: #c9ccc7; font-size: 14px; line-height: 1.7; }
+#erfolge .display-case__story { display: inline-flex; align-items: center; align-self: flex-start; min-height: 44px; margin-top: auto; color: var(--case-gold); font-size: 14px; font-weight: 700; }
+#erfolge .display-case__story:hover { color: #fff0ce; text-decoration: underline; }
+#erfolge .display-case a:focus-visible { outline: 3px solid #ffca79; outline-offset: 4px; }
+#erfolge .display-case__base { height: 16px; border-top: 1px solid #9f9f8270; background: linear-gradient(#414543, #242827); box-shadow: 0 5px 0 #1a1d1c; }
+#erfolge .display-case__hint { margin-top: 22px; color: #626265; font-size: 13px; text-align: center; }
+@media (max-width: 899px) {
+    #erfolge .display-case__exhibits { grid-template-columns: minmax(0, 1fr); }
+    #erfolge .display-case__exhibit + .display-case__exhibit { border-left: 0; border-top: 8px solid #3b4140; }
+    #erfolge .display-case__stage { height: 360px; padding-left: 24px; padding-right: 24px; }
+    #erfolge .display-case__details { padding: 18px 24px 24px; }
+    #erfolge .display-case__image { max-height: 257px; }
+}
+@media (max-width: 359px) {
+    #erfolge .display-case { border-width: 7px; }
+    #erfolge .display-case__header { padding: 16px 12px; font-size: 12px; }
+    #erfolge .display-case__details { padding-left: 16px; padding-right: 16px; }
+    #erfolge .display-case__plaque h3 { font-size: 23px; }
+}

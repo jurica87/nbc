@@ -283,6 +283,7 @@
         }
     </style>
 <link rel="stylesheet" href="./css/cookie-consent.css">
+<link rel="stylesheet" href="./css/hall-of-fame.css">
 </head>
 <body class="relative font-sans antialiased text-[#1a1a2e] bg-[#f8f9fa]">
 
@@ -498,7 +499,7 @@
             </div>
         </section>
 
-        <section id="erfolge" aria-labelledby="erfolge-title" class="py-20 md:py-24 bg-gradient-to-br from-[#fff8ee] via-white to-[#f2edf8] border-t border-[#e0e0e5]">
+        <section id="erfolge" aria-labelledby="erfolge-title" class="py-20 md:py-24 bg-[#f5f3ef] border-t border-[#e0e0e5]">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
                     <div>
@@ -512,62 +513,67 @@
                     </div>
                 </div>
 
-                <!-- Neue Erfolge als weitere Artikel ergänzen; Originalbilder bleiben direkt verlinkt. -->
-                <div class="grid gap-7 md:grid-cols-2 lg:grid-cols-3">
-                    <article class="flex flex-col rounded-2xl overflow-hidden bg-white border border-[#e2d6c4] shadow-sm">
-                        <figure class="bg-[#f2efea] border-b border-[#e2d6c4]">
-                            <a href="./news-sterne-des-sports-urkunde.jpg" class="block p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:-outline-offset-4" aria-label="Urkunde und Bronzestern der Sterne des Sports 2026 in voller Größe ansehen">
-                                <img src="./news-sterne-des-sports-urkunde.jpg" alt="Urkunde und Bronzestern der Sterne des Sports für den NBC im Jahr 2026" width="1204" height="1600" loading="lazy" decoding="async" class="w-full h-72 object-contain">
+                <!-- Neue Erfolge als weitere Exponate ergänzen; Originalbilder bleiben verlinkt. -->
+                <div class="display-case">
+                    <div class="display-case__header">NBC Baskets · Unsere Trophäensammlung</div>
+                    <div class="display-case__exhibits">
+                    <article class="display-case__exhibit">
+                        <figure class="display-case__stage">
+                            <a href="./news-sterne-des-sports-urkunde.jpg" class="display-case__photo" aria-label="Urkunde und Bronzestern der Sterne des Sports 2026 in voller Größe ansehen">
+                                <img src="./news-sterne-des-sports-urkunde.jpg" alt="Urkunde und Bronzestern der Sterne des Sports für den NBC im Jahr 2026" width="1204" height="1600" loading="lazy" decoding="async" class="display-case__image object-contain">
                             </a>
-                            <figcaption class="px-5 pb-4 text-xs text-[#4a4a5a]">Foto: NBC Baskets Nordhorn · Zum Vergrößern antippen</figcaption>
+                            <span class="display-case__shelf" aria-hidden="true"></span>
+                            <figcaption class="display-case__credit">Foto: NBC Baskets Nordhorn · Zum Vergrößern antippen</figcaption>
                         </figure>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wider mb-4">
-                                <span class="rounded-full bg-[#f6ead5] text-[#80531b] px-3 py-1">3. Platz · Auszeichnung</span>
-                                <span class="text-[#6a6a7a]">2026</span>
+                        <div class="display-case__details">
+                            <div class="display-case__plaque">
+                                <p>3. Platz · Auszeichnung · 2026</p>
+                                <h3>Sterne des Sports</h3>
                             </div>
-                            <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-3">Sterne des Sports</h3>
-                            <p class="text-[#4a4a5a] leading-relaxed mb-6">Ausgezeichnet für unser Basketball-Ganztagsprojekt: Wir bringen Bewegung, Teamgeist und Vereinsbasketball direkt an Nordhorner Schulen.</p>
-                            <a href="./news/sterne-des-sports-2026.html" class="mt-auto inline-flex self-start py-2 text-nbc-purple font-bold text-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:outline-offset-4">Zur Auszeichnung <span aria-hidden="true" class="ml-2">→</span></a>
+                            <p class="display-case__description">Ausgezeichnet für unser Basketball-Ganztagsprojekt: Wir bringen Bewegung, Teamgeist und Vereinsbasketball direkt an Nordhorner Schulen.</p>
+                            <a href="./news/sterne-des-sports-2026.html" class="display-case__story">Zur Auszeichnung <span aria-hidden="true" class="ml-2">→</span></a>
                         </div>
                     </article>
 
-                    <article class="flex flex-col rounded-2xl overflow-hidden bg-white border border-[#e2d6c4] shadow-sm">
-                        <figure class="bg-[#f2efea] border-b border-[#e2d6c4]">
-                            <a href="./news/turniersieg-spelle-2026-1.jpg" class="block p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:-outline-offset-4" aria-label="Teamfoto mit Pokalen vom Turniersieg in Spelle in voller Größe ansehen">
-                                <img src="./news/turniersieg-spelle-2026-1.jpg" alt="Die 1. Herren der NBC Baskets mit den Pokalen beim Vorbereitungsturnier in Spelle" width="2742" height="2129" loading="lazy" decoding="async" class="w-full h-72 object-contain">
+                    <article class="display-case__exhibit">
+                        <figure class="display-case__stage">
+                            <a href="./news/turniersieg-spelle-2026-1.jpg" class="display-case__photo" aria-label="Teamfoto mit Pokalen vom Turniersieg in Spelle in voller Größe ansehen">
+                                <img src="./news/turniersieg-spelle-2026-1.jpg" alt="Die 1. Herren der NBC Baskets mit den Pokalen beim Vorbereitungsturnier in Spelle" width="2742" height="2129" loading="lazy" decoding="async" class="display-case__image object-contain">
                             </a>
-                            <figcaption class="px-5 pb-4 text-xs text-[#4a4a5a]">Spelle · <time datetime="2026-09-05">5. September 2026</time> · Zum Vergrößern antippen</figcaption>
+                            <span class="display-case__shelf" aria-hidden="true"></span>
+                            <figcaption class="display-case__credit">Spelle · <time datetime="2026-09-05">5. September 2026</time> · Zum Vergrößern antippen</figcaption>
                         </figure>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wider mb-4">
-                                <span class="rounded-full bg-[#f6ead5] text-[#80531b] px-3 py-1">Turniersieger · 1. Herren</span>
-                                <span class="text-[#6a6a7a]">2026</span>
+                        <div class="display-case__details">
+                            <div class="display-case__plaque">
+                                <p>Turniersieger · 1. Herren · 2026</p>
+                                <h3>Turniersieg in Spelle</h3>
                             </div>
-                            <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-3">Turniersieg in Spelle</h3>
-                            <p class="text-[#4a4a5a] leading-relaxed mb-6">Unsere 1. Herren gewinnt das Vorbereitungsturnier der Spelle Dragonflys – ein gemeinsamer Erfolg zum Start in die neue Saison.</p>
-                            <a href="./news/turniersieg-spelle-2026.html" class="mt-auto inline-flex self-start py-2 text-nbc-purple font-bold text-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:outline-offset-4">Zum Turnierbericht <span aria-hidden="true" class="ml-2">→</span></a>
+                            <p class="display-case__description">Unsere 1. Herren gewinnt das Vorbereitungsturnier der Spelle Dragonflys – ein gemeinsamer Erfolg zum Start in die neue Saison.</p>
+                            <a href="./news/turniersieg-spelle-2026.html" class="display-case__story">Zum Turnierbericht <span aria-hidden="true" class="ml-2">→</span></a>
                         </div>
                     </article>
 
-                    <article class="flex flex-col rounded-2xl overflow-hidden bg-white border border-[#e2d6c4] shadow-sm">
-                        <figure class="bg-[#f2efea] border-b border-[#e2d6c4]">
-                            <a href="./news/turniersieg-spelle-2026-3.jpg" class="block p-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:-outline-offset-4" aria-label="Sascha Weirich mit seinem Pokal in voller Größe ansehen">
-                                <img src="./news/turniersieg-spelle-2026-3.jpg" alt="Sascha Weirich mit dem Pokal für seinen Sieg im Dreier-Contest in Spelle" width="2268" height="4032" loading="lazy" decoding="async" class="w-full h-72 object-contain">
+                    <article class="display-case__exhibit">
+                        <figure class="display-case__stage">
+                            <a href="./news/turniersieg-spelle-2026-3.jpg" class="display-case__photo" aria-label="Sascha Weirich mit seinem Pokal in voller Größe ansehen">
+                                <img src="./news/turniersieg-spelle-2026-3.jpg" alt="Sascha Weirich mit dem Pokal für seinen Sieg im Dreier-Contest in Spelle" width="2268" height="4032" loading="lazy" decoding="async" class="display-case__image object-contain">
                             </a>
-                            <figcaption class="px-5 pb-4 text-xs text-[#4a4a5a]">Spelle · <time datetime="2026-09-05">5. September 2026</time> · Zum Vergrößern antippen</figcaption>
+                            <span class="display-case__shelf" aria-hidden="true"></span>
+                            <figcaption class="display-case__credit">Spelle · <time datetime="2026-09-05">5. September 2026</time> · Zum Vergrößern antippen</figcaption>
                         </figure>
-                        <div class="p-6 flex flex-col flex-1">
-                            <div class="flex flex-wrap items-center gap-2 text-xs font-bold uppercase tracking-wider mb-4">
-                                <span class="rounded-full bg-[#f6ead5] text-[#80531b] px-3 py-1">Sieger · Dreier-Contest</span>
-                                <span class="text-[#6a6a7a]">2026</span>
+                        <div class="display-case__details">
+                            <div class="display-case__plaque">
+                                <p>Sieger · Dreier-Contest · 2026</p>
+                                <h3>Sascha Weirich</h3>
                             </div>
-                            <h3 class="text-2xl font-heading font-bold text-[#1a1a2e] mb-3">Sascha Weirich</h3>
-                            <p class="text-[#4a4a5a] leading-relaxed mb-6">Treffsicher von der Dreierlinie: Sascha gewinnt den Dreier-Contest beim Vorbereitungsturnier in Spelle und holt einen weiteren Pokal für den NBC.</p>
-                            <a href="./news/turniersieg-spelle-2026.html" class="mt-auto inline-flex self-start py-2 text-nbc-purple font-bold text-sm hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-nbc-purple focus-visible:outline-offset-4">Zum Contest-Erfolg <span aria-hidden="true" class="ml-2">→</span></a>
+                            <p class="display-case__description">Treffsicher von der Dreierlinie: Sascha gewinnt den Dreier-Contest beim Vorbereitungsturnier in Spelle und holt einen weiteren Pokal für den NBC.</p>
+                            <a href="./news/turniersieg-spelle-2026.html" class="display-case__story">Zum Contest-Erfolg <span aria-hidden="true" class="ml-2">→</span></a>
                         </div>
                     </article>
+                    </div>
+                    <div class="display-case__base" aria-hidden="true"></div>
                 </div>
+                <p class="display-case__hint">Ein Blick in unsere Vitrine: Fotos und Urkunden antippen, um sie in voller Größe anzusehen.</p>
             </div>
         </section>
 

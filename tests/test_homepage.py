@@ -18,6 +18,26 @@ class Elements(HTMLParser):
 
 
 class HomepageTests(unittest.TestCase):
+    def test_achievements_are_exhibits_in_a_shared_display_cabinet(self):
+        html = (ROOT / 'index.html').read_text()
+        match = re.search(r'<section\b[^>]*id="erfolge"[^>]*>(.*?)</section>', html, re.S)
+        assert match is not None
+        elements = Elements(match.group()).tags
+        cabinet = [attrs for _, attrs in elements
+                   if 'display-case' in attrs.get('class', '').split()]
+        self.assertEqual(len(cabinet), 1, 'Achievements need one shared glass display cabinet')
+        for class_name, expected in [('display-case__exhibit', 3),
+                                     ('display-case__shelf', 3),
+                                     ('display-case__plaque', 3)]:
+            self.assertEqual(sum(class_name in attrs.get('class', '').split()
+                                 for _, attrs in elements), expected)
+        shelves = [attrs for _, attrs in elements
+                   if 'display-case__shelf' in attrs.get('class', '').split()]
+        self.assertTrue(all(attrs.get('aria-hidden') == 'true' for attrs in shelves))
+        self.assertIn('./css/hall-of-fame.css',
+                      [attrs.get('href') for tag, attrs in Elements(html).tags if tag == 'link'])
+        self.assertTrue((ROOT / 'css/hall-of-fame.css').is_file())
+
     def test_achievements_reachable_from_desktop_mobile_and_footer(self):
         html = (ROOT / 'index.html').read_text()
         nav = re.search(r'<nav\b.*?</nav>', html, re.S)
