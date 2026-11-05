@@ -19,6 +19,23 @@ class Tags(HTMLParser):
 
 
 class CampTests(unittest.TestCase):
+    def test_camp_matches_athletics_dark_theme_with_local_fonts(self):
+        css = (ROOT / 'css/camp2027.css').read_text()
+        self.assertRegex(css, r'--background:\s*#0a0a0a')
+        self.assertRegex(css, r"font-family:\s*'Oswald'")
+        self.assertRegex(css, r"font-family:\s*'Inter'")
+        self.assertIn('color-scheme: dark', css)
+        self.assertIn('#F2722C', css)
+        self.assertIn('#7457A3', css)
+        self.assertIn('prefers-reduced-motion', css)
+        self.assertNotIn('fonts.googleapis.com', css)
+        self.assertNotIn('fonts.gstatic.com', css)
+        for name in ['oswald-latin.woff2', 'inter-latin.woff2']:
+            self.assertIn('../fonts/' + name, css)
+            self.assertTrue((ROOT / 'fonts' / name).is_file())
+        for name in ['Oswald-OFL.txt', 'Inter-OFL.txt']:
+            self.assertIn('SIL OPEN FONT LICENSE', (ROOT / 'fonts' / name).read_text())
+
     def test_camp_privacy_and_homepage_discovery_are_present(self):
         privacy = ROOT / 'Camp-Datenschutz.html'
         self.assertTrue(privacy.is_file(), 'Dedicated camp privacy notice is missing')
