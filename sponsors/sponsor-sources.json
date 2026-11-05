@@ -1,0 +1,26 @@
+[
+  {
+    "name": "DMG Nordhorn",
+    "website": "https://dmg-nordhorn.de/",
+    "source": "https://dmg-nordhorn.de/wp-content/uploads/2026/03/DMG_Logo-2025_Namen-768x262.png",
+    "file": "sponsors/dmg-nordhorn-logo.png"
+  },
+  {
+    "name": "Uelsener Massivbau",
+    "website": "https://uelsener-massivbau.de/",
+    "source": "https://uelsener-massivbau.de/wp-content/uploads/2017/03/uelsener_massivbau.png",
+    "file": "sponsors/uelsener-massivbau-logo.png"
+  },
+  {
+    "name": "ProQuartis",
+    "website": "https://proquartis.de/",
+    "source": "https://proquartis.de/wp-content/uploads/2021/12/ohne_Rahmen_proquartis_Logo_schwarz_Adresse_HH_NOH-e1638375308304.png",
+    "file": "sponsors/proquartis-logo.png"
+  },
+  {
+    "name": "Hermann Schulten GmbH",
+    "website": "https://www.hermann-schulten.de/",
+    "source": "https://www.hermann-schulten.de/wp-content/uploads/2024/02/Logo-hermann-schulten-ganz-v3.png",
+    "file": "sponsors/hermann-schulten-logo.png"
+  }
+]
