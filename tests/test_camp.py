@@ -38,6 +38,27 @@ class CampTests(unittest.TestCase):
         for name in ['Oswald-OFL.txt', 'Inter-OFL.txt']:
             self.assertIn('SIL OPEN FONT LICENSE', (ROOT / 'fonts' / name).read_text())
 
+    def test_supplied_team_photo_is_prominent_and_credited(self):
+        html = (ROOT / 'Camp2027.html').read_text()
+        tags = Tags(html).tags
+        photos = [a for t, a in tags if t == 'img' and 'camp-team-photo' in a.get('class', '').split()]
+        self.assertEqual(len(photos), 1, 'Supplied team photo must be visible in the hero')
+        photo = photos[0]
+        self.assertTrue(photo.get('alt'))
+        self.assertEqual(photo.get('fetchpriority'), 'high')
+        self.assertNotEqual(photo.get('loading'), 'lazy')
+        self.assertEqual((photo.get('width'), photo.get('height')), ('1600', '1000'))
+        self.assertIn('800w', photo.get('srcset', ''))
+        self.assertIn('1600w', photo.get('srcset', ''))
+        self.assertIn('sizes', photo)
+        self.assertLess(html.index('class="camp-team-photo"'), html.index('class="intro wrap"'))
+        for name in ['camp2027-team-800.webp', 'camp2027-team-1600.webp', 'camp2027-team-original.jpg']:
+            self.assertIn('./images/' + name, html)
+            self.assertTrue((ROOT / 'images' / name).is_file())
+        self.assertIn('<figcaption>', html)
+        self.assertIn('© philippheils.jpg', html)
+        self.assertIn('Bild vollständig ansehen', html)
+
     def test_camp_privacy_and_homepage_discovery_are_present(self):
         privacy = ROOT / 'Camp-Datenschutz.html'
         self.assertTrue(privacy.is_file(), 'Dedicated camp privacy notice is missing')

@@ -24,7 +24,12 @@ button, .button { cursor: pointer; }
 .site-nav nav a:hover { color: var(--ink); }
 .site-nav nav .nav-cta { padding: 10px 22px; border-radius: 7px; font-size: 13px; font-weight: 700; color: var(--ink); background: var(--orange); }
 .site-nav nav .nav-cta:hover { background: #ff965c; }
-.camp-hero { display: grid; grid-template-columns: 1.3fr 1fr; align-items: center; gap: 76px; padding-block: 76px 64px; }
+.camp-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 32px 56px; padding-block: 52px 48px; }
+.camp-photo { margin: 0; min-width: 0; }
+.camp-photo-link { display: block; border-radius: 14px; box-shadow: 0 10px 30px #1c293c0c; }
+.camp-team-photo { display: block; width: 100%; height: auto; border-radius: 14px; }
+.camp-photo figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 0 14px; margin-top: 4px; color: var(--muted); font-size: 11px; }
+.camp-photo figcaption a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; }
 .eyebrow { margin: 0 0 18px; color: var(--link); font-size: 11px; text-transform: uppercase; letter-spacing: .16em; font-weight: 700; }
 h1, h2, h3, legend, .form-section-title { font-family: 'Oswald', 'Arial Narrow', sans-serif; }
 h1 { margin: 0 0 24px; font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; letter-spacing: -.015em; font-weight: 600; }
@@ -36,16 +41,16 @@ h1 { margin: 0 0 24px; font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; l
 .button-primary:hover { background: #ff965c; color: var(--ink); }
 .button-secondary { background: var(--surface); border-color: #8994a4; color: var(--ink); }
 .button-secondary:hover { background: #f2eef8; border-color: var(--purple); color: var(--link); }
-.camp-ticket { position: relative; padding: 32px; background: var(--surface); color: var(--ink); border-radius: 14px; border: 1px solid var(--line); box-shadow: 0 12px 36px #1c293c08; overflow: hidden; }
+.camp-ticket { grid-column: 1 / -1; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 20px 36px; position: relative; padding: 28px 32px; background: var(--surface); color: var(--ink); border-radius: 14px; border: 1px solid var(--line); overflow: hidden; }
 .camp-ticket::before { content: ''; position: absolute; inset: 0 0 auto; height: 4px; background: var(--orange); }
-.ticket-top { margin: 0 0 18px; font-size: 13px; color: var(--muted); }
-.ticket-date { margin: 0 0 24px; font-family: 'Oswald', 'Arial Narrow', sans-serif; font-size: 68px; font-weight: 600; line-height: 1; letter-spacing: -.02em; color: var(--ink); }
+.ticket-top { margin: 0 0 10px; font-size: 12px; color: var(--muted); }
+.ticket-date { margin: 0; font-family: 'Oswald', 'Arial Narrow', sans-serif; font-size: 46px; font-weight: 600; line-height: 1; letter-spacing: -.02em; color: var(--ink); }
 .ticket-date span { display: block; margin-top: 13px; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: .15em; color: var(--link); }
-.camp-ticket dl { margin: 0; }
-.camp-ticket dl div { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.camp-ticket dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; align-self: center; margin: 0; }
+.camp-ticket dl div { min-width: 0; font-size: 13px; }
 .camp-ticket dt { color: var(--muted); }
-.camp-ticket dd { margin: 0; font-weight: 600; text-align: right; }
-.ticket-note { margin: 18px 0 0; font-size: 12px; line-height: 1.7; color: var(--muted); }
+.camp-ticket dd { margin: 5px 0 0; font-weight: 600; }
+.ticket-note { grid-column: 1 / -1; margin: 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; line-height: 1.7; color: var(--muted); }
 .intro { max-width: 820px; padding-bottom: 64px; }
 .intro h2 { margin: 0 0 20px; font-size: 30px; font-weight: 500; }
 .intro p { margin: 0 0 17px; color: var(--muted); }
@@ -106,7 +111,9 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
 .privacy-content p, .privacy-content li { color: var(--muted); }
 .privacy-content a { overflow-wrap: anywhere; }
 @media (max-width: 960px) {
-    .camp-hero { gap: 32px; padding-block: 56px; }
+    .camp-hero { gap: 32px; padding-block: 48px; }
+    .camp-ticket { grid-template-columns: 160px minmax(0, 1fr); gap: 20px 28px; }
+    .camp-ticket dl { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .registration-layout { grid-template-columns: minmax(0, 1fr); gap: 30px; max-width: 760px; }
     .registration-guide { position: static; }
     .registration-guide ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
@@ -124,9 +131,9 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
     .camp-hero { grid-template-columns: minmax(0, 1fr); padding-block: 38px; gap: 32px; }
     .camp-hero h1 { font-size: 16px; }
     .camp-hero h1 span { font-size: clamp(36px, 10.3vw, 54px); }
-    .camp-ticket { padding: 24px; }
-    .ticket-date { font-size: 60px; }
-    .camp-ticket dl div { gap: 12px; font-size: 12px; }
+    .camp-ticket { grid-template-columns: minmax(0, 1fr); padding: 24px; gap: 20px; }
+    .ticket-date { font-size: 42px; }
+    .camp-ticket dl { gap: 18px 12px; }
     .lead { font-size: 15px; }
     .intro { padding-bottom: 38px; }
     .registration-section { padding-block: 38px; }
