@@ -100,6 +100,43 @@ class CampTests(unittest.TestCase):
         self.assertGreaterEqual(len(original_links), 1)
         self.assertTrue(all(a.get('target') == '_blank' and 'noopener' in a.get('rel', '') for a in original_links))
 
+    def test_qr_downloads_and_share_links_use_only_the_public_camp_url(self):
+        from urllib.parse import urlparse, parse_qs
+        html = (ROOT / 'Camp2027.html').read_text()
+        tags = Tags(html).tags
+        canonical = 'https://nbc-nordhorn.de/Camp2027.html'
+        self.assertTrue(any(t == 'section' and a.get('id') == 'camp-teilen' for t, a in tags))
+        self.assertTrue(any(t == 'a' and a.get('href') == '#camp-teilen' for t, a in tags))
+        for extension in ['png', 'svg']:
+            path = './downloads/NBC-Camp-2027-QR.' + extension
+            self.assertTrue((ROOT / path).is_file())
+            self.assertTrue(any(t == 'a' and a.get('href') == path and 'download' in a for t, a in tags))
+        self.assertTrue(any(t == 'img' and a.get('src') == './downloads/NBC-Camp-2027-QR.svg'
+                            and a.get('alt') and a.get('width') and a.get('height') for t, a in tags))
+        links = {a['id']: a for t, a in tags if t == 'a' and a.get('id', '').startswith('camp-share-')}
+        whatsapp = urlparse(links['camp-share-whatsapp']['href'])
+        self.assertEqual((whatsapp.scheme, whatsapp.netloc), ('https', 'wa.me'))
+        self.assertIn(canonical, parse_qs(whatsapp.query)['text'][0])
+        facebook = urlparse(links['camp-share-facebook']['href'])
+        self.assertEqual((facebook.scheme, facebook.netloc), ('https', 'www.facebook.com'))
+        self.assertEqual(parse_qs(facebook.query)['u'], [canonical])
+        email = urlparse(links['camp-share-email']['href'])
+        self.assertEqual(email.scheme, 'mailto')
+        self.assertIn(canonical, parse_qs(email.query)['body'][0])
+        for name in ['camp-share-whatsapp', 'camp-share-facebook']:
+            self.assertEqual(links[name].get('target'), '_blank')
+            self.assertIn('noopener', links[name].get('rel', ''))
+            self.assertEqual(links[name].get('referrerpolicy'), 'no-referrer')
+        for name in ['camp-share-copy', 'camp-share-native']:
+            button = next(a for t, a in tags if t == 'button' and a.get('id') == name)
+            self.assertEqual(button.get('type'), 'button')
+            self.assertIn('hidden', button)
+        public_link = next(a for t, a in tags if t == 'input' and a.get('id') == 'camp-share-url')
+        self.assertEqual(public_link.get('value'), canonical)
+        self.assertIn('readonly', public_link)
+        self.assertIn('role="status"', html)
+        self.assertIn('./js/camp2027-share.js', html)
+
     def test_camp_privacy_and_homepage_discovery_are_present(self):
         privacy = ROOT / 'Camp-Datenschutz.html'
         self.assertTrue(privacy.is_file(), 'Dedicated camp privacy notice is missing')

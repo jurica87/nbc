@@ -116,6 +116,23 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 32px; color: var(--muted); font-size: 12px; }
 .site-footer nav { gap: 10px 20px; }
 .site-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.camp-share { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; margin-block: 56px; padding: 40px; border: 1px solid #d7c6e5; border-radius: 16px; background: var(--surface); }
+.share-content { min-width: 0; }
+.share-content h2 { margin: 0 0 16px; font-size: 36px; font-weight: 500; line-height: 1.2; }
+.share-content > p:not(.eyebrow):not(.share-status):not(.share-note) { margin: 0; max-width: 65ch; color: var(--muted); font-size: 15px; }
+.share-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 24px; }
+.share-actions .button { padding: 12px 18px; font-size: 13px; }
+.share-content > label { display: block; margin-bottom: 8px; color: var(--ink); font-size: 12px; font-weight: 600; }
+.share-url { display: block; width: 100%; min-width: 0; min-height: 48px; padding: 12px; border: 1px solid #8994a4; border-radius: 7px; background: var(--surface); color: var(--ink); font-size: 16px; line-height: 1.4; }
+.share-status { min-height: 24px; margin: 8px 0; color: var(--link); font-size: 13px; }
+.share-note { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+.share-qr { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 0; margin: 0; padding-left: 32px; border-left: 1px solid var(--line); }
+.share-qr img { display: block; width: 180px; height: 180px; max-width: 100%; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.share-qr figcaption { color: var(--ink); font-size: 12px; font-weight: 600; text-align: center; }
+.qr-downloads { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.qr-downloads .button { min-height: 44px; padding: 10px 12px; font-size: 12px; }
+.share-qr p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; text-align: center; }
 .privacy-content { max-width: 850px; padding-block: 55px; }
 .privacy-content h1 { font-size: clamp(34px, 5vw, 50px); }
 .privacy-content h2 { margin-top: 38px; font-size: 28px; font-weight: 500; line-height: 1.2; }
@@ -162,6 +179,9 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
     .photo-choice { padding: 16px; }
     .radio-options { display: block; }
     .mail-actions, .mail-actions .button { width: 100%; }
+    .camp-share { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 24px 20px; margin-block: 38px; }
+    .share-content h2 { font-size: 32px; }
+    .share-qr { padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--line); }
     .site-footer { flex-direction: column; align-items: flex-start; gap: 0; }
     .site-footer nav { gap: 0 16px; }
 }

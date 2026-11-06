@@ -13,8 +13,9 @@
     <meta property="og:image" content="https://nbc-nordhorn.de/android-chrome-512x512.png">
     <link rel="icon" href="./favicon.ico" sizes="any">
     <meta name="theme-color" content="#F2722C">
-    <link rel="stylesheet" href="./css/camp2027.css?v=framed-overview">
+    <link rel="stylesheet" href="./css/camp2027.css?v=share-qr">
     <script src="./js/camp2027.js?v=years-2010-2018" defer></script>
+    <script src="./js/camp2027-share.js?v=share-qr" defer></script>
 </head>
 <body>
     <a class="skip-link" href="#anmeldung">Zur Anmeldung springen</a>
@@ -28,7 +29,7 @@
                 <p class="eyebrow">Jugendcamp · Januar 2027</p>
                 <h1>Anmeldung zum <span>1. NBC Jugend Basketballcamp 2027</span></h1>
                 <p class="lead">Zwei Tage. Ein Team. Jede Menge Basketball.</p>
-                <a class="button button-primary" href="#anmeldung">Anmeldung ausfüllen <span aria-hidden="true">↓</span></a>
+                <div class="hero-actions"><a class="button button-primary" href="#anmeldung">Anmeldung ausfüllen <span aria-hidden="true">↓</span></a><a class="button button-secondary" href="#camp-teilen">Camp teilen</a></div>
             </div>
             <figure class="camp-photo">
                 <a class="camp-photo-link" href="./images/camp2027-team-original.jpg" target="_blank" rel="noopener noreferrer" aria-label="Teamfoto vollständig ansehen (öffnet in neuem Tab)">
@@ -123,6 +124,30 @@
                     </section>
                 </div>
             </div>
+        </section>
+        <section class="camp-share wrap" id="camp-teilen" aria-labelledby="camp-share-title">
+            <div class="share-content">
+                <p class="eyebrow">Gemeinsam mehr Kids erreichen</p>
+                <h2 id="camp-share-title">Camp weitersagen.</h2>
+                <p>Teilt die Campseite mit Freunden, Familie und eurem Team. Den QR-Code könnt ihr für Aushänge und zum Weitergeben herunterladen.</p>
+                <div class="share-actions" aria-label="Campseite teilen">
+                    <button id="camp-share-native" class="button button-primary" type="button" hidden>Teilen …</button>
+                    <a id="camp-share-whatsapp" class="button button-secondary" href="https://wa.me/?text=1.%20NBC%20Jugend%20Basketballcamp%20am%2030.%20und%2031.%20Januar%202027%20im%20Gymnasium%20Nordhorn.%20Jahrg%C3%A4nge%202010%E2%80%932018%20%C2%B7%20Kostenbeitrag%2069%20%E2%82%AC.%0Ahttps%3A%2F%2Fnbc-nordhorn.de%2FCamp2027.html" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">WhatsApp</a>
+                    <a id="camp-share-facebook" class="button button-secondary" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fnbc-nordhorn.de%2FCamp2027.html" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Facebook</a>
+                    <a id="camp-share-email" class="button button-secondary" href="mailto:?subject=1.%20NBC%20Jugend%20Basketballcamp%202027&amp;body=1.%20NBC%20Jugend%20Basketballcamp%20am%2030.%20und%2031.%20Januar%202027%20im%20Gymnasium%20Nordhorn.%20Jahrg%C3%A4nge%202010%E2%80%932018%20%C2%B7%20Kostenbeitrag%2069%20%E2%82%AC.%0A%0AInfos%20und%20Anmeldung%3A%20https%3A%2F%2Fnbc-nordhorn.de%2FCamp2027.html">Per E-Mail</a>
+                    <button id="camp-share-copy" class="button button-secondary" type="button" hidden>Link kopieren</button>
+                </div>
+                <label for="camp-share-url">Direktlink zur Campseite</label>
+                <input id="camp-share-url" class="share-url" type="url" value="https://nbc-nordhorn.de/Camp2027.html" readonly spellcheck="false" autocomplete="off">
+                <p id="camp-share-status" class="share-status" role="status" aria-live="polite"></p>
+                <p class="share-note">Geteilt werden nur öffentliche Camp-Infos, keine Formulareingaben. WhatsApp und Facebook öffnen erst nach eurem Klick.</p>
+            </div>
+            <figure class="share-qr">
+                <img src="./downloads/NBC-Camp-2027-QR.svg" alt="QR-Code zur öffentlichen Campseite: https://nbc-nordhorn.de/Camp2027.html" width="164" height="164" loading="lazy" decoding="async">
+                <figcaption>Scannen oder herunterladen</figcaption>
+                <div class="qr-downloads"><a class="button button-secondary" href="./downloads/NBC-Camp-2027-QR.png" download="NBC-Camp-2027-QR.png">QR als PNG</a><a class="button button-secondary" href="./downloads/NBC-Camp-2027-QR.svg" download="NBC-Camp-2027-QR.svg">QR als SVG</a></div>
+                <p>PNG für Handy &amp; Bildschirm<br>SVG für Druck &amp; Plakate</p>
+            </figure>
         </section>
     </main>
     <footer class="site-footer wrap"><p>© NBC Baskets Nordhorn e.V.</p><nav aria-label="Rechtliches"><a href="./index.html">Startseite</a><a href="./Camp-Datenschutz.html">Camp-Datenschutz</a><a href="./Datenschutz.html">Website-Datenschutz</a><a href="./Impressum.html">Impressum</a></nav></footer>
