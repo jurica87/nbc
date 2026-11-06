@@ -66,6 +66,31 @@ h1 { margin: 0 0 24px; font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; l
 .intro h2 { margin: 0 0 20px; font-size: 30px; font-weight: 500; }
 .intro p { margin: 0 0 17px; color: var(--muted); }
 .intro strong { color: var(--ink); font-weight: 600; }
+.camp-information { position: relative; padding: 28px 32px; margin-bottom: 64px; border: 2px solid var(--purple); border-radius: 16px; background: var(--paper); box-shadow: 0 0 0 4px #fff, 0 0 0 6px var(--orange), 0 16px 36px #30213f14; overflow: hidden; }
+.camp-information .ticket-banner { margin-bottom: 24px; }
+.camp-times { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+.camp-time { display: flex; align-items: center; gap: 16px; padding: 18px 22px; border: 1px solid #d7c6e5; border-radius: 10px; background: var(--surface); }
+.camp-time svg { flex-shrink: 0; color: var(--link); }
+.camp-time p { margin: 0 0 4px; font-size: 13px; font-weight: 600; color: var(--link); }
+.camp-time strong { display: block; font-family: 'Oswald', 'Arial Narrow', sans-serif; font-size: 27px; line-height: 1.3; font-weight: 500; }
+.camp-programme { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.camp-programme-card { min-width: 0; padding: 22px; border: 1px solid #d7c6e5; border-radius: 10px; background: var(--surface); }
+.camp-programme-card h3, .camp-cake h3 { margin: 0 0 12px; font-size: 23px; line-height: 1.3; font-weight: 500; }
+.camp-programme-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 14px; }
+.camp-programme-card li + li { margin-top: 9px; }
+.camp-programme-card li::marker { color: #a44513; }
+.camp-cake { margin-top: 20px; padding: 20px 22px; border: 1px solid #edb78e; border-left: 4px solid var(--orange); border-radius: 10px; background: #fff4ea; }
+.camp-cake h3 { color: var(--ink); margin-bottom: 8px; }
+.camp-cake p { margin: 0; color: #674a30; font-size: 14px; }
+@media (max-width: 700px) {
+    .camp-information { padding: 22px 18px; margin-bottom: 38px; }
+    .camp-information .ticket-banner { margin-bottom: 18px; }
+    .camp-times, .camp-programme { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .camp-time { padding: 16px; gap: 12px; }
+    .camp-time strong { font-size: 25px; }
+    .camp-programme-card { padding: 18px; }
+    .camp-cake { padding: 18px; }
+}
 .registration-section { background: var(--paper); border-block: 1px solid var(--line); padding: 64px 0 76px; }
 .registration-layout { display: grid; grid-template-columns: .7fr 1.5fr; align-items: start; gap: 56px; }
 .registration-guide { position: sticky; top: 108px; }
