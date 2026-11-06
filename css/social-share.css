@@ -1,0 +1,14 @@
+/* NBC social sharing: same SVG/pill vocabulary as the news articles.
+   Platform shades retain readable text contrast; no external icon libraries. */
+.nbc-social-share { display: flex; flex-wrap: wrap; gap: 12px; }
+.nbc-social-share .nbc-share-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 11px 18px; border: 1px solid transparent; border-radius: 999px; font: inherit; font-size: 14px; font-weight: 700; line-height: 1.4; text-align: center; text-decoration: none; cursor: pointer; transition: filter .2s; }
+.nbc-social-icon { display: inline-block; width: 16px; height: 16px; flex: 0 0 16px; vertical-align: middle; }
+.nbc-social-share .nbc-share-native { background: #7457A3; color: #fff; }
+.nbc-social-share .nbc-share-whatsapp { background: #25D366; color: #123521; }
+.nbc-social-share .nbc-share-facebook { background: #1665ce; color: #fff; }
+.nbc-social-share .nbc-share-instagram { background: linear-gradient(120deg, #ad4a1d, #b32363, #71349b); color: #fff; }
+.nbc-social-share .nbc-share-email { background: #f2edf7; color: #68418f; border-color: #c5b3d9; }
+.nbc-social-share .nbc-share-button:hover { filter: brightness(.95); }
+.nbc-social-share .nbc-share-button:focus-visible { outline: 3px solid #7457A3; outline-offset: 4px; }
+.nbc-social-share .nbc-share-button:disabled { cursor: wait; opacity: .7; }
+@media (prefers-reduced-motion: reduce) { .nbc-social-share .nbc-share-button { transition: none; } }

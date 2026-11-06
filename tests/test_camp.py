@@ -137,6 +137,30 @@ class CampTests(unittest.TestCase):
         self.assertIn('role="status"', html)
         self.assertIn('./js/camp2027-share.js', html)
 
+    def test_social_buttons_reuse_news_icons_and_shared_pill_styling(self):
+        html = (ROOT / 'Camp2027.html').read_text()
+        reference = (ROOT / 'news/sparkasse-spendenuebergabe-2026.html').read_text()
+        reference_paths = {a['d'] for t, a in Tags(reference).tags if t == 'path' and 'd' in a}
+        for identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-copy', 'camp-share-email', 'camp-share-native']:
+            match = re.search(r'<(?:a|button)\b[^>]*id="' + identifier + r'"[^>]*>(.*?)</(?:a|button)>', html, re.S)
+            assert match is not None, identifier
+            inner_tags = Tags(match.group(1)).tags
+            icons = [a for t, a in inner_tags if t == 'svg']
+            self.assertEqual(len(icons), 1, identifier + ' needs an inline icon')
+            self.assertEqual(icons[0].get('viewbox'), '0 0 24 24')
+            self.assertEqual(icons[0].get('aria-hidden'), 'true')
+            self.assertEqual(icons[0].get('focusable'), 'false')
+            if identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-copy']:
+                self.assertTrue(any(t == 'path' and a.get('d') in reference_paths for t, a in inner_tags), identifier)
+        self.assertIn('Instagram / Link', html)
+        self.assertIn('id="camp-instagram-help"', html)
+        self.assertIn('aria-describedby="camp-instagram-help"', html)
+        self.assertIn('./css/social-share.css', html)
+        common_css = ROOT / 'css/social-share.css'
+        self.assertTrue(common_css.is_file())
+        self.assertIn('border-radius: 999px', common_css.read_text())
+        self.assertNotIn('font-awesome', html.lower())
+
     def test_camp_privacy_and_homepage_discovery_are_present(self):
         privacy = ROOT / 'Camp-Datenschutz.html'
         self.assertTrue(privacy.is_file(), 'Dedicated camp privacy notice is missing')

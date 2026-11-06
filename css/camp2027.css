@@ -22,7 +22,7 @@ button, .button { cursor: pointer; }
 .site-nav nav, .site-footer nav { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; }
 .site-nav nav a { color: var(--muted); font-size: 13px; font-weight: 500; text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .site-nav nav a:hover { color: var(--ink); }
-.site-nav nav .nav-cta { padding: 10px 22px; border-radius: 7px; font-size: 13px; font-weight: 700; color: var(--ink); background: var(--orange); }
+.site-nav nav .nav-cta { padding: 10px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; color: var(--ink); background: var(--orange); }
 .site-nav nav .nav-cta:hover { background: #ff965c; }
 .camp-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; gap: 32px 56px; padding-block: 52px 48px; }
 .camp-photo { margin: 0; min-width: 0; }
@@ -36,7 +36,7 @@ h1 { margin: 0 0 24px; font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; l
 .camp-hero h1 { font-family: 'Inter', Arial, sans-serif; font-size: 18px; font-weight: 500; color: var(--muted); letter-spacing: 0; }
 .camp-hero h1 span { display: block; margin-top: 14px; font-family: 'Oswald', 'Arial Narrow', sans-serif; font-size: clamp(44px, 4.5vw, 64px); line-height: 1.1; font-weight: 600; letter-spacing: -.015em; text-transform: uppercase; color: var(--ink); text-wrap: balance; }
 .lead { margin: 0 0 30px; color: var(--muted); font-size: 17px; line-height: 1.7; }
-.button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 48px; padding: 14px 24px; border: 1px solid transparent; border-radius: 7px; font-size: 14px; font-weight: 700; line-height: 1.4; text-align: center; text-decoration: none; transition: background-color .2s, border-color .2s; }
+.button { display: inline-flex; justify-content: center; align-items: center; gap: 12px; min-height: 48px; padding: 14px 24px; border: 1px solid transparent; border-radius: 999px; font-size: 14px; font-weight: 700; line-height: 1.4; text-align: center; text-decoration: none; transition: background-color .2s, border-color .2s; }
 .button-primary { background: var(--orange); color: var(--ink); }
 .button-primary:hover { background: #ff965c; color: var(--ink); }
 .button-secondary { background: var(--surface); border-color: #8994a4; color: var(--ink); }
@@ -120,9 +120,10 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
 .camp-share { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; margin-block: 56px; padding: 40px; border: 1px solid #d7c6e5; border-radius: 16px; background: var(--surface); }
 .share-content { min-width: 0; }
 .share-content h2 { margin: 0 0 16px; font-size: 36px; font-weight: 500; line-height: 1.2; }
-.share-content > p:not(.eyebrow):not(.share-status):not(.share-note) { margin: 0; max-width: 65ch; color: var(--muted); font-size: 15px; }
+.share-content > p:not(.eyebrow):not(.share-status):not(.share-note):not(.share-instagram-help) { margin: 0; max-width: 65ch; color: var(--muted); font-size: 15px; }
 .share-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-block: 24px; }
 .share-actions .button { padding: 12px 18px; font-size: 13px; }
+.share-instagram-help { margin: -8px 0 20px; color: var(--muted); font-size: 12px; }
 .share-content > label { display: block; margin-bottom: 8px; color: var(--ink); font-size: 12px; font-weight: 600; }
 .share-url { display: block; width: 100%; min-width: 0; min-height: 48px; padding: 12px; border: 1px solid #8994a4; border-radius: 7px; background: var(--surface); color: var(--ink); font-size: 16px; line-height: 1.4; }
 .share-status { min-height: 24px; margin: 8px 0; color: var(--link); font-size: 13px; }
