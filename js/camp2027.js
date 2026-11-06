@@ -101,8 +101,8 @@
         const isoDate = clean(input.geburtstag);
         const parsedDate = new Date(isoDate + 'T00:00:00Z');
         if (!/^\d{4}-\d{2}-\d{2}$/.test(isoDate) || Number.isNaN(parsedDate.getTime()) ||
-                parsedDate.toISOString().slice(0, 10) !== isoDate || isoDate < '2015-01-01' || isoDate > '2020-12-31') {
-            fail('geburtstag', 'Bitte ein gültiges Geburtsdatum aus den Jahrgängen 2015 bis 2020 eingeben.');
+                parsedDate.toISOString().slice(0, 10) !== isoDate || isoDate < '2010-01-01' || isoDate > '2018-12-31') {
+            fail('geburtstag', 'Bitte ein gültiges Geburtsdatum aus den Jahrgängen 2010 bis 2018 eingeben.');
         }
         if (!['Ja', 'Nein'].includes(input.foto_video)) fail('foto_video', 'Bitte bei Fotos und Videos Ja oder Nein auswählen.');
         if (input.sorgeberechtigt !== 'Ja') fail('sorgeberechtigt');

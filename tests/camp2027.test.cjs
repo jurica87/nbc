@@ -54,7 +54,7 @@ test('rejects incomplete registrations, invalid dates, wrong age years and missi
         assert.throws(() => camp.prepareRegistration({ ...valid(), [field]: '' }),
                       error => error.field === field, `Missing ${field} must block email preparation`);
     }
-    for (const birthday of ['2014-12-31', '2021-01-01', '2017-02-29', '2019-02-30', '2017-13-01', '15.04.2017']) {
+    for (const birthday of ['2009-12-31', '2019-01-01', '2020-12-31', '2017-02-29', '2018-02-30', '2017-13-01', '15.04.2017']) {
         assert.throws(() => camp.prepareRegistration({ ...valid(), geburtstag: birthday }),
                       error => error.field === 'geburtstag');
     }
@@ -64,7 +64,7 @@ test('rejects incomplete registrations, invalid dates, wrong age years and missi
         assert.throws(() => camp.prepareRegistration({ ...valid(), [field]: value }),
                       error => error.field === field);
     }
-    for (const birthday of ['2015-01-01', '2020-12-31', '2016-02-29']) {
+    for (const birthday of ['2010-01-01', '2018-12-31', '2012-02-29', '2014-12-31', '2016-02-29']) {
         assert.doesNotThrow(() => camp.prepareRegistration({ ...valid(), geburtstag: birthday }));
     }
 });

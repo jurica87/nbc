@@ -19,12 +19,14 @@ class Tags(HTMLParser):
 
 
 class CampTests(unittest.TestCase):
-    def test_camp_matches_athletics_dark_theme_with_local_fonts(self):
+    def test_camp_uses_light_professional_theme_with_local_fonts(self):
         css = (ROOT / 'css/camp2027.css').read_text()
-        self.assertRegex(css, r'--background:\s*#0a0a0a')
+        self.assertRegex(css, r'--background:\s*#f7f8fa')
         self.assertRegex(css, r"font-family:\s*'Oswald'")
         self.assertRegex(css, r"font-family:\s*'Inter'")
-        self.assertIn('color-scheme: dark', css)
+        self.assertIn('color-scheme: light', css)
+        self.assertNotIn('color-scheme: dark', css)
+        self.assertRegex(css, r'--surface:\s*#fff(?:fff)?;')
         self.assertIn('#F2722C', css)
         self.assertIn('#7457A3', css)
         self.assertIn('prefers-reduced-motion', css)
@@ -56,7 +58,7 @@ class CampTests(unittest.TestCase):
         self.assertTrue(page.is_file(), 'Camp registration page is missing')
         html = page.read_text()
         self.assertIn('Anmeldung zum 1. NBC Jugend Basketballcamp 2027', html)
-        for phrase in ['30. und 31. Januar 2027', 'Gymnasiums Nordhorn', '2015 bis 2020', '80 Plätze', '69 €']:
+        for phrase in ['30. und 31. Januar 2027', 'Gymnasiums Nordhorn', '2010 bis 2018', '80 Plätze', '69 €']:
             self.assertIn(phrase, html)
         self.assertNotRegex(html.lower(), r'fu[ßs]ball')
         tags = Tags(html).tags
@@ -66,8 +68,8 @@ class CampTests(unittest.TestCase):
                      'sorgeberechtigt', 'datenschutz']:
             self.assertIn(name, inputs)
             self.assertIn('required', inputs[name], name)
-        self.assertEqual(inputs['geburtstag'].get('min'), '2015-01-01')
-        self.assertEqual(inputs['geburtstag'].get('max'), '2020-12-31')
+        self.assertEqual(inputs['geburtstag'].get('min'), '2010-01-01')
+        self.assertEqual(inputs['geburtstag'].get('max'), '2018-12-31')
         for name in ['krankheiten', 'allergien', 'essensvorschriften']:
             self.assertNotIn(name, inputs)
         self.assertIn('freund', inputs)
