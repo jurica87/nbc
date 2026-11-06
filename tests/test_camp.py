@@ -21,7 +21,7 @@ class Tags(HTMLParser):
 class CampTests(unittest.TestCase):
     def test_camp_uses_light_professional_theme_with_local_fonts(self):
         css = (ROOT / 'css/camp2027.css').read_text()
-        self.assertRegex(css, r'--background:\s*#f7f8fa')
+        self.assertRegex(css, r'--background:\s*#fbf9fd')
         self.assertRegex(css, r"font-family:\s*'Oswald'")
         self.assertRegex(css, r"font-family:\s*'Inter'")
         self.assertIn('color-scheme: light', css)
@@ -37,6 +37,25 @@ class CampTests(unittest.TestCase):
             self.assertTrue((ROOT / 'fonts' / name).is_file())
         for name in ['Oswald-OFL.txt', 'Inter-OFL.txt']:
             self.assertIn('SIL OPEN FONT LICENSE', (ROOT / 'fonts' / name).read_text())
+
+    def test_camp_overview_has_clear_heading_and_orange_purple_frame(self):
+        html = (ROOT / 'Camp2027.html').read_text()
+        css = (ROOT / 'css/camp2027.css').read_text()
+        tags = Tags(html).tags
+        self.assertIn('Das Camp auf einen Blick', html)
+        self.assertTrue(any(t == 'h2' and a.get('id') == 'camp-overview-title' for t, a in tags))
+        self.assertTrue(any(t == 'aside' and a.get('aria-labelledby') == 'camp-overview-title' for t, a in tags))
+        frame_match = re.search(r'\.camp-ticket\s*\{([^}]+)\}', css)
+        assert frame_match is not None, 'Camp overview frame styles missing'
+        frame = frame_match.group(1)
+        self.assertRegex(frame, r'border:\s*2px solid var\(--purple\)')
+        self.assertIn('box-shadow:', frame)
+        self.assertIn('var(--orange)', frame)
+        banner_match = re.search(r'\.ticket-banner\s*\{([^}]+)\}', css)
+        assert banner_match is not None, 'Camp overview heading styles missing'
+        banner = banner_match.group(1)
+        self.assertIn('background: var(--deep-purple)', banner)
+        self.assertIn('color: #fff', banner)
 
     def test_supplied_team_photo_is_prominent_and_credited(self):
         html = (ROOT / 'Camp2027.html').read_text()
