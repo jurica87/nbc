@@ -6,6 +6,7 @@
     if (root && root.document) {
         root.NBCCampShare = api;
         api.mount(root.document, root.navigator);
+        api.mountInstagram(root.document, root.navigator, typeof root.fetch === 'function' ? root.fetch.bind(root) : null, root.File);
     }
 }(typeof window !== 'undefined' ? window : null, function () {
     'use strict';
@@ -58,5 +59,43 @@
             });
         }
     }
-    return Object.freeze({ getShareData, mount });
+    // Prepare the public image BEFORE the click so the share call keeps user activation.
+    // File-only sharing avoids URL/text combinations that image apps may not accept.
+    async function mountInstagram(doc, navigator, fetchImage, FileType) {
+        if (!navigator || typeof navigator.share !== 'function' || typeof navigator.canShare !== 'function'
+            || typeof fetchImage !== 'function' || typeof FileType !== 'function') return false;
+        const button = doc.getElementById('camp-share-instagram');
+        const status = doc.getElementById('camp-share-status');
+        if (!button || !status) return false;
+        let file;
+        try {
+            const response = await fetchImage('./images/camp2027-poster-original.jpg', {
+                method: 'GET', mode: 'same-origin', credentials: 'omit', cache: 'force-cache'
+            });
+            if (!response.ok) return false;
+            const blob = await response.blob();
+            if (blob.type !== 'image/jpeg' || !blob.size) return false;
+            file = new FileType([blob], 'NBC-Camp-2027-Instagram.jpg', { type: 'image/jpeg' });
+            if (!navigator.canShare({ files: [file] })) return false;
+        } catch (_) {
+            // The static image download stays available without any sharing API or fetch.
+            return false;
+        }
+        button.addEventListener('click', async () => {
+            button.disabled = true;
+            try {
+                await navigator.share({ files: [file] });
+                status.textContent = 'Bild an das Teilen-Menü übergeben. Dort Instagram auswählen, falls angeboten.';
+            } catch (error) {
+                if (error && error.name === 'AbortError') status.textContent = 'Bild-Teilen abgebrochen.';
+                else status.textContent = 'Bild-Teilen ist hier nicht verfügbar. Bitte das Bild herunterladen und in Instagram auswählen.';
+            } finally {
+                button.disabled = false;
+            }
+        });
+        button.disabled = false;
+        button.hidden = false;
+        return true;
+    }
+    return Object.freeze({ getShareData, mount, mountInstagram });
 }));

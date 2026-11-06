@@ -141,7 +141,7 @@ class CampTests(unittest.TestCase):
         html = (ROOT / 'Camp2027.html').read_text()
         reference = (ROOT / 'news/sparkasse-spendenuebergabe-2026.html').read_text()
         reference_paths = {a['d'] for t, a in Tags(reference).tags if t == 'path' and 'd' in a}
-        for identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-copy', 'camp-share-email', 'camp-share-native']:
+        for identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-copy', 'camp-share-email', 'camp-share-native', 'camp-share-instagram']:
             match = re.search(r'<(?:a|button)\b[^>]*id="' + identifier + r'"[^>]*>(.*?)</(?:a|button)>', html, re.S)
             assert match is not None, identifier
             inner_tags = Tags(match.group(1)).tags
@@ -150,9 +150,13 @@ class CampTests(unittest.TestCase):
             self.assertEqual(icons[0].get('viewbox'), '0 0 24 24')
             self.assertEqual(icons[0].get('aria-hidden'), 'true')
             self.assertEqual(icons[0].get('focusable'), 'false')
-            if identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-copy']:
+            if identifier in ['camp-share-whatsapp', 'camp-share-facebook', 'camp-share-instagram']:
                 self.assertTrue(any(t == 'path' and a.get('d') in reference_paths for t, a in inner_tags), identifier)
-        self.assertIn('Instagram / Link', html)
+        self.assertNotIn('Instagram / Link', html)
+        self.assertIn('Instagram: Bild teilen', html)
+        self.assertIn('id="camp-instagram-download"', html)
+        self.assertIn('href="./images/camp2027-poster-original.jpg" download="NBC-Camp-2027-Instagram.jpg"', html)
+        self.assertIn('nicht erzwingen', html)
         self.assertIn('id="camp-instagram-help"', html)
         self.assertIn('aria-describedby="camp-instagram-help"', html)
         self.assertIn('./css/social-share.css', html)
