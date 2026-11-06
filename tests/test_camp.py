@@ -59,6 +59,28 @@ class CampTests(unittest.TestCase):
         self.assertIn('© philippheils.jpg', html)
         self.assertIn('Bild vollständig ansehen', html)
 
+    def test_supplied_poster_is_secondary_and_preserves_registration_cohorts(self):
+        html = (ROOT / 'Camp2027.html').read_text()
+        tags = Tags(html).tags
+        posters = [a for t, a in tags if t == 'img' and 'camp-poster-image' in a.get('class', '').split()]
+        self.assertEqual(len(posters), 1, 'Supplied poster should appear once, outside the hero')
+        poster = posters[0]
+        self.assertEqual(poster.get('loading'), 'lazy')
+        self.assertTrue(poster.get('alt'))
+        self.assertEqual((poster.get('width'), poster.get('height')), ('720', '900'))
+        self.assertIn('360w', poster.get('srcset', ''))
+        self.assertIn('720w', poster.get('srcset', ''))
+        self.assertLess(html.index('class="intro wrap"'), html.index('class="camp-poster-image"'))
+        self.assertLess(html.index('class="camp-poster-image"'), html.index('id="anmeldung"'))
+        self.assertIn('Plakat vergrößern', html)
+        self.assertIn('Für die Anmeldung gelten die Jahrgänge 2010–2018.', html)
+        for name in ['camp2027-poster-360.webp', 'camp2027-poster-720.webp', 'camp2027-poster-original.jpg']:
+            self.assertIn('./images/' + name, html)
+            self.assertTrue((ROOT / 'images' / name).is_file())
+        original_links = [a for t, a in tags if t == 'a' and a.get('href') == './images/camp2027-poster-original.jpg']
+        self.assertGreaterEqual(len(original_links), 1)
+        self.assertTrue(all(a.get('target') == '_blank' and 'noopener' in a.get('rel', '') for a in original_links))
+
     def test_camp_privacy_and_homepage_discovery_are_present(self):
         privacy = ROOT / 'Camp-Datenschutz.html'
         self.assertTrue(privacy.is_file(), 'Dedicated camp privacy notice is missing')

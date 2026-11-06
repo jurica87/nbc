@@ -51,7 +51,14 @@ h1 { margin: 0 0 24px; font-size: clamp(32px, 3.5vw, 50px); line-height: 1.12; l
 .camp-ticket dt { color: var(--muted); }
 .camp-ticket dd { margin: 5px 0 0; font-weight: 600; }
 .ticket-note { grid-column: 1 / -1; margin: 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 12px; line-height: 1.7; color: var(--muted); }
-.intro { max-width: 820px; padding-bottom: 64px; }
+.intro { display: grid; grid-template-columns: minmax(0, 1fr) 200px; align-items: start; gap: 48px; max-width: 1044px; padding-bottom: 64px; }
+.intro-copy { min-width: 0; }
+.camp-poster { margin: 6px 0 0; min-width: 0; }
+.camp-poster-link { display: block; border-radius: 8px; }
+.camp-poster-image { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
+.camp-poster figcaption { color: var(--muted); font-size: 11px; line-height: 1.6; }
+.camp-poster figcaption a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.camp-poster figcaption > span { display: block; }
 .intro h2 { margin: 0 0 20px; font-size: 30px; font-weight: 500; }
 .intro p { margin: 0 0 17px; color: var(--muted); }
 .intro strong { color: var(--ink); font-weight: 600; }
@@ -135,7 +142,8 @@ legend, .form-section-title { padding: 0; font-size: 25px; font-weight: 500; lin
     .ticket-date { font-size: 42px; }
     .camp-ticket dl { gap: 18px 12px; }
     .lead { font-size: 15px; }
-    .intro { padding-bottom: 38px; }
+    .intro { display: block; padding-bottom: 38px; }
+    .camp-poster { display: grid; grid-template-columns: 110px minmax(0, 1fr); align-items: center; gap: 18px; margin-top: 26px; }
     .registration-section { padding-block: 38px; }
     .registration-guide ol { display: block; }
     .registration-guide h2 { font-size: 32px; }
