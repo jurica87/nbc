@@ -10,6 +10,7 @@ NEW_SPONSORS = {
     './sponsors/uelsener-massivbau-logo.png': ('Uelsener Massivbau Logo', 'https://uelsener-massivbau.de/'),
     './sponsors/proquartis-logo.png': ('ProQuartis Logo', 'https://proquartis.de/'),
     './sponsors/hermann-schulten-logo.png': ('Hermann Schulten GmbH Logo', 'https://www.hermann-schulten.de/'),
+    './sponsors/heider-energietechnik-logo.png': ('Heider Energietechnik GmbH Logo', 'https://heider-energietechnik.de/'),
 }
 
 
@@ -42,7 +43,7 @@ class SponsorTests(unittest.TestCase):
         self.assertRegex(rule.group(1), r'width:\s*100%;')
         self.assertRegex(rule.group(1), r'flex-wrap:\s*wrap;')
 
-    def test_four_new_sponsors_present_in_both_seamless_loop_sets(self):
+    def test_sponsors_present_in_both_seamless_loop_sets(self):
         html = (ROOT / 'index.html').read_text()
         sets = re.findall(r'<div class="sponsor-set\b[^>]*>(.*?)</div>', html, re.S)
         self.assertEqual(len(sets), 2)
