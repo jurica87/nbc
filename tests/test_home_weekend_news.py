@@ -93,6 +93,27 @@ class HomeWeekendNewsTests(unittest.TestCase):
                         'Copy control must remain hidden until JavaScript mounts it')
         self.assertNotIn('feed.xml', html)
 
+    def test_womens_team_photo_is_uncropped_and_placed_with_the_womens_report(self):
+        html = self.article()
+        match = re.search(r'<figure id="damen-teamfoto"[^>]*>(.*?)</figure>', html, re.S)
+        self.assertIsNotNone(match, 'Supplied women team photo must be added to the report')
+        assert match is not None
+        figure = match.group(0)
+        tags = Tags(figure).tags
+        image = next(a for t, a in tags if t == 'img')
+        self.assertIn('damen-team-2026-800.webp', image['src'])
+        self.assertIn('480w', image['srcset'])
+        self.assertEqual(image.get('loading'), 'lazy')
+        self.assertIn('h-auto', image['class'])
+        self.assertNotIn('object-cover', image['class'])
+        self.assertIn('Damenmannschaft', image['alt'])
+        self.assertIn('../images/damen-team-2026-original.jpg', figure)
+        self.assertLess(html.index('in der Regionsliga ein deutliches'), match.start())
+        self.assertLess(match.end(), html.index('aria-label="Die fünf Heimspielergebnisse"'))
+        self.assertNotIn('Philipp Heils', figure, 'Do not transfer the separate game photo credit to this team photo')
+        for name in ['damen-team-2026-480.webp', 'damen-team-2026-800.webp', 'damen-team-2026-original.jpg']:
+            self.assertTrue((ROOT / 'images' / name).is_file(), name)
+
     def test_news_archive_has_a_bounded_single_column_on_narrow_screens(self):
         overview = (ROOT / 'news.html').read_text()
         self.assertTrue('grid grid-cols-1 md:grid-cols-2 gap-6 break-words' in overview,
