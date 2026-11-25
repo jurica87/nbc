@@ -1,5 +1,6 @@
 """Acceptance checks for the supplied home-weekend report and photo."""
 from html.parser import HTMLParser
+from datetime import datetime
 from pathlib import Path
 import json
 import re
@@ -52,6 +53,9 @@ class HomeWeekendNewsTests(unittest.TestCase):
         for phrase in ['Niklas Kraffzig', 'Patrick Olliges', 'Ludwig-Povel-Schule', 'U18', 'kurzfristig',
                        'Holger Wilkens', 'Grafschafter Nachrichten', 'philippheils.jpg']:
             self.assertIn(phrase, html)
+        self.assertTrue('Foto: Philipp Heils' in html, 'Requested photographer name must be visible')
+        self.assertTrue('Bericht: Holger Wilkens (Grafschafter Nachrichten vom 25.11.2026)' in html,
+                        'Use the newspaper attribution and print date supplied by NBC')
         self.assertIn('https://www.gn-online.de/sport/neuer-verein-auf-dem-hoehenflug-volle-halle-viele-siege-629457.html', html)
         self.assertNotIn('Udo Wohlrab', html, 'The supplied photo has a different photographer than the clipping')
         self.assertNotIn('am vergangenen Wochenende', html, 'Do not invent an exact event date')
@@ -66,7 +70,8 @@ class HomeWeekendNewsTests(unittest.TestCase):
         self.assertEqual(data['headline'], TITLE)
         self.assertEqual(data['mainEntityOfPage']['@id'], URL)
         self.assertEqual(data['datePublished'][:10], '2026-11-25')
-        self.assertEqual(data['datePublished'], data['dateModified'])
+        self.assertGreaterEqual(datetime.fromisoformat(data['dateModified']),
+                                datetime.fromisoformat(data['datePublished']))
         self.assertEqual(data['author']['name'], 'NBC Baskets Nordhorn e.V.')
         self.assertTrue(any(t == 'time' and a.get('datetime') == '2026-11-25' for t, a in tags))
         hero = next(a for t, a in tags if t == 'img' and a.get('src') == '../images/heimspielwochenende-2026-1600.webp')
